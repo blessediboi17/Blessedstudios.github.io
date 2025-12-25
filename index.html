@@ -6,124 +6,122 @@
     <title>Blessed Studios | Official</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --gold: #d4af37; --dark: #1a1a1a; --white: #ffffff; --bg: #f4f4f4; }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--bg); color: var(--dark); overflow-x: hidden; }
-
-        /* HEADER & MENU */
-        .top-nav { background: var(--white); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .nav-logo { font-weight: bold; color: var(--gold); font-size: 20px; text-decoration: none; }
-        .menu-btn { font-size: 24px; cursor: pointer; }
-
-        /* SIDEBAR DRAWER */
-        .sidebar { position: fixed; top: 0; right: -280px; width: 280px; height: 100%; background: var(--dark); transition: 0.3s; z-index: 1001; padding-top: 60px; }
-        .sidebar.active { right: 0; }
-        .sidebar a { display: block; padding: 15px 25px; color: white; text-decoration: none; border-bottom: 1px solid #333; }
-        .overlay-bg { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; }
-        .overlay-bg.active { display: block; }
-
-        /* MAIN CONTENT */
-        .container { max-width: 500px; margin: auto; background: white; padding: 20px; text-align: center; min-height: 100vh; }
-        .logo-main { width: 90px; height: 90px; border-radius: 50%; border: 3px solid var(--gold); margin-top: 10px; }
-        .vision-box { background: #fffcf2; border: 1px solid #eee; padding: 15px; border-radius: 10px; margin: 20px 0; font-style: italic; font-size: 14px; }
+        :root { 
+            --accent: #64ffda; /* Clean Cyan/Silver Accent */
+            --deep-blue: #0a192f; 
+            --light-blue: #112240; 
+            --white: #e6f1ff; 
+            --text-gray: #8892b0;
+        }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--deep-blue); color: var(--white); }
+        
+        /* NAVIGATION */
+        .top-nav { background: var(--light-blue); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border-bottom: 2px solid var(--accent); }
+        .nav-logo { font-weight: bold; color: var(--accent); font-size: 20px; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; }
+        
+        /* CONTAINER */
+        .container { max-width: 500px; margin: auto; background: var(--deep-blue); padding: 20px; text-align: center; min-height: 100vh; }
+        .logo-main { width: 110px; height: 110px; border-radius: 50%; border: 2px solid var(--accent); margin-top: 10px; }
+        
+        /* VISION BOX */
+        .vision-section { text-align: left; background: var(--light-blue); padding: 25px; border-radius: 12px; margin: 20px 0; line-height: 1.6; border-left: 4px solid var(--accent); }
+        .vision-section h3 { color: var(--accent); margin-top: 0; font-size: 18px; }
+        .vision-section p { color: var(--text-gray); font-size: 15px; }
 
         /* GOAL TRACKER */
-        .goal-box { background: #ffffff; padding: 20px; border-radius: 15px; border: 2px solid var(--gold); margin: 20px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .progress-bg { background: #eee; border-radius: 10px; height: 15px; width: 100%; margin: 10px 0; overflow: hidden; }
-        .progress-fill { background: var(--gold); width: 45%; height: 100%; transition: width 0.5s; }
+        .goal-box { background: var(--light-blue); padding: 20px; border-radius: 15px; border: 1px solid rgba(100, 255, 218, 0.2); margin: 20px 0; }
+        .progress-bg { background: #233554; border-radius: 10px; height: 12px; width: 100%; margin: 15px 0; overflow: hidden; }
+        .progress-fill { background: var(--accent); width: 45%; height: 100%; box-shadow: 0 0 8px var(--accent); }
+        
+        /* DONATION AREA */
+        .momo-box { background: #1d2d44; padding: 12px; border-radius: 8px; border: 1px solid var(--accent); display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+        .btn-copy { background: var(--accent); color: var(--deep-blue); border: none; padding: 7px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
 
-        /* DONATION STYLES */
-        .momo-box { background: #f9f9f9; padding: 10px; border-radius: 8px; border: 1px dashed #ccc; display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
-        .btn-copy { background: var(--gold); color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 12px; }
-        .global-note { background: #e3f2fd; padding: 12px; border-radius: 8px; font-size: 12px; text-align: left; margin-top: 15px; }
-
-        /* RECRUITMENT FORM */
-        .form-section { background: #f4f4f4; padding: 20px; border-radius: 10px; text-align: left; margin-top: 25px; }
-        input, textarea { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
-        .btn-submit { width: 100%; background: var(--gold); color: white; border: none; padding: 15px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        /* SOCIALS */
+        .social-links { margin: 30px 0; }
+        .social-links a { font-size: 26px; margin: 0 12px; text-decoration: none; color: var(--text-gray); transition: 0.3s; }
+        .social-links a:hover { color: var(--accent); }
+        
+        /* REVIEWS */
+        #cusdis_thread { background: #ffffff; border-radius: 12px; padding: 10px; margin-top: 20px; color: black; }
     </style>
 </head>
 <body>
 
     <div class="top-nav">
         <a href="#" class="nav-logo">Blessed Studios</a>
-        <div class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
-    </div>
-
-    <div class="overlay-bg" id="overlay" onclick="toggleMenu()"></div>
-    <div class="sidebar" id="sidebar">
-        <a href="#" onclick="toggleMenu()">Home</a>
-        <a href="#about" onclick="toggleMenu()">Our Vision</a>
-        <a href="#donate" onclick="toggleMenu()">Donate</a>
-        <a href="#recruit" onclick="toggleMenu()">Join Us</a>
-        <hr style="border:0; border-top:1px solid #333; margin:20px 0;">
-        <a href="https://github.com/blessediboi17/blessediboi17.github.io/edit/main/index.html" style="color:var(--gold);">Administration</a>
+        <a href="https://github.com/blessediboi17/blessediboi17.github.io/edit/main/index.html" style="color:var(--text-gray); text-decoration:none; font-size:11px;">Admin</a>
     </div>
 
     <div class="container">
         <img src="logo.jpg" alt="Blessed Studios" class="logo-main">
-        <h1>Blessed Studios</h1>
-        
-        <div class="vision-box" id="about">
-            "Our vision is to build a community that guides people to learn life lessons through inspirational videos. We recruit and grow together."
+        <h1 style="margin-bottom:5px; color:var(--white); font-size: 28px;">Blessed Studios</h1>
+        <p style="color:var(--accent); font-size: 14px; letter-spacing: 1px; margin-bottom: 25px;">GUIDING THROUGH LESSONS</p>
+
+        <div class="vision-section">
+            <h3>Our Vision</h3>
+            <p>To be a global light of inspiration, building a community where every individual is empowered to transform their life lessons into stepping stones for success.</p>
+            
+            <h3>Our Mission</h3>
+            <p>We produce soul-stirring content that motivates and recruits talented individuals to share their wisdom with the world.</p>
         </div>
 
-        <div class="goal-box" id="donate">
-            <h3 style="margin-top:0;">🎥 Video Production Goal</h3>
-            <div class="progress-bg">
-                <div class="progress-fill"></div>
-            </div>
-            <p style="font-size:13px;"><b>45% Raised</b> so far for our next project.</p>
-
-            <p style="font-size:14px; margin-top:20px; font-weight:bold;">Local Donation (Liberia MoMo):</p>
+        <div class="goal-box">
+            <h3 style="margin-top:0; font-size:16px; color:var(--white);">Video Production Goal</h3>
+            <div class="progress-bg"><div class="progress-fill"></div></div>
+            <p style="font-size:13px; color:var(--text-gray);"><b>45% Raised</b> for the next project.</p>
+            
             <div class="momo-box">
-                <span id="momoNumber" style="font-weight:bold;">0771798046</span>
+                <span id="momoNumber" style="font-weight:bold; color:var(--white);">0771798046</span>
                 <button class="btn-copy" onclick="copyNumber()">Copy Number</button>
             </div>
-            <p style="font-size:12px; color:#555;">Name: <b>Blessed F. Iboi</b></p>
-
-            <div class="global-note">
-                <b>🌍 Global Support (Nigeria, USA, etc.)</b><br>
-                Send via <b>Sendwave</b> or <b>Taptap Send</b> to Liberia.<br>
-                Recipient: <b>Blessed F. Iboi</b> | Number: <b>771798046</b>
-            </div>
-
-            <div style="text-align:left; margin-top:15px;">
-                <h4 style="font-size:12px; border-bottom:1px solid #eee;">RECENT SUPPORTERS 🙏</h4>
-                <ul style="font-size:12px; color:#666; list-style:none; padding:0;">
-                    <li>✨ Anonymous Supporter - $10</li>
-                </ul>
-            </div>
+            <p style="font-size:11px; color:var(--text-gray); margin-top:8px;">Account: <b>Blessed F. Iboi</b></p>
         </div>
 
-        <div class="form-section" id="recruit">
-            <h3>Join the Team</h3>
-            <form action="https://formsubmit.co/blessedstudios50@gmail.com" method="POST">
-                <input type="text" name="name" placeholder="Your Full Name" required>
-                <input type="email" name="email" placeholder="Your Gmail Address" required>
-                <textarea name="message" rows="3" placeholder="Tell us about the lesson you want to share..."></textarea>
-                <button type="submit" class="btn-submit">Submit Application</button>
-            </form>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/231771798046"><i class="fab fa-whatsapp"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
         </div>
 
-        <footer style="margin:40px 0; font-size:12px; color:#999;">
-            &copy; 2025 Blessed Studios | Liberia <br>
-            <a href="#" style="color:#d4af37; text-decoration:none;">Privacy Policy</a>
+        <div style="margin-top:20px; text-align: left;">
+            <h4 style="color:var(--accent); padding-left: 10px;">Community Reviews</h4>
+            <div id="cusdis_thread"
+              data-host="https://cusdis.com"
+              data-app-id="2dfdf2f2-aee5-4174-ae9d-03384e87f1a4"
+              data-page-id="homepage"
+              data-page-url="https://blessediboi17.github.io/"
+              data-page-title="Blessed Studios">
+            </div>
+            <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+        </div>
+
+        <footer style="margin-top:60px; padding-bottom:50px; font-size:11px; color:var(--text-gray);">
+            &copy; 2025 Blessed Studios | Liberia
         </footer>
     </div>
 
+    <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/694ceffdc7e8f119812e2130/1jda8j2bj';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+
+    <script data-goatcounter="https://blessedstudios50.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
     <script>
-        function toggleMenu() {
-            document.getElementById('sidebar').classList.toggle('active');
-            document.getElementById('overlay').classList.toggle('active');
-        }
         function copyNumber() {
             var num = "0771798046";
             navigator.clipboard.writeText(num);
             alert("MoMo Number Copied!");
         }
     </script>
-
-    <script data-goatcounter="https://blessedstudios50.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-
 </body>
-        </html>
+    </html>
