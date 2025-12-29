@@ -4,103 +4,133 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blessed Studios | Official</title>
+    
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0a192f">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
         :root { 
-            --accent: #64ffda; /* Clean Cyan/Silver Accent */
+            --accent: #64ffda; 
             --deep-blue: #0a192f; 
             --light-blue: #112240; 
             --white: #e6f1ff; 
             --text-gray: #8892b0;
         }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--deep-blue); color: var(--white); }
         
-        /* NAVIGATION */
-        .top-nav { background: var(--light-blue); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border-bottom: 2px solid var(--accent); }
-        .nav-logo { font-weight: bold; color: var(--accent); font-size: 20px; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--deep-blue); color: var(--white); line-height: 1.6; text-align: center; }
+        .container { max-width: 550px; margin: auto; padding: 20px; }
         
-        /* CONTAINER */
-        .container { max-width: 500px; margin: auto; background: var(--deep-blue); padding: 20px; text-align: center; min-height: 100vh; }
-        .logo-main { width: 110px; height: 110px; border-radius: 50%; border: 2px solid var(--accent); margin-top: 10px; }
+        /* Logo */
+        .logo-main { width: 130px; height: 130px; border-radius: 15px; border: 2px solid var(--accent); margin-top: 20px; box-shadow: 0 0 20px rgba(100,255,218,0.2); }
         
-        /* VISION BOX */
-        .vision-section { text-align: left; background: var(--light-blue); padding: 25px; border-radius: 12px; margin: 20px 0; line-height: 1.6; border-left: 4px solid var(--accent); }
-        .vision-section h3 { color: var(--accent); margin-top: 0; font-size: 18px; }
-        .vision-section p { color: var(--text-gray); font-size: 15px; }
+        /* Cards */
+        .info-card { text-align: left; background: var(--light-blue); padding: 25px; border-radius: 15px; margin: 25px 0; border-left: 5px solid var(--accent); }
+        .info-card h2 { color: var(--accent); font-size: 18px; text-transform: uppercase; margin-top: 0; }
+        
+        /* Flyer/Masterclass Section */
+        .flyer-box { background: linear-gradient(135deg, #112240 0%, #0a192f 100%); padding: 25px; border-radius: 15px; border: 1px solid var(--accent); margin: 25px 0; }
+        .tag { background: var(--accent); color: var(--deep-blue); padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 12px; }
 
-        /* GOAL TRACKER */
-        .goal-box { background: var(--light-blue); padding: 20px; border-radius: 15px; border: 1px solid rgba(100, 255, 218, 0.2); margin: 20px 0; }
-        .progress-bg { background: #233554; border-radius: 10px; height: 12px; width: 100%; margin: 15px 0; overflow: hidden; }
-        .progress-fill { background: var(--accent); width: 45%; height: 100%; box-shadow: 0 0 8px var(--accent); }
-        
-        /* DONATION AREA */
-        .momo-box { background: #1d2d44; padding: 12px; border-radius: 8px; border: 1px solid var(--accent); display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
-        .btn-copy { background: var(--accent); color: var(--deep-blue); border: none; padding: 7px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        /* Buttons */
+        .btn-main { background: var(--accent); color: var(--deep-blue); border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-weight: bold; text-decoration: none; display: inline-block; width: 100%; box-sizing: border-box; }
+        .btn-copy { background: #1d2d44; color: var(--accent); border: 1px solid var(--accent); padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 12px; }
 
-        /* SOCIALS */
-        .social-links { margin: 30px 0; }
-        .social-links a { font-size: 26px; margin: 0 12px; text-decoration: none; color: var(--text-gray); transition: 0.3s; }
-        .social-links a:hover { color: var(--accent); }
-        
-        /* REVIEWS */
-        #cusdis_thread { background: #ffffff; border-radius: 12px; padding: 10px; margin-top: 20px; color: black; }
+        /* Review Section */
+        #cusdis_thread { margin-top: 20px; background: transparent !important; }
+        .stars { color: #ffcc00; font-size: 22px; margin-bottom: 5px; }
     </style>
 </head>
 <body>
 
-    <div class="top-nav">
-        <a href="#" class="nav-logo">Blessed Studios</a>
-        <a href="https://github.com/blessediboi17/blessediboi17.github.io/edit/main/index.html" style="color:var(--text-gray); text-decoration:none; font-size:11px;">Admin</a>
-    </div>
-
     <div class="container">
         <img src="logo.jpg" alt="Blessed Studios" class="logo-main">
-        <h1 style="margin-bottom:5px; color:var(--white); font-size: 28px;">Blessed Studios</h1>
-        <p style="color:var(--accent); font-size: 14px; letter-spacing: 1px; margin-bottom: 25px;">GUIDING THROUGH LESSONS</p>
+        <h1 style="margin-bottom:5px;">Blessed Studios</h1>
+        <p style="color:var(--accent); font-weight: bold; letter-spacing: 2px; font-size: 11px; margin-top:0;">CREATING TO CHANGE LIVES</p>
 
-        <div class="vision-section">
-            <h3>Our Vision</h3>
-            <p>To be a global light of inspiration, building a community where every individual is empowered to transform their life lessons into stepping stones for success.</p>
-            
-            <h3>Our Mission</h3>
-            <p>We produce soul-stirring content that motivates and recruits talented individuals to share their wisdom with the world.</p>
+        <div id="install-container" style="display: none; margin-bottom: 25px;">
+            <button id="btn-install" class="btn-main">📲 INSTALL BLESSED APP</button>
         </div>
 
-        <div class="goal-box">
-            <h3 style="margin-top:0; font-size:16px; color:var(--white);">Video Production Goal</h3>
-            <div class="progress-bg"><div class="progress-fill"></div></div>
-            <p style="font-size:13px; color:var(--text-gray);"><b>45% Raised</b> for the next project.</p>
-            
-            <div class="momo-box">
-                <span id="momoNumber" style="font-weight:bold; color:var(--white);">0771798046</span>
-                <button class="btn-copy" onclick="copyNumber()">Copy Number</button>
+        <div class="flyer-box">
+            <span class="tag">COMING SOON</span>
+            <h2 style="color:white; margin: 15px 0 10px 0;">Website Creation Masterclass</h2>
+            <p style="color: var(--text-gray); font-size: 14px;">Learn how to build and publish your own website for <b>FREE</b>. Master the skills from your phone or laptop.</p>
+            <div style="background: rgba(100,255,218,0.1); padding: 10px; border-radius: 8px; margin-bottom: 15px;">
+                <p style="margin:0; font-size: 13px;">📍 Venue: <b>WhatsApp</b></p>
+                <p style="margin:0; font-size: 13px;">💰 Registration: <b>TBA (Coming Soon)</b></p>
             </div>
-            <p style="font-size:11px; color:var(--text-gray); margin-top:8px;">Account: <b>Blessed F. Iboi</b></p>
+            <a href="https://wa.me/231771798046" class="btn-main">JOIN WAITING LIST</a>
         </div>
 
-        <div class="social-links">
-            <a href="#"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="https://wa.me/231771798046"><i class="fab fa-whatsapp"></i></a>
-            <a href="#"><i class="fab fa-youtube"></i></a>
+        <div class="info-card">
+            <h2>About Our Vision</h2>
+            <p style="color: var(--text-gray); font-size: 14px;">Blessed Studios creates movies, professional voiceovers, and life-changing content. We guide our community through storytelling and technical empowerment.</p>
         </div>
 
-        <div style="margin-top:20px; text-align: left;">
-            <h4 style="color:var(--accent); padding-left: 10px;">Community Reviews</h4>
+        <div style="background: var(--light-blue); padding: 20px; border-radius: 15px; text-align: left;">
+            <h3 style="margin-top:0; font-size: 16px; color: var(--accent);">Support Our Production</h3>
+            <p style="font-size: 12px; color: var(--text-gray);">Contribute to our next movie project via MoMo:</p>
+            <div style="display: flex; justify-content: space-between; align-items: center; background: #0a192f; padding: 10px; border-radius: 8px;">
+                <span style="font-weight:bold;">0771798046</span>
+                <button class="btn-copy" onclick="copyNumber()">COPY</button>
+            </div>
+        </div>
+
+        <div style="margin-top:50px; border-top: 1px solid rgba(100,255,218,0.1); padding-top: 30px;">
+            <h3 style="color:var(--accent); margin-bottom: 5px;">Community Voice</h3>
+            <div class="stars">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p style="font-size: 11px; color: var(--text-gray);">Trusted by our students and viewers.</p>
+            
             <div id="cusdis_thread"
               data-host="https://cusdis.com"
               data-app-id="2dfdf2f2-aee5-4174-ae9d-03384e87f1a4"
               data-page-id="homepage"
               data-page-url="https://blessediboi17.github.io/"
-              data-page-title="Blessed Studios">
+              data-page-title="Blessed Studios"
+              data-theme="dark">
             </div>
             <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
         </div>
 
-        <footer style="margin-top:60px; padding-bottom:50px; font-size:11px; color:var(--text-gray);">
-            &copy; 2025 Blessed Studios | Liberia
+        <footer style="margin: 60px 0; font-size:10px; color:var(--text-gray); letter-spacing: 1px;">
+            &copy; 2025 BLESSED STUDIOS | LIBERIA
         </footer>
     </div>
+
+    <script>
+        // Copy MoMo Number
+        function copyNumber() {
+            navigator.clipboard.writeText("0771798046");
+            alert("MoMo Number Copied! Thank you for your support.");
+        }
+
+        // PWA Install Logic
+        let deferredPrompt;
+        const installContainer = document.getElementById('install-container');
+        const btnInstall = document.getElementById('btn-install');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installContainer.style.display = 'block';
+
+            btnInstall.addEventListener('click', () => {
+                installContainer.style.display = 'none';
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    deferredPrompt = null;
+                });
+            });
+        });
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js');
+        }
+    </script>
 
     <script type="text/javascript">
     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
@@ -112,16 +142,6 @@
     s1.setAttribute('crossorigin','*');
     s0.parentNode.insertBefore(s1,s0);
     })();
-    </script>
-
-    <script data-goatcounter="https://blessedstudios50.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-
-    <script>
-        function copyNumber() {
-            var num = "0771798046";
-            navigator.clipboard.writeText(num);
-            alert("MoMo Number Copied!");
-        }
     </script>
 </body>
     </html>
