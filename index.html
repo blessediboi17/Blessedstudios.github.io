@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blessed Studios | Official</title>
-    
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#0a192f">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     
     <style>
         :root { 
@@ -18,72 +17,133 @@
             --white: #e6f1ff; 
             --text-gray: #8892b0;
         }
-        
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--deep-blue); color: var(--white); line-height: 1.6; text-align: center; }
-        .container { max-width: 550px; margin: auto; padding: 20px; }
-        
-        /* Logo */
-        .logo-main { width: 130px; height: 130px; border-radius: 15px; border: 2px solid var(--accent); margin-top: 20px; box-shadow: 0 0 20px rgba(100,255,218,0.2); }
-        
-        /* Cards */
-        .info-card { text-align: left; background: var(--light-blue); padding: 25px; border-radius: 15px; margin: 25px 0; border-left: 5px solid var(--accent); }
-        .info-card h2 { color: var(--accent); font-size: 18px; text-transform: uppercase; margin-top: 0; }
-        
-        /* Flyer/Masterclass Section */
-        .flyer-box { background: linear-gradient(135deg, #112240 0%, #0a192f 100%); padding: 25px; border-radius: 15px; border: 1px solid var(--accent); margin: 25px 0; }
-        .tag { background: var(--accent); color: var(--deep-blue); padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 12px; }
+
+        /* Smooth Background Animation */
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            margin: 0; 
+            background: radial-gradient(circle at top, #112240 0%, #0a192f 100%);
+            color: var(--white); 
+            line-height: 1.6; 
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        .container { max-width: 500px; margin: auto; padding: 20px; }
+
+        /* Animated Logo */
+        .logo-main { 
+            width: 130px; height: 130px; 
+            border-radius: 20px; 
+            border: 2px solid var(--accent); 
+            margin-top: 20px; 
+            box-shadow: 0 0 25px rgba(100,255,218,0.3);
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Cards with Hover Effects */
+        .info-card, .flyer-box { 
+            text-align: left; 
+            background: var(--light-blue); 
+            padding: 25px; 
+            border-radius: 15px; 
+            margin: 25px 0; 
+            border-left: 5px solid var(--accent);
+            transition: transform 0.3s ease;
+            animation: fadeInUp 1s;
+        }
+
+        .info-card:hover { transform: translateY(-5px); }
 
         /* Buttons */
-        .btn-main { background: var(--accent); color: var(--deep-blue); border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-weight: bold; text-decoration: none; display: inline-block; width: 100%; box-sizing: border-box; }
-        .btn-copy { background: #1d2d44; color: var(--accent); border: 1px solid var(--accent); padding: 8px 15px; border-radius: 5px; cursor: pointer; font-size: 12px; }
+        .btn-main { 
+            background: var(--accent); 
+            color: var(--deep-blue); 
+            border: none; 
+            padding: 15px 25px; 
+            border-radius: 10px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            text-decoration: none; 
+            display: inline-block; 
+            width: 100%; 
+            box-sizing: border-box;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-main:hover { background: #fff; transform: scale(1.02); }
+
+        .tag { background: var(--accent); color: var(--deep-blue); padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 10px; }
 
         /* Review Section */
-        #cusdis_thread { margin-top: 20px; background: transparent !important; }
-        .stars { color: #ffcc00; font-size: 22px; margin-bottom: 5px; }
+        #cusdis_thread { margin-top: 20px; }
+        .stars { color: #ffcc00; font-size: 20px; }
+
+        /* Floating WhatsApp Button */
+        .float-wa {
+            position: fixed; width: 60px; height: 60px; bottom: 40px; right: 20px;
+            background-color: #25d366; color: #FFF; border-radius: 50px; text-align: center;
+            font-size: 30px; box-shadow: 2px 2px 3px #999; z-index: 100;
+        }
+
+        /* Scroll Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <img src="logo.jpg" alt="Blessed Studios" class="logo-main">
-        <h1 style="margin-bottom:5px;">Blessed Studios</h1>
-        <p style="color:var(--accent); font-weight: bold; letter-spacing: 2px; font-size: 11px; margin-top:0;">CREATING TO CHANGE LIVES</p>
+    <a href="https://wa.me/231771798046" class="float-wa" target="_blank" style="display: flex; align-items: center; justify-content: center;">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
-        <div id="install-container" style="display: none; margin-bottom: 25px;">
-            <button id="btn-install" class="btn-main">📲 INSTALL BLESSED APP</button>
+    <div class="container animate__animated animate__fadeIn">
+        
+        <img src="logo.jpg" alt="Blessed Studios" class="logo-main">
+        <h1 class="animate__animated animate__backInDown">Blessed Studios</h1>
+        <p style="color:var(--accent); font-weight: bold; letter-spacing: 3px; font-size: 10px; margin-top:0;">CREATING TO CHANGE LIVES</p>
+
+        <div id="install-container" style="display: none; margin: 20px 0;">
+            <button id="btn-install" class="btn-main" style="background: var(--white);">📲 INSTALL OFFICIAL APP</button>
         </div>
 
-        <div class="flyer-box">
-            <span class="tag">COMING SOON</span>
-            <h2 style="color:white; margin: 15px 0 10px 0;">Website Creation Masterclass</h2>
-            <p style="color: var(--text-gray); font-size: 14px;">Learn how to build and publish your own website for <b>FREE</b>. Master the skills from your phone or laptop.</p>
-            <div style="background: rgba(100,255,218,0.1); padding: 10px; border-radius: 8px; margin-bottom: 15px;">
-                <p style="margin:0; font-size: 13px;">📍 Venue: <b>WhatsApp</b></p>
-                <p style="margin:0; font-size: 13px;">💰 Registration: <b>TBA (Coming Soon)</b></p>
+        <div class="flyer-box animate__animated animate__zoomIn">
+            <span class="tag">REGISTRATION OPEN</span>
+            <h2 style="color:white; margin: 15px 0 10px 0;">Website Masterclass</h2>
+            <p style="color: var(--text-gray); font-size: 14px;">Master the art of building and publishing professional websites for <b>FREE</b>.</p>
+            
+            <div style="background: rgba(100,255,218,0.05); padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 1px dashed var(--accent);">
+                <p style="margin:5px 0; font-size: 13px;"><i class="fas fa-check-circle" style="color:var(--accent)"></i> Mobile & PC Friendly</p>
+                <p style="margin:5px 0; font-size: 13px;"><i class="fas fa-check-circle" style="color:var(--accent)"></i> Zero Hosting Costs</p>
+                <p style="margin:5px 0; font-size: 13px;"><i class="fas fa-check-circle" style="color:var(--accent)"></i> WhatsApp Support Group</p>
             </div>
-            <a href="https://wa.me/231771798046" class="btn-main">JOIN WAITING LIST</a>
+
+            <a href="https://wa.me/231771798046?text=Hello%20Blessed%20Studios,%20I%20want%20to%20register%20for%20the%20Website%20Masterclass.%20My%20name%20is:" 
+               class="btn-main">
+               <i class="fab fa-whatsapp"></i> SECURE MY SPOT
+            </a>
         </div>
 
         <div class="info-card">
-            <h2>About Our Vision</h2>
-            <p style="color: var(--text-gray); font-size: 14px;">Blessed Studios creates movies, professional voiceovers, and life-changing content. We guide our community through storytelling and technical empowerment.</p>
+            <h2>Our Core Mission</h2>
+            <p style="color: var(--text-gray); font-size: 14px; margin-bottom: 0;">We use digital creativity to transform minds. From cinema production to tech education, Blessed Studios is your home for growth.</p>
         </div>
 
-        <div style="background: var(--light-blue); padding: 20px; border-radius: 15px; text-align: left;">
-            <h3 style="margin-top:0; font-size: 16px; color: var(--accent);">Support Our Production</h3>
-            <p style="font-size: 12px; color: var(--text-gray);">Contribute to our next movie project via MoMo:</p>
-            <div style="display: flex; justify-content: space-between; align-items: center; background: #0a192f; padding: 10px; border-radius: 8px;">
-                <span style="font-weight:bold;">0771798046</span>
-                <button class="btn-copy" onclick="copyNumber()">COPY</button>
-            </div>
-        </div>
-
-        <div style="margin-top:50px; border-top: 1px solid rgba(100,255,218,0.1); padding-top: 30px;">
-            <h3 style="color:var(--accent); margin-bottom: 5px;">Community Voice</h3>
-            <div class="stars">
+        <div style="margin-top:40px; border-top: 1px solid rgba(100,255,218,0.1); padding-top: 30px;">
+            <h3 style="color:var(--accent); margin-bottom: 5px;">Community Rating</h3>
+            <div class="stars animate__animated animate__pulse animate__infinite">
                 <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
             </div>
-            <p style="font-size: 11px; color: var(--text-gray);">Trusted by our students and viewers.</p>
             
             <div id="cusdis_thread"
               data-host="https://cusdis.com"
@@ -96,19 +156,13 @@
             <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
         </div>
 
-        <footer style="margin: 60px 0; font-size:10px; color:var(--text-gray); letter-spacing: 1px;">
-            &copy; 2025 BLESSED STUDIOS | LIBERIA
+        <footer style="margin: 50px 0; font-size:10px; color:var(--text-gray); opacity: 0.6;">
+            &copy; 2025 BLESSED STUDIOS | MONROVIA, LIBERIA
         </footer>
     </div>
 
     <script>
-        // Copy MoMo Number
-        function copyNumber() {
-            navigator.clipboard.writeText("0771798046");
-            alert("MoMo Number Copied! Thank you for your support.");
-        }
-
-        // PWA Install Logic
+        // PWA Install Script
         let deferredPrompt;
         const installContainer = document.getElementById('install-container');
         const btnInstall = document.getElementById('btn-install');
@@ -117,13 +171,10 @@
             e.preventDefault();
             deferredPrompt = e;
             installContainer.style.display = 'block';
-
             btnInstall.addEventListener('click', () => {
                 installContainer.style.display = 'none';
                 deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((choiceResult) => {
-                    deferredPrompt = null;
-                });
+                deferredPrompt.userChoice.then(() => { deferredPrompt = null; });
             });
         });
 
@@ -144,4 +195,4 @@
     })();
     </script>
 </body>
-    </html>
+        </html>
