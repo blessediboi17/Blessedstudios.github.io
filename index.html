@@ -204,3 +204,67 @@
     </script>
 </body>
         </html>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAuth, GoogleAuthProvider, signInWithPopup, sendSignInLinkToEmail } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBfMG8RzzKQkyTSP1PQR0QpqHasnQ2oAug",
+    authDomain: "blessed-studios-portal.firebaseapp.com",
+    projectId: "blessed-studios-portal",
+    storageBucket: "blessed-studios-portal.firebasestorage.app",
+    messagingSenderId: "922888843378",
+    appId: "1:922888843378:web:1c1609860cd825f1acd2eb",
+    measurementId: "G-0KX63BY9W3"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+
+  // THE CEO SECRET CODE (Keep this secret!)
+  const CEO_CODE = "BLESSED_LIB_2026"; 
+
+  // --- Google Login Function ---
+  window.loginWithGoogle = async () => {
+    const inputCode = document.getElementById('ceoCode').value;
+    if(inputCode !== CEO_CODE) {
+        alert("❌ ACCESS DENIED: Invalid CEO Special Code.");
+        if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+        return;
+    }
+    try {
+      const result = await signInWithPopup(auth, provider);
+      localStorage.setItem('isBlessedAdmin', 'true'); // Permission granted
+      alert("Welcome Director " + result.user.displayName + "!");
+      window.location.href = "dashboard.html"; 
+    } catch (error) {
+      alert("Error: " + error.message);
+    }
+  };
+
+  // --- Email Link Function ---
+  window.sendEmailLink = async () => {
+    const email = document.getElementById('teamEmail').value;
+    const inputCode = document.getElementById('ceoCode').value;
+
+    if(inputCode !== CEO_CODE) {
+        alert("❌ CEO CODE REQUIRED to trigger email system.");
+        return;
+    }
+
+    const actionCodeSettings = {
+      url: 'https://blessedstudios.netlify.app/dashboard.html',
+      handleCodeInApp: true,
+    };
+
+    try {
+      await sendSignInLinkToEmail(auth, email, actionCodeSettings);
+      window.localStorage.setItem('emailForSignIn', email);
+      alert("✅ Check your email! A secure login link has been sent.");
+    } catch (error) {
+      alert("Error: " + error.message);
+    }
+  };
+    </script>
