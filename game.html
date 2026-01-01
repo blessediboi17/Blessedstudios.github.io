@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blessed Slicer | Pro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        body { margin: 0; background: #0a192f; overflow: hidden; font-family: 'Segoe UI', sans-serif; }
+        canvas { display: block; touch-action: none; cursor: crosshair; }
+        
+        #ui { 
+            position: absolute; top: 20px; width: 100%; display: flex; 
+            justify-content: space-around; color: #64ffda; font-size: 24px; pointer-events: none; 
+        }
+
+        #game-over {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10, 25, 47, 0.9); display: none;
+            flex-direction: column; align-items: center; justify-content: center;
+            color: white; z-index: 100;
+        }
+
+        .btn-restart {
+            background: #64ffda; color: #0a192f; border: none; padding: 15px 40px;
+            font-size: 20px; font-weight: bold; border-radius: 50px; cursor: pointer;
+            margin-top: 20px; transition: 0.3s;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="ui">
+        <div>SCORE: <span id="score">0</span></div>
+        <div>LIVES: <span id="lives">❤️❤️❤️</span></div>
+    </div>
+
+    <div id="game-over" class="animate__animated animate__fadeIn">
+        <h1 style="font-size: 50px; color: #64ffda;">GAME OVER</h1>
+        <p style="font-size: 24px;">Final Score: <span id="final-score">0</span></p>
+        <button class="btn-restart" onclick="resetGame()">PLAY AGAIN</button>
+    </div>
+
+    <canvas id="gameCanvas"></canvas>
+
+<script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const scoreElement = document.getElementById('score');
+    const livesElement = document.getElementById('lives');
+    const gameOverScreen = document.getElementById('game-over');
+    const finalScoreElement = document.getElementById('final-score');
+
+    let score = 0;
+    let lives = 3;
+    let gameActive = true;
+    let foods = [];
+    let trail = [];
+    const emojis = ['🍎', '🍌', '🍉', '🍍', '🍓', '🥝', '🍔', '🍕'];
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Food {
+        constructor() {
+            this.x = Math.random() * (canvas.width - 60) + 30;
+            this.y = canvas.height + 50;
+            this.emoji = emojis[Math.floor(Math.random() * emojis.length)];
+            this.speedX = (Math.random() - 0.5) * 8;
+            this.speedY = -Math.random() * 12 - 12;
+            this.radius = 35;
+            this.isSliced = false;
+        }
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            this.speedY += 0.25; // Gravity
+        }
+        draw() {
+            ctx.font = '50px serif';
+            ctx.textAlign = 'center';
+            ctx.fillText(this.emoji, this.x, this.y);
+        }
+    }
+
+    function checkSlice(inputX, inputY) {
+        if (!gameActive) return;
+        
+        // Add to blade trail
+        trail.push({x: inputX, y: inputY, age: 0});
+
+        foods.forEach((food, index) => {
+            const dist = Math.hypot(food.x - inputX, food.y - inputY);
+            if (dist < food.radius && !food.isSliced) {
+                food.isSliced = true;
+                foods.splice(index, 1);
+                score += 10;
+                scoreElement.innerText = score;
+            }
+        });
+    }
+
+    function endGame() {
+        gameActive = false;
+        finalScoreElement.innerText = score;
+        gameOverScreen.style.display = 'flex';
+    }
+
+    function resetGame() {
+        score = 0;
+        lives = 3;
+        foods = [];
+        gameActive = true;
+        scoreElement.innerText = "0";
+        livesElement.innerText = "❤️❤️❤️";
+        gameOverScreen.style.display = 'none';
+        animate();
+    }
+
+    // Input Listeners
+    canvas.addEventListener('mousemove', (e) => checkSlice(e.clientX, e.clientY));
+    canvas.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        checkSlice(touch.clientX, touch.clientY);
+    }, {passive: false});
+
+    function animate() {
+        if (!gameActive) return;
+
+        ctx.fillStyle = '#0a192f';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Draw Blade Trail
+        ctx.beginPath();
+        ctx.strokeStyle = '#64ffda';
+        ctx.lineWidth = 3;
+        for(let i=0; i<trail.length; i++) {
+            if(i==0) ctx.moveTo(trail[i].x, trail[i].y);
+            else ctx.lineTo(trail[i].x, trail[i].y);
+            trail[i].age++;
+        }
+        ctx.stroke();
+        trail = trail.filter(t => t.age < 10);
+
+        // Spawn food
+        if (Math.random() < 0.04) foods.push(new Food());
+
+        foods.forEach((food, index) => {
+            food.update();
+            food.draw();
+            
+            // If food falls off bottom without being sliced
+            if (food.y > canvas.height + 100) {
+                foods.splice(index, 1);
+                lives--;
+                livesElement.innerText = "❤️".repeat(lives) || "💀";
+                if (lives <= 0) endGame();
+            }
+        });
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+</script>
+</body>
+  </html>
