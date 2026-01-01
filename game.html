@@ -1,171 +1,150 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Blessed Slicer | Pro</title>
+    <meta charset="UTF-8">
+    <title>Shadow Beats: Director Elite</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
-        body { margin: 0; background: #0a192f; overflow: hidden; font-family: 'Segoe UI', sans-serif; }
-        canvas { display: block; touch-action: none; cursor: crosshair; }
-        
-        #ui { 
-            position: absolute; top: 20px; width: 100%; display: flex; 
-            justify-content: space-around; color: #64ffda; font-size: 24px; pointer-events: none; 
+        body { margin: 0; background: #050a14; overflow: hidden; font-family: 'Courier New', monospace; color: #64ffda; transition: background 1s; }
+        canvas { display: block; touch-action: none; }
+        #ui { position: absolute; top: 20px; width: 100%; text-align: center; pointer-events: none; z-index: 10; }
+        #rank { font-size: 14px; letter-spacing: 3px; color: #fff; margin-top: 5px; }
+        #start-btn { 
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            padding: 20px 40px; background: #64ffda; color: #050a14; border: none;
+            font-weight: bold; font-size: 20px; border-radius: 5px; cursor: pointer; z-index: 20; box-shadow: 0 0 20px #64ffda;
         }
-
-        #game-over {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(10, 25, 47, 0.9); display: none;
-            flex-direction: column; align-items: center; justify-content: center;
-            color: white; z-index: 100;
-        }
-
-        .btn-restart {
-            background: #64ffda; color: #0a192f; border: none; padding: 15px 40px;
-            font-size: 20px; font-weight: bold; border-radius: 50px; cursor: pointer;
-            margin-top: 20px; transition: 0.3s;
-        }
+        .action-text { position: absolute; top: 40%; width: 100%; text-align: center; font-size: 50px; opacity: 0; pointer-events: none; color: white; font-weight: bold; }
     </style>
 </head>
 <body>
-
+    <button id="start-btn">🎬 START DIRECTING</button>
     <div id="ui">
-        <div>SCORE: <span id="score">0</span></div>
-        <div>LIVES: <span id="lives">❤️❤️❤️</span></div>
+        <div style="letter-spacing: 5px; font-weight: bold;">SHADOW BEATS</div>
+        <div id="score">SCORE: 0</div>
+        <div id="rank">RANK: JUNIOR EDITOR</div>
     </div>
-
-    <div id="game-over" class="animate__animated animate__fadeIn">
-        <h1 style="font-size: 50px; color: #64ffda;">GAME OVER</h1>
-        <p style="font-size: 24px;">Final Score: <span id="final-score">0</span></p>
-        <button class="btn-restart" onclick="resetGame()">PLAY AGAIN</button>
-    </div>
-
+    <div id="action" class="action-text">ACTION!</div>
     <canvas id="gameCanvas"></canvas>
 
 <script>
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
-    const scoreElement = document.getElementById('score');
-    const livesElement = document.getElementById('lives');
-    const gameOverScreen = document.getElementById('game-over');
-    const finalScoreElement = document.getElementById('final-score');
-
+    const startBtn = document.getElementById('start-btn');
+    const actionText = document.getElementById('action');
+    const rankText = document.getElementById('rank');
+    
     let score = 0;
-    let lives = 3;
-    let gameActive = true;
-    let foods = [];
-    let trail = [];
-    const emojis = ['🍎', '🍌', '🍉', '🍍', '🍓', '🥝', '🍔', '🍕'];
+    let items = [];
+    let gameStarted = false;
+    let pulse = 0;
+    let beatInterval = 800; // Starting speed (ms)
+    let gameLoop;
+    let level = 1;
 
-    function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    
+    function playBeat() {
+        if(!gameStarted) return;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        
+        // Pitch goes up as level goes up
+        osc.frequency.setValueAtTime(150 + (level * 20), audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.1);
+        
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.1);
+        
+        pulse = 15; 
+        spawnItem();
+
+        // Recursively call for dynamic speed
+        setTimeout(playBeat, beatInterval);
     }
-    window.addEventListener('resize', resize);
-    resize();
 
-    class Food {
+    class FilmStrip {
         constructor() {
-            this.x = Math.random() * (canvas.width - 60) + 30;
+            this.x = Math.random() * (canvas.width - 100) + 50;
             this.y = canvas.height + 50;
-            this.emoji = emojis[Math.floor(Math.random() * emojis.length)];
-            this.speedX = (Math.random() - 0.5) * 8;
-            this.speedY = -Math.random() * 12 - 12;
-            this.radius = 35;
-            this.isSliced = false;
-        }
-        update() {
-            this.x += this.speedX;
-            this.y += this.speedY;
-            this.speedY += 0.25; // Gravity
+            this.w = 45;
+            this.h = 65;
+            this.speedY = -10 - (level * 1.5); // Faster items each level
+            this.gravity = 0.25;
+            this.hue = 160; // Initial Cyan
         }
         draw() {
-            ctx.font = '50px serif';
-            ctx.textAlign = 'center';
-            ctx.fillText(this.emoji, this.x, this.y);
+            ctx.strokeStyle = `hsl(${this.hue + (level*30)}, 100%, 70%)`;
+            ctx.lineWidth = 3;
+            ctx.strokeRect(this.x - this.w/2, this.y - this.h/2, this.w, this.h);
         }
     }
 
-    function checkSlice(inputX, inputY) {
-        if (!gameActive) return;
-        
-        // Add to blade trail
-        trail.push({x: inputX, y: inputY, age: 0});
+    function spawnItem() {
+        items.push(new FilmStrip());
+    }
 
-        foods.forEach((food, index) => {
-            const dist = Math.hypot(food.x - inputX, food.y - inputY);
-            if (dist < food.radius && !food.isSliced) {
-                food.isSliced = true;
-                foods.splice(index, 1);
-                score += 10;
-                scoreElement.innerText = score;
+    function checkLevelUp() {
+        if (score >= level * 500) {
+            level++;
+            beatInterval = Math.max(300, beatInterval - 100); // Speed up music
+            
+            // Update UI
+            if (level === 2) { rankText.innerText = "RANK: HEAD DIRECTOR"; document.body.style.background = "#1a0505"; }
+            if (level === 3) { rankText.innerText = "RANK: CINEMATIC MASTER"; document.body.style.background = "#1a1505"; }
+            if (level >= 4) { rankText.innerText = "RANK: EXECUTIVE PRODUCER"; }
+            
+            actionText.innerText = "LEVEL UP!";
+            actionText.style.opacity = "1";
+            setTimeout(() => actionText.style.opacity = "0", 1000);
+        }
+    }
+
+    function handleInput(ex, ey) {
+        items.forEach((item, i) => {
+            if (Math.abs(item.x - ex) < 45 && Math.abs(item.y - ey) < 45) {
+                items.splice(i, 1);
+                score += 100;
+                document.getElementById('score').innerText = "SCORE: " + score;
+                checkLevelUp();
             }
         });
     }
 
-    function endGame() {
-        gameActive = false;
-        finalScoreElement.innerText = score;
-        gameOverScreen.style.display = 'flex';
-    }
-
-    function resetGame() {
-        score = 0;
-        lives = 3;
-        foods = [];
-        gameActive = true;
-        scoreElement.innerText = "0";
-        livesElement.innerText = "❤️❤️❤️";
-        gameOverScreen.style.display = 'none';
+    startBtn.onclick = () => {
+        gameStarted = true;
+        startBtn.style.display = 'none';
+        playBeat();
         animate();
-    }
+    };
 
-    // Input Listeners
-    canvas.addEventListener('mousemove', (e) => checkSlice(e.clientX, e.clientY));
-    canvas.addEventListener('touchmove', (e) => {
+    window.addEventListener('mousemove', (e) => handleInput(e.clientX, e.clientY));
+    window.addEventListener('touchmove', (e) => {
         e.preventDefault();
-        const touch = e.touches[0];
-        checkSlice(touch.clientX, touch.clientY);
+        handleInput(e.touches[0].clientX, e.touches[0].clientY);
     }, {passive: false});
 
     function animate() {
-        if (!gameActive) return;
-
-        ctx.fillStyle = '#0a192f';
+        let bg = level === 1 ? '5, 10, 20' : (level === 2 ? '26, 5, 5' : '26, 21, 5');
+        ctx.fillStyle = `rgba(${bg}, ${pulse > 0 ? 0.3 : 0.1})`;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
+        if(pulse > 0) pulse--;
 
-        // Draw Blade Trail
-        ctx.beginPath();
-        ctx.strokeStyle = '#64ffda';
-        ctx.lineWidth = 3;
-        for(let i=0; i<trail.length; i++) {
-            if(i==0) ctx.moveTo(trail[i].x, trail[i].y);
-            else ctx.lineTo(trail[i].x, trail[i].y);
-            trail[i].age++;
-        }
-        ctx.stroke();
-        trail = trail.filter(t => t.age < 10);
-
-        // Spawn food
-        if (Math.random() < 0.04) foods.push(new Food());
-
-        foods.forEach((food, index) => {
-            food.update();
-            food.draw();
-            
-            // If food falls off bottom without being sliced
-            if (food.y > canvas.height + 100) {
-                foods.splice(index, 1);
-                lives--;
-                livesElement.innerText = "❤️".repeat(lives) || "💀";
-                if (lives <= 0) endGame();
-            }
+        items.forEach((item, i) => {
+            item.y += item.speedY;
+            item.speedY += item.gravity;
+            item.draw();
+            if(item.y > canvas.height + 100) items.splice(i, 1);
         });
 
         requestAnimationFrame(animate);
     }
-
-    animate();
 </script>
 </body>
-  </html>
+            </html>
