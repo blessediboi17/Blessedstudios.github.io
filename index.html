@@ -7,18 +7,13 @@
     <style>
         :root { --accent: #64ffda; --bg: #0a192f; --navy-light: #112240; }
         body { margin: 0; background: var(--bg); color: white; font-family: 'Segoe UI', sans-serif; scroll-behavior: smooth; }
-        
         nav { background: var(--bg); padding: 15px; text-align: center; border-bottom: 2px solid var(--accent); position: sticky; top: 0; z-index: 1000; }
         nav a { color: white; margin: 0 10px; text-decoration: none; font-size: 14px; font-weight: bold; }
-        
-        header { padding: 100px 20px; text-align: center; background: linear-gradient(rgba(10,25,47,0.9), rgba(10,25,47,0.9)); }
-        section { padding: 60px 20px; max-width: 900px; margin: auto; }
-        
+        header { padding: 80px 20px; text-align: center; background: #0a192f; }
+        section { padding: 40px 20px; max-width: 800px; margin: auto; }
         .card { background: var(--navy-light); padding: 30px; border-radius: 15px; border: 1px solid var(--accent); margin-bottom: 30px; }
         input, textarea, select { width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: 1px solid #233554; background: var(--bg); color: white; box-sizing: border-box; }
         .btn { background: var(--accent); color: var(--bg); border: none; padding: 15px 30px; font-weight: bold; border-radius: 5px; cursor: pointer; width: 100%; }
-        
-        .update-item { border-left: 3px solid var(--accent); padding-left: 15px; margin-bottom: 20px; text-align: left; }
     </style>
 </head>
 <body>
@@ -32,47 +27,48 @@
     </nav>
 
     <header>
-        <h1 style="font-size: 3rem; margin-bottom: 10px;">BLESSED STUDIOS</h1>
-        <p style="color: var(--accent); letter-spacing: 2px;">VISION • MISSION • EXCELLENCE</p>
+        <h1 style="font-size: 2.5rem; margin: 0;">BLESSED STUDIOS</h1>
+        <p style="color: var(--accent); letter-spacing: 2px;">VISION • MISSION • UPDATES</p>
     </header>
 
-    <section id="about" style="text-align: center;">
-        <div class="card">
+    <section id="about">
+        <div class="card" style="text-align: center;">
             <h2 style="color: var(--accent);">OUR VISION</h2>
-            <p id="vision-display">Leading the cinematic revolution in Liberia and beyond through storytelling and technology.</p>
-            <hr style="border: 0.5px solid #233554; margin: 20px 0;">
-            <h2 style="color: var(--accent);">OUR MISSION</h2>
-            <p id="mission-display">To empower young creators, produce world-class films, and provide the tools needed for digital excellence.</p>
+            <p id="vision-text">Loading vision...</p>
+            <h2 style="color: var(--accent); margin-top: 30px;">OUR MISSION</h2>
+            <p id="mission-text">Loading mission...</p>
         </div>
-    </section>
-
-    <section id="updates" style="text-align: center;">
-        <h2 style="color: white;">LATEST UPDATES</h2>
-        <div id="updates-container" class="card">
-            <div class="update-item">
-                <h4 style="margin: 0; color: var(--accent);">Site is Officially Live!</h4>
-                <p style="font-size: 14px; color: #8892b0;">Jan 19, 2026 - Welcome to our new digital home.</p>
-            </div>
-            </div>
     </section>
 
     <section id="recruitment">
         <div class="card">
-            <h2 style="text-align: center; color: var(--accent);">🎭 ACTOR RECRUITMENT</h2>
-            <p style="text-align: center; color: #8892b0;">Ages 5-60. Join the Blessed Studios Cast.</p>
-            <form action="https://formspree.io/f/mqaejprz" method="POST">
+            <h2 style="text-align: center; color: var(--accent);">🎭 JOIN THE CAST</h2>
+            <p style="text-align: center; color: #8892b0; margin-bottom: 20px;">Ages 5-60. Recruiting now for upcoming projects.</p>
+            
+            <form action="https://formspree.io/f/xeeekqkr" method="POST">
                 <input type="text" name="Name" placeholder="Full Name" required>
                 <input type="email" name="Email" placeholder="Email Address" required>
                 <input type="text" name="WhatsApp" placeholder="WhatsApp Number" required>
-                <input type="number" name="Age" placeholder="Age" min="5" max="60" required>
-                <textarea name="Experience" placeholder="Acting experience or talents..." rows="4"></textarea>
-                <button type="submit" class="btn">SUBMIT TO CEO</button>
+                
+                <div style="display: flex; gap: 10px;">
+                    <input type="number" name="Age" placeholder="Age" min="5" max="60" required style="width: 50%;">
+                    <select name="Gender" style="width: 50%;">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+
+                <textarea name="Experience" placeholder="Tell us about your acting experience..." rows="3"></textarea>
+                
+                <input type="hidden" name="_next" value="https://blessedstudios.netlify.app/success.html">
+                
+                <button type="submit" class="btn">SUBMIT APPLICATION</button>
             </form>
         </div>
     </section>
 
     <section id="login-section">
-        <div class="card" style="max-width: 350px; margin: auto;">
+        <div class="card" style="max-width: 350px; margin: auto; text-align: center;">
             <h3 style="color: var(--accent);">TEAM PORTAL</h3>
             <input type="password" id="ceoPassword" placeholder="Enter Password">
             <button onclick="checkAccess()" class="btn">LOGIN</button>
@@ -80,18 +76,18 @@
     </section>
 
     <script>
-        // Load Vision/Mission from storage (so they update instantly)
-        document.getElementById('vision-display').innerText = localStorage.getItem('vision') || "Leading the cinematic revolution in Liberia.";
-        document.getElementById('mission-display').innerText = localStorage.getItem('mission') || "To empower young creators and produce world-class films.";
+        // Automatic display of Vision and Mission from Dashboard
+        document.getElementById('vision-text').innerText = localStorage.getItem('vision') || "Leading the cinematic revolution in Liberia.";
+        document.getElementById('mission-text').innerText = localStorage.getItem('mission') || "To empower young creators and produce world-class films.";
 
         function checkAccess() {
             if (document.getElementById('ceoPassword').value === "Blessedstudios") {
                 localStorage.setItem('isBlessedAdmin', 'true');
                 window.location.href = "dashboard.html";
             } else {
-                alert("❌ Incorrect Password.");
+                alert("Incorrect Password.");
             }
         }
     </script>
 </body>
-    </html>
+            </html>
