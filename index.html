@@ -3,268 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blessed Studios | Official</title>
-    <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#0a192f">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    
+    <title>Blessed Studios | Official Site</title>
     <style>
-        :root { 
-            --accent: #64ffda; 
-            --deep-blue: #0a192f; 
-            --light-blue: #112240; 
-            --white: #e6f1ff; 
-            --text-gray: #8892b0;
-        }
+        :root { --accent: #64ffda; --bg: #0a192f; --navy-light: #112240; }
+        body { margin: 0; background: var(--bg); color: white; font-family: 'Segoe UI', sans-serif; }
+        
+        /* Navigation */
+        nav { background: var(--bg); padding: 15px; text-align: center; border-bottom: 2px solid var(--accent); position: sticky; top: 0; z-index: 1000; }
+        nav a { color: white; margin: 0 10px; text-decoration: none; font-size: 14px; font-weight: bold; }
+        nav a:hover { color: var(--accent); }
 
-        /* Smooth Background Animation */
-        body { 
-            font-family: 'Segoe UI', sans-serif; 
-            margin: 0; 
-            background: radial-gradient(circle at top, #112240 0%, #0a192f 100%);
-            color: var(--white); 
-            line-height: 1.6; 
-            text-align: center;
-            overflow-x: hidden;
-        }
+        /* Hero Section */
+        header { padding: 100px 20px; text-align: center; background: linear-gradient(rgba(10,25,47,0.8), rgba(10,25,47,0.8)), url('hero-bg.jpg'); background-size: cover; }
+        .btn-main { display: inline-block; padding: 15px 30px; background: var(--accent); color: var(--bg); text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 20px; }
 
-        .container { max-width: 500px; margin: auto; padding: 20px; }
+        /* CEO Section */
+        #ceo { padding: 60px 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 40px; background: var(--navy-light); }
+        .ceo-img { width: 200px; height: 200px; border-radius: 50%; border: 3px solid var(--accent); object-fit: cover; }
 
-        /* Animated Logo */
-        .logo-main { 
-            width: 130px; height: 130px; 
-            border-radius: 20px; 
-            border: 2px solid var(--accent); 
-            margin-top: 20px; 
-            box-shadow: 0 0 25px rgba(100,255,218,0.3);
-            animation: pulse 3s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        /* Cards with Hover Effects */
-        .info-card, .flyer-box { 
-            text-align: left; 
-            background: var(--light-blue); 
-            padding: 25px; 
-            border-radius: 15px; 
-            margin: 25px 0; 
-            border-left: 5px solid var(--accent);
-            transition: transform 0.3s ease;
-            animation: fadeInUp 1s;
-        }
-
-        .info-card:hover { transform: translateY(-5px); }
-
-        /* Buttons */
-        .btn-main { 
-            background: var(--accent); 
-            color: var(--deep-blue); 
-            border: none; 
-            padding: 15px 25px; 
-            border-radius: 10px; 
-            cursor: pointer; 
-            font-weight: bold; 
-            text-decoration: none; 
-            display: inline-block; 
-            width: 100%; 
-            box-sizing: border-box;
-            transition: 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .btn-main:hover { background: #fff; transform: scale(1.02); }
-
-        .tag { background: var(--accent); color: var(--deep-blue); padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 10px; }
-
-        /* Review Section */
-        #cusdis_thread { margin-top: 20px; }
-        .stars { color: #ffcc00; font-size: 20px; }
-
-        /* Floating WhatsApp Button */
-        .float-wa {
-            position: fixed; width: 60px; height: 60px; bottom: 40px; right: 20px;
-            background-color: #25d366; color: #FFF; border-radius: 50px; text-align: center;
-            font-size: 30px; box-shadow: 2px 2px 3px #999; z-index: 100;
-        }
-
-        /* Scroll Animations */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        /* Login Box */
+        #login-section { padding: 80px 20px; text-align: center; }
+        .login-card { max-width: 350px; margin: auto; padding: 30px; background: var(--navy-light); border-radius: 15px; border: 1px solid var(--accent); }
+        input { width: 90%; padding: 12px; margin: 10px 0; border-radius: 5px; border: 1px solid #233554; background: var(--bg); color: white; }
     </style>
 </head>
 <body>
-    <nav style="background: #0a192f; padding: 15px; text-align: center; border-bottom: 1px solid #233554;">
-    <a href="index.html" style="color: white; margin: 0 15px; text-decoration: none;">🏠 Home</a>
-    <a href="gallery.html" style="color: white; margin: 0 15px; text-decoration: none;">🎬 Movies</a>
-    <a href="game.html" style="color: white; margin: 0 15px; text-decoration: none;">🎮 Game</a>
-    <a href="shop.html" style="color: #64ffda; margin: 0 15px; text-decoration: none; font-weight: bold;">🛒 Shop</a>
+
+    <nav>
+        <a href="index.html">🏠 HOME</a>
+        <a href="gallery.html">🎬 MOVIES</a>
+        <a href="game.html">🎮 GAME</a>
+        <a href="shop.html">🛒 SHOP</a>
+        <a href="#login-section" style="color: var(--accent);">🔑 TEAM</a>
     </nav>
-    <a href="game.html" class="btn-main" style="background: #ff64da; margin-top: 10px;">
-   🎮 PLAY FOOD SLICER
-    </a>
-    <a href="https://wa.me/231771798046" class="float-wa" target="_blank" style="display: flex; align-items: center; justify-content: center;">
-        <i class="fab fa-whatsapp"></i>
-    </a>
 
-    <div class="container animate__animated animate__fadeIn">
-        
-        <img src="logo.jpg" alt="Blessed Studios" class="logo-main">
-        <h1 class="animate__animated animate__backInDown">Blessed Studios</h1>
-        <p style="color:var(--accent); font-weight: bold; letter-spacing: 3px; font-size: 10px; margin-top:0;">CREATING TO CHANGE LIVES</p>
+    <header>
+        <h1>BLESSED STUDIOS</h1>
+        <p>Creating Cinematic Excellence in Liberia</p>
+        <a href="gallery.html" class="btn-main">WATCH OUR FILMS</a>
+    </header>
 
-        <div id="install-container" style="display: none; margin: 20px 0;">
-            <button id="btn-install" class="btn-main" style="background: var(--white);">📲 INSTALL OFFICIAL APP</button>
+    <section id="ceo">
+        <img src="ceo-photo.jpg" alt="CEO" class="ceo-img">
+        <div style="max-width: 500px;">
+            <h2 style="color: var(--accent);">Meet the Director</h2>
+            <p>From the streets of Monrovia to the digital screen, Blessed Studios is dedicated to high-quality storytelling and empowering the next generation of creators.</p>
         </div>
+    </section>
 
-        <div class="flyer-box animate__animated animate__zoomIn">
-            <span class="tag">REGISTRATION OPEN</span>
-            <h2 style="color:white; margin: 15px 0 10px 0;">Website Masterclass</h2>
-            <p style="color: var(--text-gray); font-size: 14px;">Master the art of building and publishing professional websites for <b>FREE</b>.</p>
-            
-            <div style="background: rgba(100,255,218,0.05); padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 1px dashed var(--accent);">
-                <p style="margin:5px 0; font-size: 13px;"><i class="fas fa-check-circle" style="color:var(--accent)"></i> Mobile & PC Friendly</p>
-                <p style="margin:5px 0; font-size: 13px;"><i class="fas fa-check-circle" style="color:var(--accent)"></i> Zero Hosting Costs</p>
-                <p style="margin:5px 0; font-size: 13px;"><i class="fas fa-check-circle" style="color:var(--accent)"></i> WhatsApp Support Group</p>
-            </div>
-
-            <a href="https://wa.me/231771798046?text=Hello%20Blessed%20Studios,%20I%20want%20to%20register%20for%20the%20Website%20Masterclass.%20My%20name%20is:" 
-               class="btn-main">
-               <i class="fab fa-whatsapp"></i> SECURE MY SPOT
-            </a>
+    <section id="login-section">
+        <div class="login-card">
+            <h3 style="color: var(--accent);">TEAM LOGIN</h3>
+            <p style="font-size: 13px; color: #8892b0;">Private Access for Blessed Studios Staff</p>
+            <input type="password" id="ceoPassword" placeholder="Enter CEO Password">
+            <button onclick="checkAccess()" style="width: 98%; padding: 12px; background: var(--accent); border: none; font-weight: bold; cursor: pointer; border-radius: 5px;">ENTER DASHBOARD</button>
         </div>
-
-        <div class="info-card">
-            <h2>Our Core Mission</h2>
-            <p style="color: var(--text-gray); font-size: 14px; margin-bottom: 0;">We use digital creativity to transform minds. From cinema production to tech education, Blessed Studios is your home for growth.</p>
-        </div>
-
-        <div style="margin-top:40px; border-top: 1px solid rgba(100,255,218,0.1); padding-top: 30px;">
-            <h3 style="color:var(--accent); margin-bottom: 5px;">Community Rating</h3>
-            <div class="stars animate__animated animate__pulse animate__infinite">
-                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            
-            <div id="cusdis_thread"
-              data-host="https://cusdis.com"
-              data-app-id="2dfdf2f2-aee5-4174-ae9d-03384e87f1a4"
-              data-page-id="homepage"
-              data-page-url="https://blessediboi17.github.io/"
-              data-page-title="Blessed Studios"
-              data-theme="dark">
-            </div>
-            <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
-        </div>
-
-        <footer style="margin: 50px 0; font-size:10px; color:var(--text-gray); opacity: 0.6;">
-            &copy; 2025 BLESSED STUDIOS | MONROVIA, LIBERIA
-        </footer>
-    </div>
+    </section>
 
     <script>
-        // PWA Install Script
-        let deferredPrompt;
-        const installContainer = document.getElementById('install-container');
-        const btnInstall = document.getElementById('btn-install');
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            installContainer.style.display = 'block';
-            btnInstall.addEventListener('click', () => {
-                installContainer.style.display = 'none';
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then(() => { deferredPrompt = null; });
-            });
-        });
-
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js');
+        function checkAccess() {
+            const pass = document.getElementById('ceoPassword').value;
+            if (pass === "Blessedstudios") {
+                localStorage.setItem('isBlessedAdmin', 'true');
+                window.location.href = "dashboard.html";
+            } else {
+                alert("❌ Incorrect Password.");
+            }
         }
     </script>
-
-    <script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    (function(){
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-    s1.async=true;
-    s1.src='https://embed.tawk.to/694ceffdc7e8f119812e2130/1jda8j2bj';
-    s1.charset='UTF-8';
-    s1.setAttribute('crossorigin','*');
-    s0.parentNode.insertBefore(s1,s0);
-    })();
-    </script>
 </body>
-        </html>
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getAuth, GoogleAuthProvider, signInWithPopup, sendSignInLinkToEmail } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyBfMG8RzzKQkyTSP1PQR0QpqHasnQ2oAug",
-    authDomain: "blessed-studios-portal.firebaseapp.com",
-    projectId: "blessed-studios-portal",
-    storageBucket: "blessed-studios-portal.firebasestorage.app",
-    messagingSenderId: "922888843378",
-    appId: "1:922888843378:web:1c1609860cd825f1acd2eb",
-    measurementId: "G-0KX63BY9W3"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const provider = new GoogleAuthProvider();
-
-  // THE CEO SECRET CODE (Keep this secret!)
-  const CEO_CODE = "BLESSED_LIB_2026"; 
-
-  // --- Google Login Function ---
-  window.loginWithGoogle = async () => {
-    const inputCode = document.getElementById('ceoCode').value;
-    if(inputCode !== CEO_CODE) {
-        alert("❌ ACCESS DENIED: Invalid CEO Special Code.");
-        if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
-        return;
-    }
-    try {
-      const result = await signInWithPopup(auth, provider);
-      localStorage.setItem('isBlessedAdmin', 'true'); // Permission granted
-      alert("Welcome Director " + result.user.displayName + "!");
-      window.location.href = "dashboard.html"; 
-    } catch (error) {
-      alert("Error: " + error.message);
-    }
-  };
-
-  // --- Email Link Function ---
-  window.sendEmailLink = async () => {
-    const email = document.getElementById('teamEmail').value;
-    const inputCode = document.getElementById('ceoCode').value;
-
-    if(inputCode !== CEO_CODE) {
-        alert("❌ CEO CODE REQUIRED to trigger email system.");
-        return;
-    }
-
-    const actionCodeSettings = {
-      url: 'https://blessedstudios.netlify.app/dashboard.html',
-      handleCodeInApp: true,
-    };
-
-    try {
-      await sendSignInLinkToEmail(auth, email, actionCodeSettings);
-      window.localStorage.setItem('emailForSignIn', email);
-      alert("✅ Check your email! A secure login link has been sent.");
-    } catch (error) {
-      alert("Error: " + error.message);
-    }
-  };
-    </script>
+    </html>
