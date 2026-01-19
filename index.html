@@ -6,25 +6,19 @@
     <title>Blessed Studios | Official Site</title>
     <style>
         :root { --accent: #64ffda; --bg: #0a192f; --navy-light: #112240; }
-        body { margin: 0; background: var(--bg); color: white; font-family: 'Segoe UI', sans-serif; }
+        body { margin: 0; background: var(--bg); color: white; font-family: 'Segoe UI', sans-serif; scroll-behavior: smooth; }
         
-        /* Navigation */
         nav { background: var(--bg); padding: 15px; text-align: center; border-bottom: 2px solid var(--accent); position: sticky; top: 0; z-index: 1000; }
         nav a { color: white; margin: 0 10px; text-decoration: none; font-size: 14px; font-weight: bold; }
-        nav a:hover { color: var(--accent); }
-
-        /* Hero Section */
-        header { padding: 100px 20px; text-align: center; background: linear-gradient(rgba(10,25,47,0.8), rgba(10,25,47,0.8)), url('hero-bg.jpg'); background-size: cover; }
-        .btn-main { display: inline-block; padding: 15px 30px; background: var(--accent); color: var(--bg); text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 20px; }
-
-        /* CEO Section */
-        #ceo { padding: 60px 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 40px; background: var(--navy-light); }
-        .ceo-img { width: 200px; height: 200px; border-radius: 50%; border: 3px solid var(--accent); object-fit: cover; }
-
-        /* Login Box */
-        #login-section { padding: 80px 20px; text-align: center; }
-        .login-card { max-width: 350px; margin: auto; padding: 30px; background: var(--navy-light); border-radius: 15px; border: 1px solid var(--accent); }
-        input { width: 90%; padding: 12px; margin: 10px 0; border-radius: 5px; border: 1px solid #233554; background: var(--bg); color: white; }
+        
+        header { padding: 100px 20px; text-align: center; background: linear-gradient(rgba(10,25,47,0.9), rgba(10,25,47,0.9)); }
+        section { padding: 60px 20px; max-width: 900px; margin: auto; }
+        
+        .card { background: var(--navy-light); padding: 30px; border-radius: 15px; border: 1px solid var(--accent); margin-bottom: 30px; }
+        input, textarea, select { width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: 1px solid #233554; background: var(--bg); color: white; box-sizing: border-box; }
+        .btn { background: var(--accent); color: var(--bg); border: none; padding: 15px 30px; font-weight: bold; border-radius: 5px; cursor: pointer; width: 100%; }
+        
+        .update-item { border-left: 3px solid var(--accent); padding-left: 15px; margin-bottom: 20px; text-align: left; }
     </style>
 </head>
 <body>
@@ -38,32 +32,60 @@
     </nav>
 
     <header>
-        <h1>BLESSED STUDIOS</h1>
-        <p>Creating Cinematic Excellence in Liberia</p>
-        <a href="gallery.html" class="btn-main">WATCH OUR FILMS</a>
+        <h1 style="font-size: 3rem; margin-bottom: 10px;">BLESSED STUDIOS</h1>
+        <p style="color: var(--accent); letter-spacing: 2px;">VISION • MISSION • EXCELLENCE</p>
     </header>
 
-    <section id="ceo">
-        <img src="ceo-photo.jpg" alt="CEO" class="ceo-img">
-        <div style="max-width: 500px;">
-            <h2 style="color: var(--accent);">Meet the Director</h2>
-            <p>From the streets of Monrovia to the digital screen, Blessed Studios is dedicated to high-quality storytelling and empowering the next generation of creators.</p>
+    <section id="about" style="text-align: center;">
+        <div class="card">
+            <h2 style="color: var(--accent);">OUR VISION</h2>
+            <p id="vision-display">Leading the cinematic revolution in Liberia and beyond through storytelling and technology.</p>
+            <hr style="border: 0.5px solid #233554; margin: 20px 0;">
+            <h2 style="color: var(--accent);">OUR MISSION</h2>
+            <p id="mission-display">To empower young creators, produce world-class films, and provide the tools needed for digital excellence.</p>
+        </div>
+    </section>
+
+    <section id="updates" style="text-align: center;">
+        <h2 style="color: white;">LATEST UPDATES</h2>
+        <div id="updates-container" class="card">
+            <div class="update-item">
+                <h4 style="margin: 0; color: var(--accent);">Site is Officially Live!</h4>
+                <p style="font-size: 14px; color: #8892b0;">Jan 19, 2026 - Welcome to our new digital home.</p>
+            </div>
+            </div>
+    </section>
+
+    <section id="recruitment">
+        <div class="card">
+            <h2 style="text-align: center; color: var(--accent);">🎭 ACTOR RECRUITMENT</h2>
+            <p style="text-align: center; color: #8892b0;">Ages 5-60. Join the Blessed Studios Cast.</p>
+            <form action="https://formspree.io/f/mqaejprz" method="POST">
+                <input type="text" name="Name" placeholder="Full Name" required>
+                <input type="email" name="Email" placeholder="Email Address" required>
+                <input type="text" name="WhatsApp" placeholder="WhatsApp Number" required>
+                <input type="number" name="Age" placeholder="Age" min="5" max="60" required>
+                <textarea name="Experience" placeholder="Acting experience or talents..." rows="4"></textarea>
+                <button type="submit" class="btn">SUBMIT TO CEO</button>
+            </form>
         </div>
     </section>
 
     <section id="login-section">
-        <div class="login-card">
-            <h3 style="color: var(--accent);">TEAM LOGIN</h3>
-            <p style="font-size: 13px; color: #8892b0;">Private Access for Blessed Studios Staff</p>
-            <input type="password" id="ceoPassword" placeholder="Enter CEO Password">
-            <button onclick="checkAccess()" style="width: 98%; padding: 12px; background: var(--accent); border: none; font-weight: bold; cursor: pointer; border-radius: 5px;">ENTER DASHBOARD</button>
+        <div class="card" style="max-width: 350px; margin: auto;">
+            <h3 style="color: var(--accent);">TEAM PORTAL</h3>
+            <input type="password" id="ceoPassword" placeholder="Enter Password">
+            <button onclick="checkAccess()" class="btn">LOGIN</button>
         </div>
     </section>
 
     <script>
+        // Load Vision/Mission from storage (so they update instantly)
+        document.getElementById('vision-display').innerText = localStorage.getItem('vision') || "Leading the cinematic revolution in Liberia.";
+        document.getElementById('mission-display').innerText = localStorage.getItem('mission') || "To empower young creators and produce world-class films.";
+
         function checkAccess() {
-            const pass = document.getElementById('ceoPassword').value;
-            if (pass === "Blessedstudios") {
+            if (document.getElementById('ceoPassword').value === "Blessedstudios") {
                 localStorage.setItem('isBlessedAdmin', 'true');
                 window.location.href = "dashboard.html";
             } else {
