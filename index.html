@@ -3,47 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blessed Studios | Official Site</title>
+    <title>Blessed Studios | Smartphone Cinema</title>
     <style>
-        :root { --accent: #64ffda; --bg: #0a192f; --navy-light: #112240; }
-        body { margin: 0; background: var(--bg); color: white; font-family: 'Segoe UI', sans-serif; scroll-behavior: smooth; }
-        nav { background: var(--bg); padding: 15px; text-align: center; border-bottom: 2px solid var(--accent); position: sticky; top: 0; z-index: 1000; }
-        nav a { color: white; margin: 0 10px; text-decoration: none; font-size: 14px; font-weight: bold; }
-        header { padding: 80px 20px; text-align: center; background: #0a192f; }
-        section { padding: 40px 20px; max-width: 800px; margin: auto; }
-        .card { background: var(--navy-light); padding: 30px; border-radius: 15px; border: 1px solid var(--accent); margin-bottom: 30px; }
-        input, textarea, select { width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: 1px solid #233554; background: var(--bg); color: white; box-sizing: border-box; }
-        .btn { background: var(--accent); color: var(--bg); border: none; padding: 15px 30px; font-weight: bold; border-radius: 5px; cursor: pointer; width: 100%; }
+        :root { --accent: #64ffda; --bg: #0a192f; --navy-light: #112240; --text: #ccd6f6; --slate: #8892b0; }
+        
+        body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; scroll-behavior: smooth; line-height: 1.6; }
+        
+        /* Navigation */
+        nav { background: rgba(10, 25, 47, 0.95); padding: 15px; text-align: center; border-bottom: 2px solid var(--accent); position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); }
+        nav a { color: white; margin: 0 12px; text-decoration: none; font-size: 13px; font-weight: bold; letter-spacing: 1px; }
+        nav a:hover { color: var(--accent); }
+
+        /* Hero Section */
+        header { padding: 100px 20px; text-align: center; background: linear-gradient(rgba(10, 25, 47, 0.8), rgba(10, 25, 47, 0.8)); }
+        h1 { font-size: 2.8rem; margin: 0; color: white; letter-spacing: 2px; }
+        .hero-tagline { color: var(--accent); font-size: 14px; font-weight: bold; margin-top: 10px; text-transform: uppercase; }
+
+        section { padding: 60px 20px; max-width: 800px; margin: auto; }
+        .card { background: var(--navy-light); padding: 30px; border-radius: 15px; border: 1px solid #233554; margin-bottom: 30px; transition: 0.3s; }
+        .card:hover { border-color: var(--accent); }
+
+        /* Toolkit Grid */
+        .toolkit-grid { display: grid; grid-template-columns: 1fr; gap: 15px; margin-top: 20px; }
+        .tool-card { background: var(--bg); padding: 15px; border-radius: 8px; border-left: 3px solid var(--accent); text-align: left; }
+        .tool-card h4 { margin: 0 0 5px 0; color: var(--accent); }
+
+        /* Form Styling */
+        input, textarea, select { width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: 1px solid #233554; background: var(--bg); color: white; box-sizing: border-box; font-size: 16px; }
+        .btn { background: var(--accent); color: var(--bg); border: none; padding: 16px 30px; font-weight: bold; border-radius: 5px; cursor: pointer; width: 100%; font-size: 16px; margin-top: 10px; }
+        
+        footer { text-align: center; padding: 40px 20px; color: var(--slate); font-size: 12px; }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="index.html">🏠 HOME</a>
-        <a href="gallery.html">🎬 MOVIES</a>
-        <a href="game.html">🎮 GAME</a>
-        <a href="shop.html">🛒 SHOP</a>
-        <a href="#login-section" style="color: var(--accent);">🔑 TEAM</a>
+        <a href="index.html">HOME</a>
+        <a href="#about">VISION</a>
+        <a href="#toolkit">TOOLKIT</a>
+        <a href="#recruitment">JOIN</a>
+        <a href="#login-section" style="color: var(--accent);">DASHBOARD</a>
     </nav>
 
     <header>
-        <h1 style="font-size: 2.5rem; margin: 0;">BLESSED STUDIOS</h1>
-        <p style="color: var(--accent); letter-spacing: 2px;">VISION • MISSION • UPDATES</p>
+        <h1>BLESSED STUDIOS</h1>
+        <div class="hero-tagline">Smartphone Filmmaking • Gospel Content • Liberia</div>
     </header>
 
     <section id="about">
         <div class="card" style="text-align: center;">
-            <h2 style="color: var(--accent);">OUR VISION</h2>
-            <p id="vision-text">Loading vision...</p>
-            <h2 style="color: var(--accent); margin-top: 30px;">OUR MISSION</h2>
-            <p id="mission-text">Loading mission...</p>
+            <h2 style="color: var(--accent);">THE VISION</h2>
+            <p id="vision-text" style="font-style: italic;">"I am proving that great stories don't need big budgets, just big vision. Blessed Studios is built on passion and a smartphone."</p>
+            <div style="margin: 30px 0; height: 1px; background: #233554;"></div>
+            <h2 style="color: var(--accent);">OUR MISSION</h2>
+            <p id="mission-text">To master the art of mobile cinema and share gospel-centered stories that inspire the world.</p>
+        </div>
+    </section>
+
+    <section id="toolkit" style="text-align: center;">
+        <h2 style="color: white;">DIRECTOR'S TOOLKIT</h2>
+        <p style="color: var(--slate);">The apps and methods I use to create cinema on my phone.</p>
+        <div class="toolkit-grid">
+            <div class="tool-card">
+                <h4>🎬 Mobile Editing</h4>
+                <p style="font-size: 14px; margin: 0;">Using CapCut and InShot to achieve professional-grade cuts and transitions.</p>
+            </div>
+            <div class="tool-card">
+                <h4>📸 Visual Mastery</h4>
+                <p style="font-size: 14px; margin: 0;">Focusing on natural lighting and steady hands to make phone footage look like film.</p>
+            </div>
+            <div class="tool-card">
+                <h4>🔊 Sound Design</h4>
+                <p style="font-size: 14px; margin: 0;">Recording clear audio with simple tools to ensure the message is heard.</p>
+            </div>
         </div>
     </section>
 
     <section id="recruitment">
         <div class="card">
-            <h2 style="text-align: center; color: var(--accent);">🎭 JOIN THE CAST</h2>
-            <p style="text-align: center; color: #8892b0; margin-bottom: 20px;">Ages 5-60. Recruiting now for upcoming projects.</p>
+            <h2 style="text-align: center; color: var(--accent);">🎭 JOIN THE MOVEMENT</h2>
+            <p style="text-align: center; color: var(--slate); margin-bottom: 25px;">I'm looking for passionate people to join my journey. Actors, writers, and dreamers welcome.</p>
             
             <form action="https://formspree.io/f/xeeekqkr" method="POST">
                 <input type="text" name="Name" placeholder="Full Name" required>
@@ -58,27 +97,31 @@
                     </select>
                 </div>
 
-                <textarea name="Experience" placeholder="Tell us about your acting experience..." rows="3"></textarea>
+                <textarea name="Message" placeholder="Why do you want to join Blessed Studios?" rows="3"></textarea>
                 
                 <input type="hidden" name="_next" value="https://blessedstudios.netlify.app/success.html">
                 
-                <button type="submit" class="btn">SUBMIT APPLICATION</button>
+                <button type="submit" class="btn">SEND APPLICATION</button>
             </form>
         </div>
     </section>
 
-    <section id="login-section">
+    <section id="login-section" style="padding-bottom: 100px;">
         <div class="card" style="max-width: 350px; margin: auto; text-align: center;">
-            <h3 style="color: var(--accent);">TEAM PORTAL</h3>
+            <h3 style="color: var(--accent); margin-bottom: 20px;">TEAM PORTAL</h3>
             <input type="password" id="ceoPassword" placeholder="Enter Password">
             <button onclick="checkAccess()" class="btn">LOGIN</button>
         </div>
     </section>
 
+    <footer>
+        <p>&copy; 2026 BLESSED STUDIOS. Developed via Smartphone.</p>
+    </footer>
+
     <script>
-        // Automatic display of Vision and Mission from Dashboard
-        document.getElementById('vision-text').innerText = localStorage.getItem('vision') || "Leading the cinematic revolution in Liberia.";
-        document.getElementById('mission-text').innerText = localStorage.getItem('mission') || "To empower young creators and produce world-class films.";
+        // Load Live Vision/Mission from Dashboard
+        document.getElementById('vision-text').innerText = localStorage.getItem('vision') || `"I am proving that great stories don't need big budgets, just big vision. Blessed Studios is built on passion and a smartphone."`;
+        document.getElementById('mission-text').innerText = localStorage.getItem('mission') || "To master the art of mobile cinema and share gospel-centered stories that inspire the world.";
 
         function checkAccess() {
             if (document.getElementById('ceoPassword').value === "Blessedstudios") {
@@ -90,4 +133,4 @@
         }
     </script>
 </body>
-            </html>
+    </html>
