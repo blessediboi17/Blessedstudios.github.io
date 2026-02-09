@@ -3,155 +3,221 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blessed Studios Impactful content</title>
+    <title>Blessed Studios | Official</title>
     <style>
-        :root { 
-            --accent: #64ffda; 
-            --bg: #050a14; 
-            --glass: rgba(255, 255, 255, 0.05);
-            --verified-blue: #1DA1F2;
+        :root {
+            --primary: #00d2ff;
+            --bg: #030712;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
         }
-        
-        body { 
-            margin: 0; 
-            background: var(--bg); 
-            color: white; 
-            font-family: 'Segoe UI', sans-serif; 
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: #ffffff;
+            font-family: 'Inter', -apple-system, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
+            overflow-x: hidden;
         }
 
-        /* Header / Profile Style */
-        header { 
+        /* Cinematic Background Glow */
+        body::before {
+            content: "";
+            position: fixed;
+            top: -10%;
+            left: -10%;
+            width: 40%;
+            height: 40%;
+            background: radial-gradient(circle, rgba(0, 210, 255, 0.08) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        header {
             width: 100%;
-            padding: 50px 20px; 
+            padding: 80px 20px;
             text-align: center;
-            background: linear-gradient(to bottom, #112240, #050a14);
+            border-bottom: 1px solid var(--border);
+            background: linear-gradient(to bottom, #0a0f1d, var(--bg));
         }
 
-        .profile-container {
+        /* Verified Badge via SVG */
+        .title-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .verified-svg {
+            width: 28px;
+            height: 28px;
+            fill: #1DA1F2;
+            filter: drop-shadow(0 0 5px rgba(29, 161, 242, 0.5));
+        }
+
+        .tagline {
+            color: var(--primary);
+            font-size: 12px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        /* Real Follow Button FX */
+        .follow-btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 40px;
+            background: #ffffff;
+            color: #000;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 14px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .follow-btn:hover {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 0 30px rgba(0, 210, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Glassmorphism Section */
+        section {
+            width: 90%;
+            max-width: 500px;
+            margin: 40px 0;
+        }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+        }
+
+        h2 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #8892b0;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #ccd6f6;
+            margin: 0;
+        }
+
+        /* Pro Recruitment Form */
+        .form-group {
+            margin-top: 30px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 10px;
+            gap: 15px;
         }
 
-        h1 { 
-            font-size: 2rem; 
-            margin: 0; 
-            display: flex; 
-            align-items: center; 
-            gap: 8px; 
+        input, select {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 8px;
+            color: white;
+            font-size: 15px;
+            outline: none;
         }
 
-        /* The Verified Badge */
-        .verified-badge {
-            color: var(--verified-blue);
-            font-size: 20px;
+        input:focus {
+            border-color: var(--primary);
         }
 
-        .follow-btn {
-            background: var(--accent);
-            color: #050a14;
-            padding: 10px 25px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
-            margin-top: 15px;
-            transition: 0.3s;
-            box-shadow: 0 0 15px rgba(100, 255, 218, 0.3);
-        }
-
-        .follow-btn:active { transform: scale(0.95); }
-
-        /* Modern Glass Card */
-        section { 
-            width: 90%; 
-            max-width: 450px; 
-            margin: 20px 0; 
-        }
-
-        .card { 
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            padding: 25px; 
-            border-radius: 20px; 
-            border: 1px solid rgba(255,255,255,0.1);
-            text-align: center;
-        }
-
-        h2 { color: var(--accent); font-size: 1.2rem; margin-top: 0; }
-        p { color: #a8b2d1; font-size: 15px; line-height: 1.6; }
-
-        /* Form Styling */
-        input, textarea, select { 
-            width: 100%; 
-            padding: 12px; 
-            margin: 8px 0; 
-            border-radius: 10px; 
-            border: 1px solid #233554; 
-            background: rgba(0,0,0,0.3); 
-            color: white; 
-            box-sizing: border-box; 
-        }
-
-        .submit-btn { 
-            background: transparent; 
-            color: var(--accent); 
-            border: 1px solid var(--accent); 
-            padding: 15px; 
-            border-radius: 10px; 
-            width: 100%; 
-            font-weight: bold; 
+        .submit-btn {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 700;
             cursor: pointer;
-            margin-top: 10px;
+            transition: 0.3s;
         }
 
-        footer { padding: 40px; color: #4e5d72; font-size: 12px; text-align: center; }
+        .submit-btn:hover {
+            background: var(--primary);
+            color: #000;
+        }
 
+        footer {
+            padding: 60px;
+            color: #4e5d72;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="profile-container">
-            <div style="font-size: 50px;">🎬</div>
-            <h1>BLESSED STUDIOS <span class="verified-badge">✔</span></h1>
-            <p style="margin: 0; color: var(--accent); font-size: 13px; letter-spacing: 1px;">INSPIRING CONTENT</p>
-            
-            <a href="YOUR_SOCIAL_LINK_HERE" class="follow-btn">FOLLOW</a>
+        <div class="title-container">
+            <h1>Blessed Studios</h1>
+            <svg class="verified-svg" viewBox="0 0 24 24">
+                <path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.416-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .495.083.965.238 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-1.16.688-1.942 1.991-1.942 3.486 0 2.21 1.71 3.998 3.818 3.998.47 0 .92-.084 1.336-.25C9.182 21.585 10.49 22.5 12 22.5s2.816-.917 3.437-2.25c.416.165.866.25 1.336.25 2.11 0 3.818-1.79 3.818-4 0-.495-.083-.965-.238-1.4 1.272-.65 2.147-2.018 2.147-3.6zm-11.5 5l-4.5-4.5 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"></path>
+            </svg>
         </div>
+        <div class="tagline">Inspiring Content</div>
+        
+        <a href="https://your-social-link.com" class="follow-link follow-btn">Follow Studio</a>
     </header>
 
-    <section id="vision">
-        <div class="card">
+    <section>
+        <div class="glass-card">
             <h2>The Vision</h2>
-            <p>"Small phone, big vision. Proving that powerful stories can be told by anyone, anywhere."</p>
+            <p>Elevating storytelling through high-end visual production. We create content that inspires, challenges, and connects with audiences worldwide.</p>
         </div>
     </section>
 
-    <section id="recruitment">
-        <div class="card">
-            <h2>Join the Cast 🎭</h2>
-            <p>I am looking for people to build with. No big setup needed, just talent.</p>
+    <section id="recruit">
+        <div class="glass-card">
+            <h2>Recruitment</h2>
+            <p>Join the next generation of creative production. We are scouting talent for major upcoming projects.</p>
             
-            <form action="https://formspree.io/f/xeeekqkr" method="POST">
-                <input type="text" name="Name" placeholder="Your Name" required>
-                <input type="text" name="WhatsApp" placeholder="WhatsApp Number" required>
-                <select name="Role">
-                    <option value="Actor">Actor/Actress</option>
-                    <option value="Writer">Story Writer</option>
-                    <option value="Other">Other Talent</option>
+            <form action="https://formspree.io/f/xeeekqkr" method="POST" class="form-group">
+                <input type="text" name="name" placeholder="Full Name" required>
+                <input type="text" name="contact" placeholder="WhatsApp / Telegram" required>
+                <select name="role">
+                    <option value="cast">Talent / Cast</option>
+                    <option value="crew">Production Crew</option>
+                    <option value="script">Script Writer</option>
                 </select>
-                <button type="submit" class="submit-btn">SEND APPLICATION</button>
+                <button type="submit" class="submit-btn">APPLY NOW</button>
             </form>
         </div>
     </section>
 
     <footer>
-        <p>Verified Smartphone Studio &copy; 2026</p>
+        &copy; 2026 BLESSED STUDIOS • OFFICIAL VERIFIED PORTAL
     </footer>
 
 </body>
