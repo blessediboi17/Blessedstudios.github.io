@@ -19,7 +19,7 @@
             color: #ffffff;
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
-            transition: background 0.8s ease; /* Smooth color shift */
+            transition: background 0.8s ease;
         }
 
         /* DYNAMIC SCROLL BACKGROUND */
@@ -33,17 +33,15 @@
         .scroll-particles {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 200%;
-            background-image: 
-                radial-gradient(white, rgba(255,255,255,.2) 1.5px, transparent 40px);
-            background-size: 400px 400px;
+            background-image: radial-gradient(white, rgba(255,255,255,.1) 1px, transparent 40px);
+            background-size: 300px 300px;
             z-index: -1;
             will-change: transform;
         }
 
-        /* BRANDING */
         header {
             width: 100%;
-            padding: 120px 20px 60px;
+            padding: 100px 20px 40px;
             text-align: center;
         }
 
@@ -55,43 +53,43 @@
         }
 
         h1 {
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             font-weight: 900;
             margin: 0;
             text-transform: uppercase;
-            letter-spacing: -2px;
+            letter-spacing: -1px;
         }
 
-        .verified-icon { width: 32px; height: 32px; fill: var(--verified-blue); }
+        .verified-icon { width: 28px; height: 28px; fill: var(--verified-blue); }
 
         .impact-tag {
-            font-size: 12px;
-            letter-spacing: 6px;
+            font-size: 11px;
+            letter-spacing: 5px;
             color: var(--primary);
             text-transform: uppercase;
             font-weight: 800;
             margin-top: 10px;
         }
 
-        /* FOLLOWER INTERACTION */
-        .follower-ui { margin-top: 40px; }
-        .count-num { font-size: 2.2rem; font-weight: 900; }
-        .count-label { font-size: 11px; opacity: 0.5; text-transform: uppercase; letter-spacing: 2px; }
+        /* REAL FOLLOWER SYSTEM */
+        .follower-ui { margin-top: 30px; }
+        .count-num { font-size: 1.8rem; font-weight: 800; }
+        .count-label { font-size: 10px; opacity: 0.6; text-transform: uppercase; letter-spacing: 2px; }
 
         .follow-btn {
-            margin-top: 25px;
-            padding: 16px 60px;
+            margin-top: 20px;
+            padding: 14px 50px;
             background: #fff;
             color: #000;
             border: none;
-            border-radius: 6px;
-            font-weight: 900;
+            border-radius: 4px;
+            font-weight: 800;
             font-size: 14px;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            gap: 10px;
+            transition: 0.3s;
             text-transform: uppercase;
         }
 
@@ -101,19 +99,39 @@
             color: var(--primary);
         }
 
-        .check-svg { display: none; width: 20px; height: 20px; fill: currentColor; }
+        .check-svg { display: none; width: 18px; height: 18px; fill: currentColor; }
         .active .check-svg { display: block; }
 
-        /* CEO BIO BOX */
-        section { width: 90%; max-width: 520px; margin: 80px auto; }
-        .ceo-card {
+        /* CONTENT SECTIONS */
+        section { width: 90%; max-width: 550px; margin: 60px auto; }
+        
+        .glass-card {
             background: var(--glass);
-            backdrop-filter: blur(25px);
+            backdrop-filter: blur(20px);
             border: 1px solid var(--border);
-            padding: 45px;
+            padding: 40px;
             border-radius: 20px;
-            text-align: center;
         }
+
+        h2 { font-size: 14px; color: var(--primary); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; text-align: center; }
+        p { line-height: 1.8; color: #ccd6f6; font-size: 15px; margin-bottom: 0; }
+
+        .ceo-label {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .ceo-name { font-size: 20px; font-weight: 800; display: block; }
+        .ceo-titles { font-size: 11px; opacity: 0.7; letter-spacing: 1px; }
+
+        footer {
+            padding: 60px;
+            text-align: center;
+            font-size: 10px;
+            letter-spacing: 2px;
+            opacity: 0.5;
+        }
+
     </style>
 </head>
 <body>
@@ -129,8 +147,8 @@
         <div class="impact-tag">Impactful Content</div>
 
         <div class="follower-ui">
-            <div class="count-num" id="fCount">345,000,000</div>
-            <div class="count-label">Official Subscribers</div>
+            <div class="count-num" id="fCount">0</div>
+            <div class="count-label">Subscribers</div>
         </div>
 
         <button class="follow-btn" id="followBtn" onclick="toggleFollow()">
@@ -140,32 +158,53 @@
     </header>
 
     <section>
-        <div class="ceo-card">
-            <h2 style="font-size: 10px; letter-spacing: 4px; color: var(--primary); text-transform: uppercase;">Leadership Profile</h2>
-            <p style="font-size: 22px; font-weight: 800; margin: 15px 0;">Blessed Fredrick Iboi</p>
-            <p style="opacity: 0.8; line-height: 1.8;">CEO • Actor • AI Web Developer • Worship Leader</p>
-            <hr style="border: 0; border-top: 1px solid var(--border); margin: 25px 0;">
-            <p style="font-size: 15px; line-height: 1.7;">Building a global stage for content that matters. Through the fusion of technology and spirituality, we deliver a message that inspires 345 million souls and counting.</p>
+        <div class="glass-card">
+            <div class="ceo-label">
+                <span class="ceo-name">Blessed Fredrick Iboi</span>
+                <span class="ceo-titles">CEO • Actor • AI Web Developer • Worship Leader</span>
+            </div>
+            <h2>The Vision</h2>
+            <p>To be a global light in the media industry, creating content that doesn't just entertain, but transforms. Blessed Studios exists to bridge the gap between high-end digital innovation and spiritual truth.</p>
         </div>
     </section>
 
+    <section>
+        <div class="glass-card">
+            <h2>Our Mission</h2>
+            <p>We are committed to producing impactful stories through film, music, and technology. Our mission is to empower talent, utilize AI for creative excellence, and lead people into an atmosphere of worship and inspiration through every frame we capture.</p>
+        </div>
+    </section>
+
+    <section id="media-feed">
+        <div class="glass-card">
+            <h2>Studio Production</h2>
+            <div id="studioDisplay" style="margin-top:20px; display:grid; gap:20px;">
+                <p style="text-align:center; opacity:0.4; font-size:13px;">Awaiting official uploads from the CEO...</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        OFFICIAL PORTAL OF BLESSED FREDRICK IBOI<br>
+        &copy; 2026 BLESSED STUDIOS | ALL RIGHTS RESERVED
+    </footer>
+
     <script>
-        // BACKGROUND COLOR SHIFT & PARALLAX
+        // BACKGROUND MOTION
         window.addEventListener('scroll', function() {
             const scroll = window.pageYOffset;
             const bodyHeight = document.body.offsetHeight - window.innerHeight;
             const scrollPercent = scroll / bodyHeight;
 
-            // Parallax particles
             document.getElementById('particles').style.transform = `translateY(${scroll * 0.4}px)`;
-
-            // Smooth color shift from Deep Blue to Deep Purple as you scroll
-            const hue = 220 + (scrollPercent * 40); // Shifts from 220 to 260
+            
+            // Color shift logic
+            const hue = 220 + (scrollPercent * 30);
             document.getElementById('mainBg').style.background = `radial-gradient(circle at center, hsl(${hue}, 40%, 10%) 0%, #030712 100%)`;
         });
 
-        // REAL-TIME FOLLOW LOGIC
-        let followers = 345000000;
+        // REAL-TIME FOLLOW (Starts at 0)
+        let followers = 0;
         let active = false;
 
         function toggleFollow() {
@@ -186,6 +225,25 @@
             }
             disp.innerText = followers.toLocaleString();
         }
+
+        // LOAD INTERNAL STORAGE CONTENT
+        function renderFeed() {
+            const feed = JSON.parse(localStorage.getItem('blessed_feed') || '[]');
+            const display = document.getElementById('studioDisplay');
+            if (feed.length > 0) {
+                display.innerHTML = feed.map(post => `
+                    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden;">
+                        ${post.type === 'video' 
+                            ? `<video src="${post.data}" controls style="width:100%;"></video>` 
+                            : `<img src="${post.data}" style="width:100%; display:block;">`}
+                        <div style="padding: 15px;">
+                            <p style="font-weight: 800; font-size: 16px; margin: 0; color:#fff;">${post.title}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+        renderFeed();
     </script>
 </body>
     </html>
