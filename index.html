@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <meta property="og:title" content="Blessed Studios | Impactful Content">
-    <meta property="og:description" content="Official Platform of Blessed Fredrick Iboi. CEO, Actor, AI Web Developer.">
-    <meta property="og:image" content="https://i.ibb.co/XfHqN4m/Blessed-Studios-Card.jpg"> <meta property="og:type" content="website">
+    <meta property="og:description" content="Official Platform of Blessed Fredrick Iboi.">
+    <meta property="og:image" content="https://i.ibb.co/XfHqN4m/Blessed-Studios-Card.jpg">
 
-    <title>Blessed Studios | Official Portal</title>
+    <title>Blessed Studios | Impactful content</title>
     
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -33,7 +33,7 @@
 
         #canvas-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
 
-        /* UI CONTROLS */
+        /* TOP NAVIGATION */
         .top-nav {
             position: fixed; top: 0; width: 100%; padding: 15px;
             display: flex; justify-content: space-between; z-index: 1000;
@@ -50,9 +50,9 @@
         h1 { font-size: clamp(1.8rem, 8vw, 2.5rem); font-weight: 900; text-transform: uppercase; margin: 0; }
         .impact-tag { font-size: 10px; letter-spacing: 5px; color: var(--primary); text-transform: uppercase; font-weight: 800; margin-top: 8px; }
 
-        /* SUBSCRIPTION SYSTEM */
+        /* SUBSCRIPTION & BELL */
         .sub-container { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 30px; }
-        .count-num { font-size: 2rem; font-weight: 900; }
+        .count-num { font-size: 2.5rem; font-weight: 900; }
         .action-row { display: flex; align-items: center; gap: 10px; }
 
         .follow-btn {
@@ -60,16 +60,16 @@
             border: none; border-radius: 8px; font-weight: 800;
             text-transform: uppercase; cursor: pointer; transition: 0.3s;
         }
-        .follow-btn.active { background: #22c55e; pointer-events: none; }
+        .follow-btn.active { background: #22c55e; }
 
         .bell-btn {
             display: none; background: var(--glass); border: 1px solid var(--border);
-            padding: 12px; border-radius: 8px; cursor: pointer;
+            padding: 12px; border-radius: 8px; cursor: pointer; color: var(--text);
         }
         .bell-btn.show { display: block; animation: popIn 0.5s ease; }
-        .bell-btn.ringing { animation: shake 0.4s ease; background: var(--primary); }
+        .bell-btn.ringing { animation: shake 0.4s ease; background: var(--primary); color: white; }
 
-        /* SECTIONS */
+        /* CONTENT CARDS */
         .container { width: 92%; max-width: 600px; margin: 0 auto; }
         .glass-card {
             background: var(--card); border: 1px solid var(--border);
@@ -80,15 +80,33 @@
         .ceo-name { font-size: 22px; font-weight: 800; display: block; }
         .ceo-titles { font-size: 11px; opacity: 0.6; color: var(--primary); letter-spacing: 1px; }
 
-        /* BLOG POSTS */
+        /* BLOG STYLE */
         .post-label { color: var(--primary); font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
         .post-title { font-size: 20px; margin: 10px 0; font-weight: 800; }
         .ai-badge { background: rgba(0,210,255,0.1); color: var(--primary); font-size: 9px; padding: 4px 8px; border-radius: 4px; }
 
-        @keyframes shake { 0%,100%{transform:rotate(0)} 25%{transform:rotate(15deg)} 75%{transform:rotate(-15deg)} }
-        @keyframes popIn { from{opacity:0; transform:scale(0.8)} to{opacity:1; transform:scale(1)} }
+        /* --- ADMIN PORTAL UI --- */
+        #ai-action-button {
+            position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px;
+            background: linear-gradient(135deg, var(--primary), #bc13fe);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; box-shadow: 0 0 20px rgba(0, 210, 255, 0.4); z-index: 9999;
+            transition: 0.3s; color: white;
+        }
+        #admin-window {
+            position: fixed; bottom: 100px; right: 30px; width: 300px;
+            display: none; z-index: 9999; animation: popIn 0.3s ease;
+        }
+        .admin-input {
+            width: 100%; background: rgba(0,0,0,0.2); border: 1px solid var(--border);
+            color: var(--text); border-radius: 8px; padding: 10px; margin-bottom: 10px;
+            font-family: inherit; box-sizing: border-box;
+        }
 
-        footer { padding: 40px; text-align: center; font-size: 10px; opacity: 0.4; letter-spacing: 2px; }
+        @keyframes shake { 0%,100%{transform:rotate(0)} 25%{transform:rotate(15deg)} 75%{transform:rotate(-15deg)} }
+        @keyframes popIn { from{opacity:0; transform:scale(0.8) translateY(20px)} to{opacity:1; transform:scale(1) translateY(0)} }
+
+        footer { padding: 60px 40px; text-align: center; font-size: 10px; opacity: 0.4; letter-spacing: 2px; }
     </style>
 </head>
 <body>
@@ -123,11 +141,32 @@
                 <span class="ceo-name">Blessed Fredrick Iboi</span>
                 <span class="ceo-titles">CEO • Actor • AI Web Developer • Worship Leader</span>
             </div>
-            <p style="font-size:14px; opacity:0.8;">Creating a global stage for content that matters. Bridging technology and spirituality.</p>
+            <p style="font-size:14px; opacity:0.8; margin-top:10px;">Creating a global stage for content that transforms. Bridging innovation and spiritual truth.</p>
         </div>
 
         <div id="live-feed">
-            <p style="text-align:center; opacity:0.3;">Syncing with AI Room...</p>
+            <p style="text-align:center; opacity:0.3;">Syncing AI Room...</p>
+        </div>
+    </div>
+
+    <div id="ai-action-button" onclick="toggleAdmin()">✨</div>
+
+    <div id="admin-window" class="glass-card">
+        <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
+            <span class="post-label">CEO Admin Portal</span>
+            <button onclick="toggleAdmin()" style="background:none; border:none; color:var(--text); cursor:pointer;">✕</button>
+        </div>
+        
+        <div id="admin-auth">
+            <input type="password" id="admin-pass" class="admin-input" placeholder="Enter Secret Key">
+            <button class="follow-btn" style="width:100%; font-size:12px;" onclick="unlockAdmin()">Unlock</button>
+        </div>
+
+        <div id="admin-post" style="display:none;">
+            <input type="text" id="p-title" class="admin-input" placeholder="Post Title">
+            <input type="text" id="p-label" class="admin-input" placeholder="Label (NEWS, PROMO)">
+            <textarea id="p-content" class="admin-input" style="height:80px;" placeholder="Content..."></textarea>
+            <button id="pub-btn" class="follow-btn" style="width:100%; font-size:12px;" onclick="publishPost()">🚀 Publish Globally</button>
         </div>
     </div>
 
@@ -138,78 +177,102 @@
     </footer>
 
     <script>
-        // --- SUPABASE CONFIG ---
+        // --- CONFIG ---
         const SB_URL = "https://ulctlyvistlcjapqbzmp.supabase.co";
         const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVsY3RseXZpc3RsY2phcHFiem1wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEzMjk2OTEsImV4cCI6MjA4NjkwNTY5MX0.tCm1YPUWQ8s2e9mdq-wMhSJql10lrApfRF40wDHC7ls";
+        const CEO_KEY = "Blessed2026"; // CHANGE THIS TO YOUR SECRET PASSWORD
         const _supabase = supabase.createClient(SB_URL, SB_KEY);
+
+        // --- AUTH & POSTING ---
+        function toggleAdmin() {
+            const win = document.getElementById('admin-window');
+            win.style.display = win.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function unlockAdmin() {
+            if(document.getElementById('admin-pass').value === CEO_KEY) {
+                document.getElementById('admin-auth').style.display = 'none';
+                document.getElementById('admin-post').style.display = 'block';
+            } else { alert("Unauthorized."); }
+        }
+
+        async function publishPost() {
+            const title = document.getElementById('p-title').value;
+            const label = document.getElementById('p-label').value;
+            const content = document.getElementById('p-content').value;
+            const btn = document.getElementById('pub-btn');
+
+            if(!title || !content) return;
+            btn.innerText = "Publishing...";
+            
+            const { error } = await _supabase.from('posts').insert([{ title, label, content }]);
+            if(error) alert(error.message);
+            else { alert("Impact Published!"); location.reload(); }
+        }
 
         // --- SUBSCRIPTION & BELL ---
         let count = 0;
-        let hasSubscribed = localStorage.getItem('hasSubscribed') === 'true';
+        let hasSub = localStorage.getItem('hasSub') === 'true';
 
         async function subscribeGlobal() {
-            if (!hasSubscribed) {
-                count++;
-                hasSubscribed = true;
-                localStorage.setItem('hasSubscribed', 'true');
-                updateSubUI();
+            if(!hasSub) {
+                count++; hasSub = true;
+                localStorage.setItem('hasSub', 'true');
+                updateUI();
             }
         }
 
         function ringBell() {
-            const bell = document.getElementById('bellBtn');
-            const sound = document.getElementById('bellSound');
-            sound.currentTime = 0; sound.play();
-            bell.classList.add('ringing');
-            setTimeout(() => bell.classList.remove('ringing'), 400);
-            alert("Latest uploads will now notify your device!");
+            const b = document.getElementById('bellBtn');
+            document.getElementById('bellSound').play();
+            b.classList.add('ringing');
+            setTimeout(() => b.classList.remove('ringing'), 400);
+            alert("Notifications active for this device.");
         }
 
-        function updateSubUI() {
+        function updateUI() {
             document.getElementById('globalCount').innerText = count.toLocaleString();
-            if(hasSubscribed) {
-                const b = document.getElementById('followBtn');
-                b.classList.add('active'); b.innerText = "Subscribed";
+            if(hasSub) {
+                document.getElementById('followBtn').classList.add('active');
+                document.getElementById('followBtn').innerText = "Subscribed";
                 document.getElementById('bellBtn').classList.add('show');
             }
         }
 
-        // --- BLOG LOAD ---
-        async function loadPosts() {
+        // --- FEED & THEME ---
+        async function loadFeed() {
             const { data } = await _supabase.from('posts').select('*').order('created_at', { ascending: false });
             const feed = document.getElementById('live-feed');
-            if (data && data.length > 0) {
-                feed.innerHTML = data.map(post => `
+            if(data && data.length > 0) {
+                feed.innerHTML = data.map(p => `
                     <div class="glass-card">
-                        <span class="post-label">${post.label || 'Update'}</span>
-                        <div class="post-title">${post.title}</div>
-                        <div style="opacity:0.8; line-height:1.6; font-size:15px;">${post.content}</div>
+                        <span class="post-label">${p.label || 'Update'}</span>
+                        <div class="post-title">${p.title}</div>
+                        <p style="opacity:0.8; line-height:1.6; font-size:15px;">${p.content}</p>
                         <div style="margin-top:15px; display:flex; justify-content:space-between; align-items:center;">
                             <span class="ai-badge">✨ Posted by Blessed AI</span>
-                            <a href="https://www.facebook.com/sharer/sharer.php?u=${window.location.href}" target="_blank" style="color:#1877F2; text-decoration:none; font-size:11px; font-weight:bold;">Share Impact</a>
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=${window.location.href}" target="_blank" style="color:#1877F2; text-decoration:none; font-size:11px; font-weight:bold;">Share on Facebook</a>
                         </div>
                     </div>
                 `).join('');
-            } else {
-                feed.innerHTML = "<p style='text-align:center; opacity:0.3;'>Awaiting AI Room content...</p>";
-            }
+            } else { feed.innerHTML = "<p style='text-align:center; opacity:0.3;'>Awaiting impact...</p>"; }
         }
 
-        // --- UI & ANIMATION ---
         function toggleTheme() {
             document.body.getAttribute('data-theme') === 'light' ? document.body.removeAttribute('data-theme') : document.body.setAttribute('data-theme', 'light');
         }
 
+        // --- MOTION BG ---
         const canvas = document.getElementById('canvas-bg');
         const ctx = canvas.getContext('2d');
         let pts = [];
         function init() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
         window.onresize = init; init();
-        class P { constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.v=Math.random()*0.2+0.1;} update(){this.y-=this.v; if(this.y<0)this.y=canvas.height;} draw(){ctx.fillStyle=getComputedStyle(document.body).getPropertyValue('--primary');ctx.globalAlpha=0.4;ctx.beginPath();ctx.arc(this.x,this.y,1,0,Math.PI*2);ctx.fill();} }
+        class P { constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.v=Math.random()*0.2+0.1;} update(){this.y-=this.v; if(this.y<0)this.y=canvas.height;} draw(){ctx.fillStyle=getComputedStyle(document.body).getPropertyValue('--primary');ctx.globalAlpha=0.3;ctx.beginPath();ctx.arc(this.x,this.y,1,0,Math.PI*2);ctx.fill();} }
         for(let i=0; i<40; i++) pts.push(new P());
         function anim() { ctx.clearRect(0,0,canvas.width,canvas.height); pts.forEach(p=>{p.update();p.draw();}); requestAnimationFrame(anim); }
 
-        updateSubUI(); loadPosts(); anim();
+        updateUI(); loadFeed(); anim();
     </script>
 </body>
-        </html>
+                                           </html>
