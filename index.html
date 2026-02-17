@@ -2,159 +2,152 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Blessed Studios | Impactful Content</title>
     <style>
         :root {
-            --primary: #00d2ff;
             --bg: #030712;
-            --glass: rgba(255, 255, 255, 0.03);
+            --text: #ffffff;
+            --primary: #00d2ff;
+            --glass: rgba(255, 255, 255, 0.05);
             --border: rgba(255, 255, 255, 0.1);
-            --verified-blue: #1DA1F2;
+            --card: #0a1120;
+        }
+
+        /* Light Mode Variables */
+        [data-theme="light"] {
+            --bg: #f0f2f5;
+            --text: #1a1a1a;
+            --primary: #0077ff;
+            --glass: rgba(0, 0, 0, 0.05);
+            --border: rgba(0, 0, 0, 0.1);
+            --card: #ffffff;
         }
 
         body {
             margin: 0;
             background: var(--bg);
-            color: #ffffff;
-            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            font-family: 'Inter', -apple-system, sans-serif;
+            transition: background 0.5s ease, color 0.5s ease;
             overflow-x: hidden;
-            transition: background 0.8s ease;
+            width: 100vw;
         }
 
-        /* DYNAMIC SCROLL BACKGROUND */
-        .bg-layer {
+        /* LIVE MOTION BACKGROUND */
+        #canvas-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -2;
-            background: radial-gradient(circle at center, #0a1120 0%, #030712 100%);
-        }
-
-        .scroll-particles {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 200%;
-            background-image: radial-gradient(white, rgba(255,255,255,.1) 1px, transparent 40px);
-            background-size: 300px 300px;
             z-index: -1;
-            will-change: transform;
+            pointer-events: none;
         }
 
+        /* THEME TOGGLE */
+        .theme-toggle {
+            position: fixed;
+            top: 20px; right: 20px;
+            z-index: 100;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+        }
+
+        /* HEADER & BRANDING */
         header {
-            width: 100%;
-            padding: 100px 20px 40px;
+            padding: 80px 20px 40px;
             text-align: center;
         }
 
-        .verified-row {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-        }
-
         h1 {
-            font-size: 2.5rem;
+            font-size: clamp(1.8rem, 8vw, 2.5rem);
             font-weight: 900;
             margin: 0;
             text-transform: uppercase;
             letter-spacing: -1px;
         }
 
-        .verified-icon { width: 28px; height: 28px; fill: var(--verified-blue); }
-
         .impact-tag {
-            font-size: 11px;
+            font-size: 10px;
             letter-spacing: 5px;
             color: var(--primary);
             text-transform: uppercase;
             font-weight: 800;
-            margin-top: 10px;
+            margin-top: 8px;
         }
 
-        /* REAL FOLLOWER SYSTEM */
-        .follower-ui { margin-top: 30px; }
+        /* SUBSCRIPTION SYSTEM */
+        .sub-box { margin-top: 30px; }
         .count-num { font-size: 1.8rem; font-weight: 800; }
-        .count-label { font-size: 10px; opacity: 0.6; text-transform: uppercase; letter-spacing: 2px; }
-
+        
         .follow-btn {
-            margin-top: 20px;
-            padding: 14px 50px;
-            background: #fff;
-            color: #000;
+            margin-top: 15px;
+            padding: 14px 40px;
+            background: var(--primary);
+            color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 50px;
             font-weight: 800;
-            font-size: 14px;
-            cursor: pointer;
+            text-transform: uppercase;
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            transition: 0.3s;
-            text-transform: uppercase;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .follow-btn.active {
-            background: var(--glass);
-            border: 1px solid var(--primary);
-            color: var(--primary);
+            background: #22c55e; /* Success Green */
+            transform: scale(1.05);
         }
 
-        .check-svg { display: none; width: 18px; height: 18px; fill: currentColor; }
+        .check-svg { display: none; width: 18px; height: 18px; fill: white; }
         .active .check-svg { display: block; }
 
-        /* CONTENT SECTIONS */
-        section { width: 90%; max-width: 550px; margin: 60px auto; }
-        
+        /* SCROLL SECTIONS */
+        section {
+            width: 92%;
+            max-width: 500px;
+            margin: 40px auto;
+        }
+
         .glass-card {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
+            background: var(--card);
             border: 1px solid var(--border);
-            padding: 40px;
-            border-radius: 20px;
+            padding: 30px;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        h2 { font-size: 14px; color: var(--primary); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; text-align: center; }
-        p { line-height: 1.8; color: #ccd6f6; font-size: 15px; margin-bottom: 0; }
+        h2 { font-size: 12px; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; }
+        p { line-height: 1.6; font-size: 15px; margin: 0; opacity: 0.9; }
 
-        .ceo-label {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
+        .ceo-label { margin-bottom: 20px; }
         .ceo-name { font-size: 20px; font-weight: 800; display: block; }
-        .ceo-titles { font-size: 11px; opacity: 0.7; letter-spacing: 1px; }
+        .ceo-titles { font-size: 11px; opacity: 0.6; }
 
-        footer {
-            padding: 60px;
-            text-align: center;
-            font-size: 10px;
-            letter-spacing: 2px;
-            opacity: 0.5;
-        }
+        footer { padding: 40px; text-align: center; font-size: 10px; letter-spacing: 1px; opacity: 0.5; }
 
     </style>
 </head>
 <body>
 
-    <div class="bg-layer" id="mainBg"></div>
-    <div class="scroll-particles" id="particles"></div>
+    <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+    <canvas id="canvas-bg"></canvas>
 
     <header>
-        <div class="verified-row">
-            <h1>Blessed Studios</h1>
-            <svg class="verified-icon" viewBox="0 0 24 24"><path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.416-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .495.083.965.238 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-1.16.688-1.942 1.991-1.942 3.486 0 2.21 1.71 3.998 3.818 3.998.47 0 .92-.084 1.336-.25C9.182 21.585 10.49 22.5 12 22.5s2.816-.917 3.437-2.25c.416.165.866.25 1.336.25 2.11 0 3.818-1.79 3.818-4 0-.495-.083-.965-.238-1.4 1.272-.65 2.147-2.018 2.147-3.6zm-11.5 5l-4.5-4.5 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"></path></svg>
-        </div>
+        <h1>Blessed Studios</h1>
         <div class="impact-tag">Impactful Content</div>
 
-        <div class="follower-ui">
+        <div class="sub-box">
             <div class="count-num" id="fCount">0</div>
-            <div class="count-label">Subscribers</div>
+            <button class="follow-btn" id="followBtn" onclick="doSubscribe()">
+                <span id="btnText">Subscribe</span>
+                <svg class="check-svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            </button>
         </div>
-
-        <button class="follow-btn" id="followBtn" onclick="toggleFollow()">
-            <span id="btnText">Subscribe</span>
-            <svg class="check-svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-        </button>
     </header>
 
     <section>
@@ -164,86 +157,100 @@
                 <span class="ceo-titles">CEO • Actor • AI Web Developer • Worship Leader</span>
             </div>
             <h2>The Vision</h2>
-            <p>To be a global light in the media industry, creating content that doesn't just entertain, but transforms. Blessed Studios exists to bridge the gap between high-end digital innovation and spiritual truth.</p>
+            <p>To be a global light in the media industry, creating content that transforms lives through high-end innovation and spiritual truth.</p>
         </div>
     </section>
 
     <section>
         <div class="glass-card">
-            <h2>Our Mission</h2>
-            <p>We are committed to producing impactful stories through film, music, and technology. Our mission is to empower talent, utilize AI for creative excellence, and lead people into an atmosphere of worship and inspiration through every frame we capture.</p>
-        </div>
-    </section>
-
-    <section id="media-feed">
-        <div class="glass-card">
-            <h2>Studio Production</h2>
-            <div id="studioDisplay" style="margin-top:20px; display:grid; gap:20px;">
-                <p style="text-align:center; opacity:0.4; font-size:13px;">Awaiting official uploads from the CEO...</p>
-            </div>
+            <h2>Mission</h2>
+            <p>Producing impactful stories through film and technology, empowering talent, and leading hearts into worship through every project.</p>
         </div>
     </section>
 
     <footer>
-        OFFICIAL PORTAL OF BLESSED FREDRICK IBOI<br>
-        &copy; 2026 BLESSED STUDIOS | ALL RIGHTS RESERVED
+        &copy; 2026 BLESSED STUDIOS | CEO BLESSED FREDRICK IBOI
     </footer>
 
     <script>
-        // BACKGROUND MOTION
-        window.addEventListener('scroll', function() {
-            const scroll = window.pageYOffset;
-            const bodyHeight = document.body.offsetHeight - window.innerHeight;
-            const scrollPercent = scroll / bodyHeight;
+        // 1. PERMANENT SUBSCRIPTION LOGIC
+        let isSubscribed = localStorage.getItem('isSubscribed') === 'true';
+        updateUI();
 
-            document.getElementById('particles').style.transform = `translateY(${scroll * 0.4}px)`;
-            
-            // Color shift logic
-            const hue = 220 + (scrollPercent * 30);
-            document.getElementById('mainBg').style.background = `radial-gradient(circle at center, hsl(${hue}, 40%, 10%) 0%, #030712 100%)`;
-        });
+        function doSubscribe() {
+            isSubscribed = !isSubscribed;
+            localStorage.setItem('isSubscribed', isSubscribed);
+            updateUI();
+        }
 
-        // REAL-TIME FOLLOW (Starts at 0)
-        let followers = 0;
-        let active = false;
-
-        function toggleFollow() {
+        function updateUI() {
             const btn = document.getElementById('followBtn');
             const txt = document.getElementById('btnText');
-            const disp = document.getElementById('fCount');
-
-            if(!active) {
-                active = true;
+            const count = document.getElementById('fCount');
+            
+            if(isSubscribed) {
                 btn.classList.add('active');
                 txt.innerText = "Subscribed";
-                followers++;
+                count.innerText = "1";
             } else {
-                active = false;
                 btn.classList.remove('active');
                 txt.innerText = "Subscribe";
-                followers--;
+                count.innerText = "0";
             }
-            disp.innerText = followers.toLocaleString();
         }
 
-        // LOAD INTERNAL STORAGE CONTENT
-        function renderFeed() {
-            const feed = JSON.parse(localStorage.getItem('blessed_feed') || '[]');
-            const display = document.getElementById('studioDisplay');
-            if (feed.length > 0) {
-                display.innerHTML = feed.map(post => `
-                    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden;">
-                        ${post.type === 'video' 
-                            ? `<video src="${post.data}" controls style="width:100%;"></video>` 
-                            : `<img src="${post.data}" style="width:100%; display:block;">`}
-                        <div style="padding: 15px;">
-                            <p style="font-weight: 800; font-size: 16px; margin: 0; color:#fff;">${post.title}</p>
-                        </div>
-                    </div>
-                `).join('');
+        // 2. THEME TOGGLE
+        function toggleTheme() {
+            const current = document.body.getAttribute('data-theme');
+            if(current === 'light') {
+                document.body.removeAttribute('data-theme');
+            } else {
+                document.body.setAttribute('data-theme', 'light');
             }
         }
-        renderFeed();
+
+        // 3. LIVE MOTION ANIMATION (Canvas Particles)
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function initCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.onresize = initCanvas;
+        initCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2;
+                this.speedY = Math.random() * 0.5 + 0.2;
+            }
+            update() {
+                this.y -= this.speedY;
+                if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--primary');
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 50; i++) particles.push(new Particle());
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
     </script>
 </body>
     </html>
