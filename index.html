@@ -3,48 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blessed Studios | Official</title>
+    <title>Blessed Studios | Impactful Content</title>
     <style>
         :root {
             --primary: #00d2ff;
             --bg: #030712;
             --glass: rgba(255, 255, 255, 0.03);
             --border: rgba(255, 255, 255, 0.1);
+            --verified-blue: #1DA1F2;
         }
 
         body {
             margin: 0;
             background: var(--bg);
             color: #ffffff;
-            font-family: 'Inter', -apple-system, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
+            transition: background 0.8s ease; /* Smooth color shift */
         }
 
-        /* Cinematic Background Glow */
-        body::before {
-            content: "";
+        /* DYNAMIC SCROLL BACKGROUND */
+        .bg-layer {
             position: fixed;
-            top: -10%;
-            left: -10%;
-            width: 40%;
-            height: 40%;
-            background: radial-gradient(circle, rgba(0, 210, 255, 0.08) 0%, transparent 70%);
-            z-index: -1;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2;
+            background: radial-gradient(circle at center, #0a1120 0%, #030712 100%);
         }
 
+        .scroll-particles {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 200%;
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.2) 1.5px, transparent 40px);
+            background-size: 400px 400px;
+            z-index: -1;
+            will-change: transform;
+        }
+
+        /* BRANDING */
         header {
             width: 100%;
-            padding: 80px 20px;
+            padding: 120px 20px 60px;
             text-align: center;
-            border-bottom: 1px solid var(--border);
-            background: linear-gradient(to bottom, #0a0f1d, var(--bg));
         }
 
-        /* Verified Badge via SVG */
-        .title-container {
+        .verified-row {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -52,173 +55,137 @@
         }
 
         h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            letter-spacing: -1px;
+            font-size: 2.8rem;
+            font-weight: 900;
             margin: 0;
             text-transform: uppercase;
+            letter-spacing: -2px;
         }
 
-        .verified-svg {
-            width: 28px;
-            height: 28px;
-            fill: #1DA1F2;
-            filter: drop-shadow(0 0 5px rgba(29, 161, 242, 0.5));
-        }
+        .verified-icon { width: 32px; height: 32px; fill: var(--verified-blue); }
 
-        .tagline {
-            color: var(--primary);
+        .impact-tag {
             font-size: 12px;
-            letter-spacing: 5px;
+            letter-spacing: 6px;
+            color: var(--primary);
             text-transform: uppercase;
-            margin-top: 10px;
-            font-weight: 600;
-        }
-
-        /* Real Follow Button FX */
-        .follow-btn {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 12px 40px;
-            background: #ffffff;
-            color: #000;
-            text-decoration: none;
             font-weight: 800;
+            margin-top: 10px;
+        }
+
+        /* FOLLOWER INTERACTION */
+        .follower-ui { margin-top: 40px; }
+        .count-num { font-size: 2.2rem; font-weight: 900; }
+        .count-label { font-size: 11px; opacity: 0.5; text-transform: uppercase; letter-spacing: 2px; }
+
+        .follow-btn {
+            margin-top: 25px;
+            padding: 16px 60px;
+            background: #fff;
+            color: #000;
+            border: none;
+            border-radius: 6px;
+            font-weight: 900;
             font-size: 14px;
-            border-radius: 4px;
-            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-transform: uppercase;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
         }
 
-        .follow-btn:hover {
-            background: var(--primary);
-            color: #fff;
-            box-shadow: 0 0 30px rgba(0, 210, 255, 0.4);
-            transform: translateY(-2px);
-        }
-
-        /* Glassmorphism Section */
-        section {
-            width: 90%;
-            max-width: 500px;
-            margin: 40px 0;
-        }
-
-        .glass-card {
+        .follow-btn.active {
             background: var(--glass);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid var(--border);
-            padding: 40px;
-            border-radius: 24px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-        }
-
-        h2 {
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #8892b0;
-            margin-bottom: 20px;
-        }
-
-        p {
-            font-size: 16px;
-            line-height: 1.8;
-            color: #ccd6f6;
-            margin: 0;
-        }
-
-        /* Pro Recruitment Form */
-        .form-group {
-            margin-top: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        input, select {
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--border);
-            padding: 15px;
-            border-radius: 8px;
-            color: white;
-            font-size: 15px;
-            outline: none;
-        }
-
-        input:focus {
-            border-color: var(--primary);
-        }
-
-        .submit-btn {
-            background: transparent;
             border: 1px solid var(--primary);
             color: var(--primary);
-            padding: 15px;
-            border-radius: 8px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
         }
 
-        .submit-btn:hover {
-            background: var(--primary);
-            color: #000;
-        }
+        .check-svg { display: none; width: 20px; height: 20px; fill: currentColor; }
+        .active .check-svg { display: block; }
 
-        footer {
-            padding: 60px;
-            color: #4e5d72;
-            font-size: 11px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+        /* CEO BIO BOX */
+        section { width: 90%; max-width: 520px; margin: 80px auto; }
+        .ceo-card {
+            background: var(--glass);
+            backdrop-filter: blur(25px);
+            border: 1px solid var(--border);
+            padding: 45px;
+            border-radius: 20px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
+    <div class="bg-layer" id="mainBg"></div>
+    <div class="scroll-particles" id="particles"></div>
+
     <header>
-        <div class="title-container">
+        <div class="verified-row">
             <h1>Blessed Studios</h1>
-            <svg class="verified-svg" viewBox="0 0 24 24">
-                <path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.416-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .495.083.965.238 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-1.16.688-1.942 1.991-1.942 3.486 0 2.21 1.71 3.998 3.818 3.998.47 0 .92-.084 1.336-.25C9.182 21.585 10.49 22.5 12 22.5s2.816-.917 3.437-2.25c.416.165.866.25 1.336.25 2.11 0 3.818-1.79 3.818-4 0-.495-.083-.965-.238-1.4 1.272-.65 2.147-2.018 2.147-3.6zm-11.5 5l-4.5-4.5 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"></path>
-            </svg>
+            <svg class="verified-icon" viewBox="0 0 24 24"><path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.416-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .495.083.965.238 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-1.16.688-1.942 1.991-1.942 3.486 0 2.21 1.71 3.998 3.818 3.998.47 0 .92-.084 1.336-.25C9.182 21.585 10.49 22.5 12 22.5s2.816-.917 3.437-2.25c.416.165.866.25 1.336.25 2.11 0 3.818-1.79 3.818-4 0-.495-.083-.965-.238-1.4 1.272-.65 2.147-2.018 2.147-3.6zm-11.5 5l-4.5-4.5 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"></path></svg>
         </div>
-        <div class="tagline">Inspiring Content</div>
-        
-        <a href="https://your-social-link.com" class="follow-link follow-btn">Follow Studio</a>
+        <div class="impact-tag">Impactful Content</div>
+
+        <div class="follower-ui">
+            <div class="count-num" id="fCount">345,000,000</div>
+            <div class="count-label">Official Subscribers</div>
+        </div>
+
+        <button class="follow-btn" id="followBtn" onclick="toggleFollow()">
+            <span id="btnText">Subscribe</span>
+            <svg class="check-svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+        </button>
     </header>
 
     <section>
-        <div class="glass-card">
-            <h2>The Vision</h2>
-            <p>Elevating storytelling through high-end visual production. We create content that inspires, challenges, and connects with audiences worldwide.</p>
+        <div class="ceo-card">
+            <h2 style="font-size: 10px; letter-spacing: 4px; color: var(--primary); text-transform: uppercase;">Leadership Profile</h2>
+            <p style="font-size: 22px; font-weight: 800; margin: 15px 0;">Blessed Fredrick Iboi</p>
+            <p style="opacity: 0.8; line-height: 1.8;">CEO • Actor • AI Web Developer • Worship Leader</p>
+            <hr style="border: 0; border-top: 1px solid var(--border); margin: 25px 0;">
+            <p style="font-size: 15px; line-height: 1.7;">Building a global stage for content that matters. Through the fusion of technology and spirituality, we deliver a message that inspires 345 million souls and counting.</p>
         </div>
     </section>
 
-    <section id="recruit">
-        <div class="glass-card">
-            <h2>Recruitment</h2>
-            <p>Join the next generation of creative production. We are scouting talent for major upcoming projects.</p>
-            
-            <form action="https://formspree.io/f/xeeekqkr" method="POST" class="form-group">
-                <input type="text" name="name" placeholder="Full Name" required>
-                <input type="text" name="contact" placeholder="WhatsApp / Telegram" required>
-                <select name="role">
-                    <option value="cast">Talent / Cast</option>
-                    <option value="crew">Production Crew</option>
-                    <option value="script">Script Writer</option>
-                </select>
-                <button type="submit" class="submit-btn">APPLY NOW</button>
-            </form>
-        </div>
-    </section>
+    <script>
+        // BACKGROUND COLOR SHIFT & PARALLAX
+        window.addEventListener('scroll', function() {
+            const scroll = window.pageYOffset;
+            const bodyHeight = document.body.offsetHeight - window.innerHeight;
+            const scrollPercent = scroll / bodyHeight;
 
-    <footer>
-        &copy; 2026 BLESSED STUDIOS • OFFICIAL VERIFIED PORTAL
-    </footer>
+            // Parallax particles
+            document.getElementById('particles').style.transform = `translateY(${scroll * 0.4}px)`;
 
+            // Smooth color shift from Deep Blue to Deep Purple as you scroll
+            const hue = 220 + (scrollPercent * 40); // Shifts from 220 to 260
+            document.getElementById('mainBg').style.background = `radial-gradient(circle at center, hsl(${hue}, 40%, 10%) 0%, #030712 100%)`;
+        });
+
+        // REAL-TIME FOLLOW LOGIC
+        let followers = 345000000;
+        let active = false;
+
+        function toggleFollow() {
+            const btn = document.getElementById('followBtn');
+            const txt = document.getElementById('btnText');
+            const disp = document.getElementById('fCount');
+
+            if(!active) {
+                active = true;
+                btn.classList.add('active');
+                txt.innerText = "Subscribed";
+                followers++;
+            } else {
+                active = false;
+                btn.classList.remove('active');
+                txt.innerText = "Subscribe";
+                followers--;
+            }
+            disp.innerText = followers.toLocaleString();
+        }
+    </script>
 </body>
     </html>
