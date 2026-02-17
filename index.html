@@ -3,254 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Blessed Studios | Impactful Content</title>
+    
+    <meta property="og:title" content="Blessed Studios | Impactful Content">
+    <meta property="og:description" content="Official Platform of Blessed Fredrick Iboi. CEO, Actor, AI Web Developer.">
+    <meta property="og:image" content="https://i.ibb.co/XfHqN4m/Blessed-Studios-Card.jpg"> <meta property="og:type" content="website">
+
+    <title>Blessed Studios | Official Portal</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <style>
         :root {
-            --bg: #030712;
-            --text: #ffffff;
-            --primary: #00d2ff;
-            --glass: rgba(255, 255, 255, 0.05);
-            --border: rgba(255, 255, 255, 0.1);
+            --bg: #030712; --text: #ffffff; --primary: #00d2ff;
+            --glass: rgba(255, 255, 255, 0.05); --border: rgba(255, 255, 255, 0.1);
             --card: #0a1120;
         }
 
-        /* Light Mode Variables */
         [data-theme="light"] {
-            --bg: #f0f2f5;
-            --text: #1a1a1a;
-            --primary: #0077ff;
-            --glass: rgba(0, 0, 0, 0.05);
-            --border: rgba(0, 0, 0, 0.1);
+            --bg: #f0f2f5; --text: #1a1a1a; --primary: #0077ff;
+            --glass: rgba(0, 0, 0, 0.05); --border: rgba(0, 0, 0, 0.1);
             --card: #ffffff;
         }
 
-        body {
-            margin: 0;
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Inter', -apple-system, sans-serif;
-            transition: background 0.5s ease, color 0.5s ease;
-            overflow-x: hidden;
-            width: 100vw;
+        body { 
+            margin: 0; background: var(--bg); color: var(--text); 
+            font-family: 'Inter', sans-serif; transition: 0.5s; 
+            overflow-x: hidden; width: 100vw;
         }
 
-        /* LIVE MOTION BACKGROUND */
-        #canvas-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            pointer-events: none;
+        #canvas-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+
+        /* UI CONTROLS */
+        .top-nav {
+            position: fixed; top: 0; width: 100%; padding: 15px;
+            display: flex; justify-content: space-between; z-index: 1000;
+            box-sizing: border-box;
         }
 
-        /* THEME TOGGLE */
         .theme-toggle {
-            position: fixed;
-            top: 20px; right: 20px;
-            z-index: 100;
-            background: var(--glass);
-            border: 1px solid var(--border);
-            color: var(--text);
-            padding: 10px;
-            border-radius: 50%;
-            cursor: pointer;
-            backdrop-filter: blur(10px);
+            background: var(--glass); border: 1px solid var(--border);
+            color: var(--text); padding: 10px; border-radius: 50%; cursor: pointer; backdrop-filter: blur(10px);
         }
 
-        /* HEADER & BRANDING */
-        header {
-            padding: 80px 20px 40px;
-            text-align: center;
-        }
-
-        h1 {
-            font-size: clamp(1.8rem, 8vw, 2.5rem);
-            font-weight: 900;
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: -1px;
-        }
-
-        .impact-tag {
-            font-size: 10px;
-            letter-spacing: 5px;
-            color: var(--primary);
-            text-transform: uppercase;
-            font-weight: 800;
-            margin-top: 8px;
-        }
+        header { padding: 80px 20px 40px; text-align: center; }
+        .verified-badge { width: 24px; fill: #1DA1F2; margin-left: 5px; vertical-align: middle; }
+        h1 { font-size: clamp(1.8rem, 8vw, 2.5rem); font-weight: 900; text-transform: uppercase; margin: 0; }
+        .impact-tag { font-size: 10px; letter-spacing: 5px; color: var(--primary); text-transform: uppercase; font-weight: 800; margin-top: 8px; }
 
         /* SUBSCRIPTION SYSTEM */
-        .sub-box { margin-top: 30px; }
-        .count-num { font-size: 1.8rem; font-weight: 800; }
-        
+        .sub-container { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 30px; }
+        .count-num { font-size: 2rem; font-weight: 900; }
+        .action-row { display: flex; align-items: center; gap: 10px; }
+
         .follow-btn {
-            margin-top: 15px;
-            padding: 14px 40px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-weight: 800;
-            text-transform: uppercase;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 14px 40px; background: var(--primary); color: white;
+            border: none; border-radius: 8px; font-weight: 800;
+            text-transform: uppercase; cursor: pointer; transition: 0.3s;
         }
+        .follow-btn.active { background: #22c55e; pointer-events: none; }
 
-        .follow-btn.active {
-            background: #22c55e; /* Success Green */
-            transform: scale(1.05);
+        .bell-btn {
+            display: none; background: var(--glass); border: 1px solid var(--border);
+            padding: 12px; border-radius: 8px; cursor: pointer;
         }
+        .bell-btn.show { display: block; animation: popIn 0.5s ease; }
+        .bell-btn.ringing { animation: shake 0.4s ease; background: var(--primary); }
 
-        .check-svg { display: none; width: 18px; height: 18px; fill: white; }
-        .active .check-svg { display: block; }
-
-        /* SCROLL SECTIONS */
-        section {
-            width: 92%;
-            max-width: 500px;
-            margin: 40px auto;
-        }
-
+        /* SECTIONS */
+        .container { width: 92%; max-width: 600px; margin: 0 auto; }
         .glass-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            padding: 30px;
-            border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background: var(--card); border: 1px solid var(--border);
+            padding: 30px; border-radius: 24px; margin-bottom: 25px;
+            backdrop-filter: blur(15px);
         }
+        
+        .ceo-name { font-size: 22px; font-weight: 800; display: block; }
+        .ceo-titles { font-size: 11px; opacity: 0.6; color: var(--primary); letter-spacing: 1px; }
 
-        h2 { font-size: 12px; color: var(--primary); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; }
-        p { line-height: 1.6; font-size: 15px; margin: 0; opacity: 0.9; }
+        /* BLOG POSTS */
+        .post-label { color: var(--primary); font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
+        .post-title { font-size: 20px; margin: 10px 0; font-weight: 800; }
+        .ai-badge { background: rgba(0,210,255,0.1); color: var(--primary); font-size: 9px; padding: 4px 8px; border-radius: 4px; }
 
-        .ceo-label { margin-bottom: 20px; }
-        .ceo-name { font-size: 20px; font-weight: 800; display: block; }
-        .ceo-titles { font-size: 11px; opacity: 0.6; }
+        @keyframes shake { 0%,100%{transform:rotate(0)} 25%{transform:rotate(15deg)} 75%{transform:rotate(-15deg)} }
+        @keyframes popIn { from{opacity:0; transform:scale(0.8)} to{opacity:1; transform:scale(1)} }
 
-        footer { padding: 40px; text-align: center; font-size: 10px; letter-spacing: 1px; opacity: 0.5; }
-
+        footer { padding: 40px; text-align: center; font-size: 10px; opacity: 0.4; letter-spacing: 2px; }
     </style>
 </head>
 <body>
 
-    <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+    <div class="top-nav">
+        <div style="font-weight:900; letter-spacing:1px; opacity:0.7;">BLESSED STUDIOS</div>
+        <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+    </div>
+
     <canvas id="canvas-bg"></canvas>
 
     <header>
-        <h1>Blessed Studios</h1>
+        <h1>Blessed Studios <svg class="verified-badge" viewBox="0 0 24 24"><path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.416-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .495.083.965.238 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-1.16.688-1.942 1.991-1.942 3.486 0 2.21 1.71 3.998 3.818 3.998.47 0 .92-.084 1.336-.25C9.182 21.585 10.49 22.5 12 22.5s2.816-.917 3.437-2.25c.416.165.866.25 1.336.25 2.11 0 3.818-1.79 3.818-4 0-.495-.083-.965-.238-1.4 1.272-.65 2.147-2.018 2.147-3.6zm-11.5 5l-4.5-4.5 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"></path></svg></h1>
         <div class="impact-tag">Impactful Content</div>
 
-        <div class="sub-box">
-            <div class="count-num" id="fCount">0</div>
-            <button class="follow-btn" id="followBtn" onclick="doSubscribe()">
-                <span id="btnText">Subscribe</span>
-                <svg class="check-svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-            </button>
+        <div class="sub-container">
+            <div class="count-num" id="globalCount">0</div>
+            <div class="action-row">
+                <button class="follow-btn" id="followBtn" onclick="subscribeGlobal()">
+                    <span id="btnText">Subscribe</span>
+                </button>
+                <button class="bell-btn" id="bellBtn" onclick="ringBell()">
+                    <svg style="width:24px; height:24px; fill:currentColor;" viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 4.36 6 6.92 6 10v5l-2 2v1h16v-1l-2-2z"/></svg>
+                </button>
+            </div>
         </div>
     </header>
 
-    <section>
-        <div class="glass-card">
+    <div class="container">
+        <div class="glass-card" style="border-left: 4px solid var(--primary);">
             <div class="ceo-label">
                 <span class="ceo-name">Blessed Fredrick Iboi</span>
                 <span class="ceo-titles">CEO • Actor • AI Web Developer • Worship Leader</span>
             </div>
-            <h2>The Vision</h2>
-            <p>To be a global light in the media industry, creating content that transforms lives through high-end innovation and spiritual truth.</p>
+            <p style="font-size:14px; opacity:0.8;">Creating a global stage for content that matters. Bridging technology and spirituality.</p>
         </div>
-    </section>
 
-    <section>
-        <div class="glass-card">
-            <h2>Mission</h2>
-            <p>Producing impactful stories through film and technology, empowering talent, and leading hearts into worship through every project.</p>
+        <div id="live-feed">
+            <p style="text-align:center; opacity:0.3;">Syncing with AI Room...</p>
         </div>
-    </section>
+    </div>
+
+    <audio id="bellSound" src="https://assets.mixkit.co/active_storage/sfx/2358/2358-preview.mp3"></audio>
 
     <footer>
         &copy; 2026 BLESSED STUDIOS | CEO BLESSED FREDRICK IBOI
     </footer>
 
     <script>
-        // 1. PERMANENT SUBSCRIPTION LOGIC
-        let isSubscribed = localStorage.getItem('isSubscribed') === 'true';
-        updateUI();
+        // --- SUPABASE CONFIG ---
+        const SB_URL = "https://ulctlyvistlcjapqbzmp.supabase.co";
+        const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVsY3RseXZpc3RsY2phcHFiem1wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEzMjk2OTEsImV4cCI6MjA4NjkwNTY5MX0.tCm1YPUWQ8s2e9mdq-wMhSJql10lrApfRF40wDHC7ls";
+        const _supabase = supabase.createClient(SB_URL, SB_KEY);
 
-        function doSubscribe() {
-            isSubscribed = !isSubscribed;
-            localStorage.setItem('isSubscribed', isSubscribed);
-            updateUI();
-        }
+        // --- SUBSCRIPTION & BELL ---
+        let count = 0;
+        let hasSubscribed = localStorage.getItem('hasSubscribed') === 'true';
 
-        function updateUI() {
-            const btn = document.getElementById('followBtn');
-            const txt = document.getElementById('btnText');
-            const count = document.getElementById('fCount');
-            
-            if(isSubscribed) {
-                btn.classList.add('active');
-                txt.innerText = "Subscribed";
-                count.innerText = "1";
-            } else {
-                btn.classList.remove('active');
-                txt.innerText = "Subscribe";
-                count.innerText = "0";
+        async function subscribeGlobal() {
+            if (!hasSubscribed) {
+                count++;
+                hasSubscribed = true;
+                localStorage.setItem('hasSubscribed', 'true');
+                updateSubUI();
             }
         }
 
-        // 2. THEME TOGGLE
+        function ringBell() {
+            const bell = document.getElementById('bellBtn');
+            const sound = document.getElementById('bellSound');
+            sound.currentTime = 0; sound.play();
+            bell.classList.add('ringing');
+            setTimeout(() => bell.classList.remove('ringing'), 400);
+            alert("Latest uploads will now notify your device!");
+        }
+
+        function updateSubUI() {
+            document.getElementById('globalCount').innerText = count.toLocaleString();
+            if(hasSubscribed) {
+                const b = document.getElementById('followBtn');
+                b.classList.add('active'); b.innerText = "Subscribed";
+                document.getElementById('bellBtn').classList.add('show');
+            }
+        }
+
+        // --- BLOG LOAD ---
+        async function loadPosts() {
+            const { data } = await _supabase.from('posts').select('*').order('created_at', { ascending: false });
+            const feed = document.getElementById('live-feed');
+            if (data && data.length > 0) {
+                feed.innerHTML = data.map(post => `
+                    <div class="glass-card">
+                        <span class="post-label">${post.label || 'Update'}</span>
+                        <div class="post-title">${post.title}</div>
+                        <div style="opacity:0.8; line-height:1.6; font-size:15px;">${post.content}</div>
+                        <div style="margin-top:15px; display:flex; justify-content:space-between; align-items:center;">
+                            <span class="ai-badge">✨ Posted by Blessed AI</span>
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=${window.location.href}" target="_blank" style="color:#1877F2; text-decoration:none; font-size:11px; font-weight:bold;">Share Impact</a>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                feed.innerHTML = "<p style='text-align:center; opacity:0.3;'>Awaiting AI Room content...</p>";
+            }
+        }
+
+        // --- UI & ANIMATION ---
         function toggleTheme() {
-            const current = document.body.getAttribute('data-theme');
-            if(current === 'light') {
-                document.body.removeAttribute('data-theme');
-            } else {
-                document.body.setAttribute('data-theme', 'light');
-            }
+            document.body.getAttribute('data-theme') === 'light' ? document.body.removeAttribute('data-theme') : document.body.setAttribute('data-theme', 'light');
         }
 
-        // 3. LIVE MOTION ANIMATION (Canvas Particles)
         const canvas = document.getElementById('canvas-bg');
         const ctx = canvas.getContext('2d');
-        let particles = [];
+        let pts = [];
+        function init() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.onresize = init; init();
+        class P { constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.v=Math.random()*0.2+0.1;} update(){this.y-=this.v; if(this.y<0)this.y=canvas.height;} draw(){ctx.fillStyle=getComputedStyle(document.body).getPropertyValue('--primary');ctx.globalAlpha=0.4;ctx.beginPath();ctx.arc(this.x,this.y,1,0,Math.PI*2);ctx.fill();} }
+        for(let i=0; i<40; i++) pts.push(new P());
+        function anim() { ctx.clearRect(0,0,canvas.width,canvas.height); pts.forEach(p=>{p.update();p.draw();}); requestAnimationFrame(anim); }
 
-        function initCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.onresize = initCanvas;
-        initCanvas();
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2;
-                this.speedY = Math.random() * 0.5 + 0.2;
-            }
-            update() {
-                this.y -= this.speedY;
-                if (this.y < 0) this.y = canvas.height;
-            }
-            draw() {
-                ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--primary');
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
-        for (let i = 0; i < 50; i++) particles.push(new Particle());
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            requestAnimationFrame(animate);
-        }
-        animate();
+        updateSubUI(); loadPosts(); anim();
     </script>
 </body>
-    </html>
+        </html>
