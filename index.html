@@ -6,12 +6,10 @@
     
     <meta name="google-site-verification" content="google3e79578c45ccecb5" />
     
-    <title>Blessed Studios | Impactful content</title>
-    <meta name="description" content="Official platform of Blessed Studios. Impactful content, worship, and media excellence by CEO Blessed Fredrick Iboi.">
-    <meta property="og:title" content="Blessed Studios | Impactful Content">
-    <meta property="og:image" content="https://i.ibb.co/XfHqN4m/Blessed-Studios-Card.jpg">
+    <title>Blessed Studios | CEO Blessed Fredrick Iboi</title>
+    <meta name="description" content="Official platform of Blessed Studios. Impactful content, worship, and media excellence.">
+    
     <link rel="icon" href="https://i.ibb.co/XfHqN4m/Blessed-Studios-Card.jpg">
-
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
@@ -22,92 +20,86 @@
         }
 
         body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
-        #canvas-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
-
-        nav { position: fixed; top: 0; width: 100%; padding: 20px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; box-sizing: border-box; backdrop-filter: blur(10px); background: rgba(3,7,18,0.8); border-bottom: 1px solid var(--border); }
-        .logo-text { font-weight: 900; letter-spacing: 2px; font-size: 18px; color: var(--primary); text-transform: uppercase; }
         
-        .social-icons a { color: white; text-decoration: none; margin-left: 15px; font-size: 14px; opacity: 0.7; transition: 0.3s; }
-        .social-icons a:hover { opacity: 1; color: var(--primary); }
+        nav { position: fixed; top: 0; width: 100%; padding: 15px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; box-sizing: border-box; backdrop-filter: blur(10px); background: rgba(3,7,18,0.8); border-bottom: 1px solid var(--border); }
+        .logo-text { font-weight: 900; letter-spacing: 1px; font-size: 16px; color: var(--primary); text-transform: uppercase; }
+        
+        header { padding: 100px 20px 40px; text-align: center; }
+        h1 { font-size: 2.2rem; font-weight: 900; margin: 0; text-transform: uppercase; }
+        .impact-tag { font-size: 10px; letter-spacing: 5px; color: var(--primary); text-transform: uppercase; margin-top: 10px; display: block; font-weight: 800; }
 
-        header { padding: 120px 20px 60px; text-align: center; }
-        h1 { font-size: clamp(2rem, 10vw, 3.5rem); font-weight: 900; margin: 0; text-transform: uppercase; line-height: 1; }
-        .verified-badge { width: 28px; fill: #1DA1F2; vertical-align: middle; }
-        .impact-tag { font-size: 12px; letter-spacing: 8px; color: var(--primary); text-transform: uppercase; margin-top: 15px; display: block; font-weight: 800; }
-
-        .container { width: 92%; max-width: 700px; margin: 0 auto; }
-        .section-label { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; color: var(--primary); margin-bottom: 20px; display: block; opacity: 0.6; }
-
+        .container { width: 92%; margin: 0 auto; }
         .glass-card {
             background: var(--card); border: 1px solid var(--border);
-            padding: 30px; border-radius: 28px; margin-bottom: 30px;
-            backdrop-filter: blur(20px); position: relative;
+            padding: 20px; border-radius: 20px; margin-bottom: 25px;
+            backdrop-filter: blur(20px);
         }
 
-        .video-vault { position: relative; padding-bottom: 56.25%; height: 0; border-radius: 15px; overflow: hidden; background: #000; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        /* MOBILE ADMIN WINDOW FIX */
+        #admin-window { 
+            position: fixed; bottom: 90px; right: 5%; left: 5%; 
+            width: 90%; max-height: 75vh; display: none; z-index: 9999; 
+            overflow-y: auto; box-sizing: border-box;
+        }
+        .admin-input { 
+            width: 100%; background: rgba(0,0,0,0.4); border: 1px solid var(--border); 
+            color: white; border-radius: 10px; padding: 12px; margin-bottom: 10px; 
+            box-sizing: border-box; font-size: 14px;
+        }
+        .action-btn { 
+            background: var(--primary); color: white; border: none; 
+            padding: 15px; border-radius: 10px; font-weight: 800; 
+            width: 100%; cursor: pointer; text-transform: uppercase;
+        }
+
+        #ai-action-button { 
+            position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; 
+            background: linear-gradient(135deg, var(--primary), #bc13fe); 
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+            cursor: pointer; z-index: 9999; box-shadow: 0 10px 20px rgba(0,0,0,0.4); 
+        }
+
+        .video-vault { position: relative; padding-bottom: 56.25%; height: 0; border-radius: 12px; overflow: hidden; background: #000; margin-bottom: 15px; }
         .video-vault iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-        .post-img { width: 100%; border-radius: 15px; margin-bottom: 20px; border: 1px solid var(--border); }
-
-        #ai-action-button { position: fixed; bottom: 30px; right: 30px; width: 65px; height: 65px; background: linear-gradient(135deg, var(--primary), #bc13fe); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 9999; box-shadow: 0 10px 30px rgba(0,210,255,0.3); }
-        #admin-window { position: fixed; bottom: 110px; right: 30px; width: 340px; max-height: 75vh; display: none; z-index: 9999; overflow-y: auto; }
-        .admin-input { width: 100%; background: rgba(0,0,0,0.3); border: 1px solid var(--border); color: white; border-radius: 10px; padding: 12px; margin-bottom: 12px; box-sizing: border-box; }
-        .action-btn { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; font-weight: 800; width: 100%; cursor: pointer; text-transform: uppercase; }
-
-        footer { padding: 80px 20px 40px; text-align: center; border-top: 1px solid var(--border); margin-top: 50px; background: rgba(0,0,0,0.2); }
-        .footer-links { margin-bottom: 20px; }
-        .footer-links a { color: white; text-decoration: none; font-size: 11px; margin: 0 10px; opacity: 0.5; }
-        .support-text { font-size: 10px; opacity: 0.4; line-height: 2; margin-top: 20px; }
+        
+        footer { padding: 40px 20px; text-align: center; border-top: 1px solid var(--border); opacity: 0.6; font-size: 10px; }
     </style>
 </head>
 <body>
 
-    <canvas id="canvas-bg"></canvas>
-
     <nav>
         <div class="logo-text">Blessed Studios</div>
-        <div class="social-icons">
-            <a href="https://www.facebook.com/Blessedstudios1" target="_blank">FB</a>
-            <a href="https://www.instagram.com/studiosblessed" target="_blank">IG</a>
-        </div>
+        <div style="font-size: 12px;">CEO PORTAL</div>
     </nav>
 
     <header>
-        <h1>BLESSED STUDIOS <svg class="verified-badge" viewBox="0 0 24 24"><path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.416-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .495.083.965.238 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-1.16.688-1.942 1.991-1.942 3.486 0 2.21 1.71 3.998 3.818 3.998.47 0 .92-.084 1.336-.25C9.182 21.585 10.49 22.5 12 22.5s2.816-.917 3.437-2.25c.416.165.866.25 1.336.25 2.11 0 3.818-1.79 3.818-4 0-.495-.083-.965-.238-1.4 1.272-.65 2.147-2.018 2.147-3.6zm-11.5 5l-4.5-4.5 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"></path></svg></h1>
+        <h1>BLESSED STUDIOS</h1>
         <span class="impact-tag">Impactful Content</span>
     </header>
 
-    <div class="container">
-        <span class="section-label">Global Impact Feed</span>
-        <div id="live-feed"></div>
-    </div>
+    <div class="container" id="live-feed">
+        </div>
 
     <div id="ai-action-button" onclick="toggleAdmin()">✨</div>
+
     <div id="admin-window" class="glass-card">
         <div id="admin-auth">
             <input type="password" id="admin-pass" class="admin-input" placeholder="CEO Key">
-            <button class="action-btn" onclick="unlockAdmin()">Enter Studio</button>
+            <button class="action-btn" onclick="unlockAdmin()">Access Studio</button>
         </div>
         <div id="admin-post" style="display:none;">
-            <input type="text" id="p-title" class="admin-input" placeholder="Title">
-            <input type="text" id="p-label" class="admin-input" placeholder="Label (WORSHIP, NEWS)">
-            <input type="text" id="p-video" class="admin-input" placeholder="YouTube URL">
+            <input type="text" id="p-title" class="admin-input" placeholder="Post Title">
+            <input type="text" id="p-label" class="admin-input" placeholder="Label (e.g. WORSHIP)">
+            <input type="text" id="p-video" class="admin-input" placeholder="YouTube Link">
             <input type="file" id="p-file" class="admin-input">
-            <textarea id="p-content" class="admin-input" style="height:100px;" placeholder="Message..."></textarea>
-            <button id="pub-btn" class="action-btn" onclick="publishPost()">🚀 Global Release</button>
+            <textarea id="p-content" class="admin-input" style="height:80px;" placeholder="Write your message..."></textarea>
+            <button id="pub-btn" class="action-btn" onclick="publishPost()">🚀 GLOBAL RELEASE</button>
         </div>
     </div>
 
     <footer>
-        <div class="footer-links">
-            <a href="mailto:iboiblessed1@gmail.com">Contact CEO</a>
-            <a href="mailto:blessedstudios50@gmail.com">Support</a>
-            <a href="#" onclick="alert('Privacy Policy: Blessed Studios does not sell user data. All uploads are stored securely.')">Privacy</a>
-            <a href="#" onclick="alert('Terms: Content published is property of Blessed Studios.')">Terms</a>
-        </div>
-        <div class="support-text">
-            &copy; 2026 BLESSED STUDIOS | CEO BLESSED FREDRICK IBOI<br>
-            Official Support: blessedstudios50@gmail.com
-        </div>
+        &copy; 2026 BLESSED STUDIOS | CEO BLESSED FREDRICK IBOI<br>
+        Support: blessedstudios50@gmail.com
     </footer>
 
     <script>
@@ -125,62 +117,58 @@
             if(document.getElementById('admin-pass').value === CEO_KEY) {
                 document.getElementById('admin-auth').style.display = 'none';
                 document.getElementById('admin-post').style.display = 'block';
-            }
+            } else { alert("Incorrect CEO Key"); }
         }
 
-        function getYouTubeID(url) {
-            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-            const match = url.match(regExp);
+        function getYTID(url) {
+            const reg = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = url.match(reg);
             return (match && match[2].length === 11) ? match[2] : null;
         }
 
         async function publishPost() {
-            const title = document.getElementById('p-title').value;
-            const content = document.getElementById('p-content').value;
-            const videoUrl = document.getElementById('p-video').value;
-            const fileInput = document.getElementById('p-file');
             const btn = document.getElementById('pub-btn');
+            btn.innerText = "UPLOADING..."; btn.disabled = true;
 
-            btn.innerText = "Releasing..."; btn.disabled = true;
+            const title = document.getElementById('p-title').value;
+            const label = document.getElementById('p-label').value;
+            const video_url = document.getElementById('p-video').value;
+            const content = document.getElementById('p-content').value;
+            const file = document.getElementById('p-file').files[0];
 
-            let imageUrl = "";
-            try {
-                if (fileInput.files.length > 0) {
-                    const file = fileInput.files[0];
-                    const path = `${Date.now()}-${file.name}`;
-                    await _supabase.storage.from('images').upload(path, file);
-                    imageUrl = _supabase.storage.from('images').getPublicUrl(path).data.publicUrl;
-                }
-
-                await _supabase.from('posts').insert([{ 
-                    title, label: document.getElementById('p-label').value, 
-                    content, image: imageUrl, video_url: videoUrl 
-                }]);
-                location.reload();
-            } catch (e) {
-                alert("Upload Error: Please ensure you ran the SQL DISABLE RLS command in Supabase.");
-                btn.innerText = "Retry Release"; btn.disabled = false;
+            let image = "";
+            if(file) {
+                const path = `uploads/${Date.now()}_${file.name}`;
+                await _supabase.storage.from('images').upload(path, file);
+                image = _supabase.storage.from('images').getPublicUrl(path).data.publicUrl;
             }
+
+            const { error } = await _supabase.from('posts').insert([{ title, label, video_url, content, image }]);
+            
+            if(error) {
+                alert("Error: Make sure RLS is disabled in Supabase SQL Editor!");
+                btn.innerText = "RETRY RELEASE"; btn.disabled = false;
+            } else { location.reload(); }
         }
 
         async function loadFeed() {
             const { data } = await _supabase.from('posts').select('*').order('created_at', { ascending: false });
             if(data) {
                 document.getElementById('live-feed').innerHTML = data.map(p => {
-                    const ytID = p.video_url ? getYouTubeID(p.video_url) : null;
+                    const yt = getYTID(p.video_url || "");
                     return `
-                    <div class="glass-card">
-                        ${ytID ? `<div class="video-vault"><iframe src="https://www.youtube.com/embed/${ytID}" allowfullscreen></iframe></div>` : ''}
-                        ${p.image && !ytID ? `<img src="${p.image}" class="post-img">` : ''}
-                        <span class="section-label" style="margin-bottom:10px;">${p.label || 'Update'}</span>
-                        <div style="font-size:24px; font-weight:900; margin-bottom:15px;">${p.title}</div>
-                        <p style="opacity:0.8; line-height:1.7; font-size:15px;">${p.content}</p>
-                    </div>
-                `}).join('');
+                        <div class="glass-card">
+                            ${yt ? `<div class="video-vault"><iframe src="https://www.youtube.com/embed/${yt}" allowfullscreen></iframe></div>` : ''}
+                            ${p.image && !yt ? `<img src="${p.image}" style="width:100%; border-radius:12px; margin-bottom:15px;">` : ''}
+                            <span class="impact-tag" style="margin-bottom:5px;">${p.label || 'Studio Update'}</span>
+                            <h2 style="margin:0 0 10px 0; font-size:20px;">${p.title}</h2>
+                            <p style="font-size:14px; opacity:0.8; line-height:1.6;">${p.content}</p>
+                        </div>
+                    `;
+                }).join('');
             }
         }
-
         loadFeed();
     </script>
 </body>
-        </html>
+    </html>
