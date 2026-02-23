@@ -3,8 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Blessed Studios | Impactful content</title>
     
+    <title>Blessed Studios |Inspiring content</title>
+    <meta name="description" content="Official platform of Blessed Studios. Impactful content, worship, and media excellence by CEO Blessed Fredrick Iboi.">
+    <meta property="og:title" content="Blessed Studios | Impactful Content">
+    <meta property="og:image" content="https://i.ibb.co/XfHqN4m/Blessed-Studios-Card.jpg">
+    <link rel="icon" href="https://i.ibb.co/XfHqN4m/Blessed-Studios-Card.jpg">
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
@@ -13,100 +18,105 @@
             --glass: rgba(255, 255, 255, 0.05); --border: rgba(255, 255, 255, 0.1);
             --card: #0a1120;
         }
-        [data-theme="light"] {
-            --bg: #f0f2f5; --text: #1a1a1a; --primary: #0077ff;
-            --glass: rgba(0, 0, 0, 0.05); --border: rgba(0, 0, 0, 0.1);
-            --card: #ffffff;
-        }
-        body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; transition: 0.5s; overflow-x: hidden; }
+
+        body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
         #canvas-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
 
-        header { padding: 80px 20px 40px; text-align: center; }
-        .verified-badge { width: 22px; fill: #1DA1F2; margin-left: 5px; vertical-align: middle; }
-        h1 { font-size: clamp(1.8rem, 8vw, 2.5rem); font-weight: 900; text-transform: uppercase; margin: 0; }
-        .impact-tag { font-size: 10px; letter-spacing: 5px; color: var(--primary); text-transform: uppercase; font-weight: 800; margin-top: 8px; }
+        /* HEADER & NAV */
+        nav { position: fixed; top: 0; width: 100%; padding: 20px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; box-sizing: border-box; backdrop-filter: blur(10px); background: rgba(3,7,18,0.8); border-bottom: 1px solid var(--border); }
+        .logo-text { font-weight: 900; letter-spacing: 2px; font-size: 18px; color: var(--primary); text-transform: uppercase; }
+        
+        .social-icons a { color: white; text-decoration: none; margin-left: 15px; font-size: 14px; opacity: 0.7; transition: 0.3s; }
+        .social-icons a:hover { opacity: 1; color: var(--primary); }
 
-        .container { width: 92%; max-width: 600px; margin: 0 auto; }
+        header { padding: 120px 20px 60px; text-align: center; }
+        h1 { font-size: clamp(2rem, 10vw, 3.5rem); font-weight: 900; margin: 0; text-transform: uppercase; line-height: 1; }
+        .verified-badge { width: 28px; fill: #1DA1F2; vertical-align: middle; }
+        .impact-tag { font-size: 12px; letter-spacing: 8px; color: var(--primary); text-transform: uppercase; margin-top: 15px; display: block; font-weight: 800; }
+
+        /* MAIN SECTIONS */
+        .container { width: 92%; max-width: 700px; margin: 0 auto; }
+        
+        .section-label { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; color: var(--primary); margin-bottom: 20px; display: block; opacity: 0.6; }
+
         .glass-card {
             background: var(--card); border: 1px solid var(--border);
-            padding: 25px; border-radius: 24px; margin-bottom: 25px;
-            backdrop-filter: blur(15px); overflow: hidden;
+            padding: 30px; border-radius: 28px; margin-bottom: 30px;
+            backdrop-filter: blur(20px); position: relative;
         }
 
-        /* MEDIA STYLES */
-        .video-container { position: relative; padding-bottom: 56.25%; height: 0; margin-bottom: 15px; border-radius: 12px; overflow: hidden; background: #000; }
-        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-        .post-img { width: 100%; border-radius: 12px; margin-bottom: 15px; display: block; }
+        /* MEDIA GRID */
+        .video-vault { position: relative; padding-bottom: 56.25%; height: 0; border-radius: 15px; overflow: hidden; background: #000; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .video-vault iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
-        .post-label { color: var(--primary); font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
-        .post-title { font-size: 22px; margin: 10px 0; font-weight: 800; }
+        .post-img { width: 100%; border-radius: 15px; margin-bottom: 20px; border: 1px solid var(--border); }
 
-        /* ADMIN PORTAL */
-        #ai-action-button {
-            position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px;
-            background: linear-gradient(135deg, var(--primary), #bc13fe);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            cursor: pointer; box-shadow: 0 0 20px rgba(0, 210, 255, 0.4); z-index: 9999; color: white;
-        }
-        #admin-window {
-            position: fixed; bottom: 100px; right: 30px; width: 320px; max-height: 80vh;
-            display: none; z-index: 9999; animation: popIn 0.3s ease; overflow-y: auto;
-        }
-        .admin-input {
-            width: 100%; background: rgba(0,0,0,0.2); border: 1px solid var(--border);
-            color: var(--text); border-radius: 8px; padding: 12px; margin-bottom: 10px;
-            font-family: inherit; box-sizing: border-box; font-size: 14px;
-        }
-        .follow-btn { padding: 12px; background: var(--primary); color: white; border: none; border-radius: 8px; font-weight: 800; width: 100%; cursor: pointer; }
-        .del-btn { background: #ff4444; color: white; border: none; padding: 5px 10px; border-radius: 4px; font-size: 10px; cursor: pointer; }
+        /* ADMIN SYSTEM */
+        #ai-action-button { position: fixed; bottom: 30px; right: 30px; width: 65px; height: 65px; background: linear-gradient(135deg, var(--primary), #bc13fe); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 9999; box-shadow: 0 10px 30px rgba(0,210,255,0.3); }
+        #admin-window { position: fixed; bottom: 110px; right: 30px; width: 340px; max-height: 75vh; display: none; z-index: 9999; overflow-y: auto; }
+        .admin-input { width: 100%; background: rgba(0,0,0,0.3); border: 1px solid var(--border); color: white; border-radius: 10px; padding: 12px; margin-bottom: 12px; box-sizing: border-box; }
+        .action-btn { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; font-weight: 800; width: 100%; cursor: pointer; text-transform: uppercase; }
 
-        @keyframes popIn { from{opacity:0; transform:scale(0.8) translateY(20px)} to{opacity:1; transform:scale(1) translateY(0)} }
+        /* FOOTER & LEGAL */
+        footer { padding: 80px 20px 40px; text-align: center; border-top: 1px solid var(--border); margin-top: 50px; background: rgba(0,0,0,0.2); }
+        .footer-links { margin-bottom: 20px; }
+        .footer-links a { color: white; text-decoration: none; font-size: 11px; margin: 0 10px; opacity: 0.5; }
+        .support-text { font-size: 10px; opacity: 0.4; line-height: 2; margin-top: 20px; }
+
+        @keyframes popIn { from{opacity:0; transform:scale(0.9)} to{opacity:1; transform:scale(1)} }
     </style>
 </head>
 <body>
 
     <canvas id="canvas-bg"></canvas>
 
+    <nav>
+        <div class="logo-text">Blessed Studios</div>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/Blessedstudios1" target="_blank">FB</a>
+            <a href="https://www.instagram.com/studiosblessed" target="_blank">IG</a>
+        </div>
+    </nav>
+
     <header>
-        <h1>Blessed Studios <svg class="verified-badge" viewBox="0 0 24 24"><path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.416-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .495.083.965.238 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-1.16.688-1.942 1.991-1.942 3.486 0 2.21 1.71 3.998 3.818 3.998.47 0 .92-.084 1.336-.25C9.182 21.585 10.49 22.5 12 22.5s2.816-.917 3.437-2.25c.416.165.866.25 1.336.25 2.11 0 3.818-1.79 3.818-4 0-.495-.083-.965-.238-1.4 1.272-.65 2.147-2.018 2.147-3.6zm-11.5 5l-4.5-4.5 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"></path></svg></h1>
-        <div class="impact-tag">Impactful Content</div>
+        <h1>BLESSED STUDIOS <svg class="verified-badge" viewBox="0 0 24 24"><path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.416-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .495.083.965.238 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-1.16.688-1.942 1.991-1.942 3.486 0 2.21 1.71 3.998 3.818 3.998.47 0 .92-.084 1.336-.25C9.182 21.585 10.49 22.5 12 22.5s2.816-.917 3.437-2.25c.416.165.866.25 1.336.25 2.11 0 3.818-1.79 3.818-4 0-.495-.083-.965-.238-1.4 1.272-.65 2.147-2.018 2.147-3.6zm-11.5 5l-4.5-4.5 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"></path></svg></h1>
+        <span class="impact-tag">Impactful Content</span>
     </header>
 
-    <div class="container" id="live-feed"></div>
+    <div class="container">
+        <span class="section-label">Global Impact Feed</span>
+        <div id="live-feed"></div>
+    </div>
 
     <div id="ai-action-button" onclick="toggleAdmin()">✨</div>
-
     <div id="admin-window" class="glass-card">
-        <div style="display:flex; justify-content:space-between; margin-bottom:15px;">
-            <span class="post-label">CEO Control</span>
-            <button onclick="toggleAdmin()" style="background:none; border:none; color:var(--text); cursor:pointer;">✕</button>
-        </div>
-        
         <div id="admin-auth">
-            <input type="password" id="admin-pass" class="admin-input" placeholder="Secret Key">
-            <button class="follow-btn" onclick="unlockAdmin()">Unlock</button>
+            <input type="password" id="admin-pass" class="admin-input" placeholder="CEO Key">
+            <button class="action-btn" onclick="unlockAdmin()">Enter Studio</button>
         </div>
-
         <div id="admin-post" style="display:none;">
-            <div style="display:flex; gap:10px; margin-bottom:15px;">
-                <button onclick="showTab('create')" style="flex:1; background:var(--glass); border:none; color:white; padding:5px; border-radius:5px;">Post</button>
-                <button onclick="showTab('manage')" style="flex:1; background:var(--glass); border:none; color:white; padding:5px; border-radius:5px;">Manage</button>
-            </div>
-
-            <div id="tab-create">
-                <input type="text" id="p-title" class="admin-input" placeholder="Title">
-                <input type="text" id="p-label" class="admin-input" placeholder="Label (WORSHIP, NEWS)">
-                <input type="text" id="p-video" class="admin-input" placeholder="YouTube Link (Optional)">
-                <input type="file" id="p-file" class="admin-input">
-                <textarea id="p-content" class="admin-input" style="height:80px;" placeholder="Message..."></textarea>
-                <button id="pub-btn" class="follow-btn" onclick="publishPost()">🚀 Publish</button>
-            </div>
-
-            <div id="tab-manage" style="display:none;">
-                <div id="manage-list"></div>
-            </div>
+            <input type="text" id="p-title" class="admin-input" placeholder="Title">
+            <input type="text" id="p-label" class="admin-input" placeholder="Label (WORSHIP, NEWS)">
+            <input type="text" id="p-video" class="admin-input" placeholder="YouTube URL">
+            <input type="file" id="p-file" class="admin-input">
+            <textarea id="p-content" class="admin-input" style="height:100px;" placeholder="Message..."></textarea>
+            <button id="pub-btn" class="action-btn" onclick="publishPost()">🚀 Global Release</button>
         </div>
     </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="mailto:iboiblessed1@gmail.com">Contact CEO</a>
+            <a href="mailto:blessedstudios50@gmail.com">Support</a>
+            <a href="#" onclick="alert('Privacy Policy: Blessed Studios does not sell user data. All uploads are stored securely.')">Privacy</a>
+            <a href="#" onclick="alert('Terms: Content published is property of Blessed Studios.')">Terms</a>
+        </div>
+        <div class="support-text">
+            &copy; 2026 BLESSED STUDIOS | CEO BLESSED FREDRICK IBOI<br>
+            Managed by Blessed Studios AI Infrastructure<br>
+            Official Support: blessedstudios50@gmail.com
+        </div>
+    </footer>
 
     <script>
         const SB_URL = "https://ulctlyvistlcjapqbzmp.supabase.co";
@@ -123,13 +133,7 @@
             if(document.getElementById('admin-pass').value === CEO_KEY) {
                 document.getElementById('admin-auth').style.display = 'none';
                 document.getElementById('admin-post').style.display = 'block';
-                loadManageList();
             }
-        }
-
-        function showTab(tab) {
-            document.getElementById('tab-create').style.display = tab === 'create' ? 'block' : 'none';
-            document.getElementById('tab-manage').style.display = tab === 'manage' ? 'block' : 'none';
         }
 
         function getYouTubeID(url) {
@@ -140,13 +144,12 @@
 
         async function publishPost() {
             const title = document.getElementById('p-title').value;
-            const label = document.getElementById('p-label').value;
             const content = document.getElementById('p-content').value;
             const videoUrl = document.getElementById('p-video').value;
             const fileInput = document.getElementById('p-file');
             const btn = document.getElementById('pub-btn');
 
-            btn.innerText = "Processing..."; btn.disabled = true;
+            btn.innerText = "Releasing..."; btn.disabled = true;
 
             let imageUrl = "";
             if (fileInput.files.length > 0) {
@@ -156,59 +159,41 @@
                 imageUrl = _supabase.storage.from('images').getPublicUrl(path).data.publicUrl;
             }
 
-            const { error } = await _supabase.from('posts').insert([{ 
-                title, label, content, image: imageUrl, video_url: videoUrl 
+            await _supabase.from('posts').insert([{ 
+                title, label: document.getElementById('p-label').value, 
+                content, image: imageUrl, video_url: videoUrl 
             }]);
-
-            if(error) alert(error.message); else location.reload();
+            location.reload();
         }
 
         async function loadFeed() {
             const { data } = await _supabase.from('posts').select('*').order('created_at', { ascending: false });
-            const feed = document.getElementById('live-feed');
             if(data) {
-                feed.innerHTML = data.map(p => {
+                document.getElementById('live-feed').innerHTML = data.map(p => {
                     const ytID = p.video_url ? getYouTubeID(p.video_url) : null;
                     return `
                     <div class="glass-card">
-                        ${ytID ? `<div class="video-container"><iframe src="https://www.youtube.com/embed/${ytID}" allowfullscreen></iframe></div>` : ''}
+                        ${ytID ? `<div class="video-vault"><iframe src="https://www.youtube.com/embed/${ytID}" allowfullscreen></iframe></div>` : ''}
                         ${p.image && !ytID ? `<img src="${p.image}" class="post-img">` : ''}
-                        <span class="post-label">${p.label || 'Studio Update'}</span>
-                        <div class="post-title">${p.title}</div>
-                        <p style="opacity:0.8; line-height:1.6;">${p.content}</p>
+                        <span class="section-label" style="margin-bottom:10px;">${p.label || 'Update'}</span>
+                        <div style="font-size:24px; font-weight:900; margin-bottom:15px;">${p.title}</div>
+                        <p style="opacity:0.8; line-height:1.7; font-size:15px;">${p.content}</p>
                     </div>
                 `}).join('');
             }
         }
 
-        async function loadManageList() {
-            const { data } = await _supabase.from('posts').select('id, title').order('created_at', { ascending: false });
-            document.getElementById('manage-list').innerHTML = data.map(p => `
-                <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border);">
-                    <span style="font-size:12px;">${p.title.substring(0,20)}...</span>
-                    <button class="del-btn" onclick="deletePost(${p.id})">Delete</button>
-                </div>
-            `).join('');
-        }
-
-        async function deletePost(id) {
-            if(confirm("Delete this post?")) {
-                await _supabase.from('posts').delete().eq('id', id);
-                location.reload();
-            }
-        }
-
-        // Background Particles
+        // Particle System
         const canvas = document.getElementById('canvas-bg');
         const ctx = canvas.getContext('2d');
         let pts = [];
         function init() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
         window.onresize = init; init();
-        class P { constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.v=Math.random()*0.2+0.1;} update(){this.y-=this.v; if(this.y<0)this.y=canvas.height;} draw(){ctx.fillStyle="#00d2ff";ctx.globalAlpha=0.2;ctx.beginPath();ctx.arc(this.x,this.y,1,0,Math.PI*2);ctx.fill();} }
-        for(let i=0; i<30; i++) pts.push(new P());
+        class P { constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.v=Math.random()*0.1+0.05;} update(){this.y-=this.v; if(this.y<0)this.y=canvas.height;} draw(){ctx.fillStyle="#00d2ff";ctx.globalAlpha=0.15;ctx.beginPath();ctx.arc(this.x,this.y,1,0,Math.PI*2);ctx.fill();} }
+        for(let i=0; i<40; i++) pts.push(new P());
         function anim() { ctx.clearRect(0,0,canvas.width,canvas.height); pts.forEach(p=>{p.update();p.draw();}); requestAnimationFrame(anim); }
 
         loadFeed(); anim();
     </script>
 </body>
-    </html>
+        </html>
