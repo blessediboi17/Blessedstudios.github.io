@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <title>Blessed Studios |Inspiring content</title>
-    <meta name="google-site-verification" content="rqcKXpeuBPZWYr8MFtPsM4VivoAZiJyeDFfZz--o7Ec" />
+    <meta name="google-site-verification" content="google3e79578c45ccecb5" />
+    
+    <title>Blessed Studios | Impactful content</title>
     <meta name="description" content="Official platform of Blessed Studios. Impactful content, worship, and media excellence by CEO Blessed Fredrick Iboi.">
     <meta property="og:title" content="Blessed Studios | Impactful Content">
     <meta property="og:image" content="https://i.ibb.co/XfHqN4m/Blessed-Studios-Card.jpg">
@@ -23,7 +24,6 @@
         body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
         #canvas-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
 
-        /* HEADER & NAV */
         nav { position: fixed; top: 0; width: 100%; padding: 20px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; box-sizing: border-box; backdrop-filter: blur(10px); background: rgba(3,7,18,0.8); border-bottom: 1px solid var(--border); }
         .logo-text { font-weight: 900; letter-spacing: 2px; font-size: 18px; color: var(--primary); text-transform: uppercase; }
         
@@ -35,9 +35,7 @@
         .verified-badge { width: 28px; fill: #1DA1F2; vertical-align: middle; }
         .impact-tag { font-size: 12px; letter-spacing: 8px; color: var(--primary); text-transform: uppercase; margin-top: 15px; display: block; font-weight: 800; }
 
-        /* MAIN SECTIONS */
         .container { width: 92%; max-width: 700px; margin: 0 auto; }
-        
         .section-label { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; color: var(--primary); margin-bottom: 20px; display: block; opacity: 0.6; }
 
         .glass-card {
@@ -46,25 +44,19 @@
             backdrop-filter: blur(20px); position: relative;
         }
 
-        /* MEDIA GRID */
         .video-vault { position: relative; padding-bottom: 56.25%; height: 0; border-radius: 15px; overflow: hidden; background: #000; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
         .video-vault iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-
         .post-img { width: 100%; border-radius: 15px; margin-bottom: 20px; border: 1px solid var(--border); }
 
-        /* ADMIN SYSTEM */
         #ai-action-button { position: fixed; bottom: 30px; right: 30px; width: 65px; height: 65px; background: linear-gradient(135deg, var(--primary), #bc13fe); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 9999; box-shadow: 0 10px 30px rgba(0,210,255,0.3); }
         #admin-window { position: fixed; bottom: 110px; right: 30px; width: 340px; max-height: 75vh; display: none; z-index: 9999; overflow-y: auto; }
         .admin-input { width: 100%; background: rgba(0,0,0,0.3); border: 1px solid var(--border); color: white; border-radius: 10px; padding: 12px; margin-bottom: 12px; box-sizing: border-box; }
         .action-btn { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; font-weight: 800; width: 100%; cursor: pointer; text-transform: uppercase; }
 
-        /* FOOTER & LEGAL */
         footer { padding: 80px 20px 40px; text-align: center; border-top: 1px solid var(--border); margin-top: 50px; background: rgba(0,0,0,0.2); }
         .footer-links { margin-bottom: 20px; }
         .footer-links a { color: white; text-decoration: none; font-size: 11px; margin: 0 10px; opacity: 0.5; }
         .support-text { font-size: 10px; opacity: 0.4; line-height: 2; margin-top: 20px; }
-
-        @keyframes popIn { from{opacity:0; transform:scale(0.9)} to{opacity:1; transform:scale(1)} }
     </style>
 </head>
 <body>
@@ -114,7 +106,6 @@
         </div>
         <div class="support-text">
             &copy; 2026 BLESSED STUDIOS | CEO BLESSED FREDRICK IBOI<br>
-            Managed by Blessed Studios AI Infrastructure<br>
             Official Support: blessedstudios50@gmail.com
         </div>
     </footer>
@@ -153,18 +144,23 @@
             btn.innerText = "Releasing..."; btn.disabled = true;
 
             let imageUrl = "";
-            if (fileInput.files.length > 0) {
-                const file = fileInput.files[0];
-                const path = `${Date.now()}-${file.name}`;
-                await _supabase.storage.from('images').upload(path, file);
-                imageUrl = _supabase.storage.from('images').getPublicUrl(path).data.publicUrl;
-            }
+            try {
+                if (fileInput.files.length > 0) {
+                    const file = fileInput.files[0];
+                    const path = `${Date.now()}-${file.name}`;
+                    await _supabase.storage.from('images').upload(path, file);
+                    imageUrl = _supabase.storage.from('images').getPublicUrl(path).data.publicUrl;
+                }
 
-            await _supabase.from('posts').insert([{ 
-                title, label: document.getElementById('p-label').value, 
-                content, image: imageUrl, video_url: videoUrl 
-            }]);
-            location.reload();
+                await _supabase.from('posts').insert([{ 
+                    title, label: document.getElementById('p-label').value, 
+                    content, image: imageUrl, video_url: videoUrl 
+                }]);
+                location.reload();
+            } catch (e) {
+                alert("Upload Error: Please ensure you ran the SQL DISABLE RLS command in Supabase.");
+                btn.innerText = "Retry Release"; btn.disabled = false;
+            }
         }
 
         async function loadFeed() {
@@ -184,17 +180,7 @@
             }
         }
 
-        // Particle System
-        const canvas = document.getElementById('canvas-bg');
-        const ctx = canvas.getContext('2d');
-        let pts = [];
-        function init() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        window.onresize = init; init();
-        class P { constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.v=Math.random()*0.1+0.05;} update(){this.y-=this.v; if(this.y<0)this.y=canvas.height;} draw(){ctx.fillStyle="#00d2ff";ctx.globalAlpha=0.15;ctx.beginPath();ctx.arc(this.x,this.y,1,0,Math.PI*2);ctx.fill();} }
-        for(let i=0; i<40; i++) pts.push(new P());
-        function anim() { ctx.clearRect(0,0,canvas.width,canvas.height); pts.forEach(p=>{p.update();p.draw();}); requestAnimationFrame(anim); }
-
-        loadFeed(); anim();
+        loadFeed();
     </script>
 </body>
         </html>
