@@ -3,19 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Blessed Studios | Official Home</title>
+    <title>Blessed Studios | Official</title>
+    
     <link rel="icon" href="https://i.ibb.co/XfHqN4m/Blessed-Studios-Card.jpg">
     
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#02040a">
-
     <style>
         :root {
             --bg: #02040a;
             --glass: rgba(13, 22, 45, 0.75);
             --accent: #00d2ff;
             --border: rgba(255, 255, 255, 0.1);
+            --gold: #ffcc00;
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -26,24 +24,15 @@
                               radial-gradient(circle at 15% 85%, #001a33 0%, transparent 45%);
             background-attachment: fixed;
             color: white; font-family: 'Inter', -apple-system, sans-serif;
-            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* Page Transitions */
+        /* PAGE SYSTEM */
         .page { display: none; width: 92%; max-width: 450px; margin: 40px auto; animation: slideUp 0.4s ease-out; }
         .active { display: block; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Install App Banner */
-        #install-banner {
-            display: none; position: fixed; bottom: 20px; left: 5%; width: 90%;
-            background: linear-gradient(135deg, #00d2ff, #0055ff);
-            color: white; padding: 16px; border-radius: 24px;
-            z-index: 9999; box-shadow: 0 15px 40px rgba(0, 210, 255, 0.4);
-            justify-content: space-between; align-items: center;
-        }
-
-        /* Visual Components */
+        /* UI COMPONENTS */
         .glass-card {
             background: var(--glass); backdrop-filter: blur(30px) saturate(180%);
             -webkit-backdrop-filter: blur(30px) saturate(180%);
@@ -54,103 +43,124 @@
             display: flex; align-items: center; justify-content: center;
             background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border);
             padding: 18px; border-radius: 22px; color: white; text-decoration: none;
-            font-weight: 700; margin-top: 12px; cursor: pointer; border: none; font-size: 15px;
+            font-weight: 700; margin-top: 12px; cursor: pointer; font-size: 15px; transition: 0.3s;
         }
 
-        .btn-primary { background: var(--accent); color: #000; }
-        .btn-yt { background: #ff0000; color: #fff; }
+        .btn-primary { background: var(--accent); color: #000; border: none; }
+        .btn-yt { background: #ff0000; color: #fff; border: none; }
 
-        .video-wrapper { 
-            position: relative; padding-bottom: 56.25%; height: 0; 
-            border-radius: 20px; overflow: hidden; margin: 20px 0; background: #000;
-        }
-        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-
-        .profile-img { 
-            width: 90px; height: 90px; margin: 0 auto 15px; border: 1px solid var(--accent);
-            box-shadow: 0 0 20px rgba(0, 210, 255, 0.2); 
+        /* LOGO STYLES */
+        .brand-img {
+            width: 140px; height: 140px; margin: 0 auto 15px;
+            border-radius: 24px; border: 1px solid var(--border);
+            background: url('https://i.ibb.co/XfHqN4m/Blessed-Studios-Card.jpg') center/cover;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
         }
 
-        footer { text-align: center; opacity: 0.3; font-size: 10px; padding: 40px; letter-spacing: 2px; }
+        .ceo-img {
+            width: 110px; height: 110px; margin: 0 auto 15px;
+            border-radius: 50%; border: 2px solid var(--accent);
+            background: url('https://i.ibb.co/3s6ZfXv/output.jpg') center/cover;
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.2);
+        }
+
+        /* TAGS */
+        .service-tag {
+            display: inline-block; background: rgba(0, 210, 255, 0.1);
+            color: var(--accent); font-size: 10px; padding: 5px 12px;
+            border-radius: 10px; margin: 4px; font-weight: 700; text-transform: uppercase;
+        }
+
+        /* DOWNLOAD SECTION */
+        .download-box {
+            background: linear-gradient(135deg, rgba(0, 210, 255, 0.2), rgba(0, 85, 255, 0.2));
+            border: 1px solid var(--accent); border-radius: 25px; padding: 20px;
+            text-align: center; margin-top: 30px;
+        }
+        .stars { color: var(--gold); font-size: 18px; margin-bottom: 5px; display: block; }
+        .rating-text { font-size: 11px; opacity: 0.6; text-transform: uppercase; letter-spacing: 1px; }
+
+        footer { text-align: center; opacity: 0.3; font-size: 10px; padding: 40px; }
     </style>
 </head>
 <body>
 
-    <div id="install-banner">
-        <span style="font-weight: 800;">Get the Blessed App?</span>
-        <button onclick="installApp()" style="background: white; color: black; border: none; padding: 10px 20px; border-radius: 14px; font-weight: 800; cursor: pointer;">INSTALL</button>
-    </div>
-
     <div id="brand-page" class="page active">
-        <div class="profile-img" style="border-radius: 22px; background: url('https://i.ibb.co/XfHqN4m/Blessed-Studios-Card.jpg') center/cover;"></div>
-        <h1 style="text-align: center; margin: 0; letter-spacing: 1px;">BLESSED STUDIOS</h1>
-        <p style="text-align: center; opacity: 0.5; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 30px;">Digital Media Production</p>
+        <div class="brand-img"></div>
+        <h1 style="text-align: center; margin: 0;">BLESSED STUDIOS</h1>
+        <p style="text-align: center; opacity: 0.6; font-size: 11px; letter-spacing: 2px; margin-bottom: 30px;">INSPIRING CONTENT & PRODUCTION</p>
         
         <div class="glass-card">
-            <span style="color: var(--accent); font-size: 10px; font-weight: 800; letter-spacing: 2px;">LATEST RELEASE</span>
-            <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/HChoRh-z-xM" frameborder="0" allowfullscreen></iframe>
+            <h3 style="color: var(--accent); margin-top: 0; font-size: 16px;">Agency Services</h3>
+            <div style="text-align: center;">
+                <span class="service-tag">Voiceover Acting</span>
+                <span class="service-tag">Video Editing</span>
+                <span class="service-tag">Videography</span>
+                <span class="service-tag">Uplifting Media</span>
+                <span class="service-tag">Motion Graphics</span>
             </div>
-            <h3 style="margin-top: 0;">Internet APN 2026 Trick</h3>
-            <p style="font-size: 13px; opacity: 0.7;">Learn how to optimize your network settings for maximum speed.</p>
-            <a href="https://youtube.com/@howto9448-c4n" class="btn btn-yt" target="_blank">Subscribe on YouTube</a>
         </div>
 
-        <button class="btn btn-primary" onclick="showPage('ceo-page')" style="width: 100%;">Learn More About CEO</button>
+        <div class="glass-card" style="text-align: center; padding: 30px;">
+            <p style="font-size: 14px; opacity: 0.8; margin-bottom: 20px;">"Capturing visions that inspire the world."</p>
+            <button class="btn btn-primary" onclick="showPage('ceo-page')" style="width: 100%;">Connect with the CEO</button>
+        </div>
 
-        <div class="glass-card" style="margin-top: 20px;">
-            <a href="https://www.facebook.com/Blessedstudios1" class="btn" target="_blank">Facebook Business</a>
-            <a href="https://www.instagram.com/studiosblessed" class="btn" target="_blank">Instagram Feed</a>
+        <div class="download-box">
+            <span class="stars">★★★★★</span>
+            <span class="rating-text">4.5 Star Production App</span>
+            <button class="btn btn-primary" onclick="installAppPrompt()" style="width: 100%; margin-top: 10px;">Download Blessed App</button>
         </div>
     </div>
 
     <div id="ceo-page" class="page">
-        <div class="profile-img" style="border-radius: 50%; background: url('https://i.ibb.co/XfHqN4m/Blessed-Studios-Card.jpg') center/cover;"></div>
+        <div class="ceo-img"></div>
         <h1 style="text-align: center; margin: 0;">Blessed Fredrick Iboi</h1>
-        <p style="text-align: center; opacity: 0.5; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 30px;">Founder & Tech Visionary</p>
+        <p style="text-align: center; color: var(--accent); font-size: 10px; font-weight: 800; letter-spacing: 1px; margin-bottom: 25px;">AI DEVELOPER | GRAPHIC DESIGNER | ACTOR</p>
 
         <div class="glass-card">
-            <h3 style="color: var(--accent); margin-top: 0;">The Vision</h3>
-            <p style="font-size: 14px; opacity: 0.8;">My goal is to bridge the gap between technology and accessibility. Through Blessed Studios, I create solutions that empower users to master their digital tools.</p>
+            <h3 style="margin-top: 0; font-size: 16px; color: var(--accent);">Professional Reach</h3>
+            <a href="https://youtube.com/@howto9448-c4n" class="btn btn-yt" target="_blank">YouTube: How To Do</a>
+            <a href="https://www.facebook.com/Blessedstudios1" class="btn" target="_blank">Official Facebook</a>
+            <a href="https://www.instagram.com/studiosblessed" class="btn" target="_blank">Official Instagram</a>
         </div>
 
         <div class="glass-card">
-            <h3 style="color: var(--accent); margin-top: 0;">Contact</h3>
-            <p style="font-size: 13px; opacity: 0.6;">For business inquiries and tech consultations.</p>
-            <a href="mailto:contact@blessedstudios.com" class="btn">Send an Email</a>
-            <button class="btn" onclick="showPage('brand-page')" style="width: 100%; margin-top: 20px; opacity: 0.7;">← Back to Studio</button>
+            <h3 style="margin-top: 0; font-size: 14px;">About Me</h3>
+            <p style="font-size: 13px; opacity: 0.8; line-height: 1.6; margin: 0;">
+                Visionary <b>Motion Graphics Editor</b> & <b>Digital Architect</b>. I specialize in building high-end AI web solutions and cinematic productions that bridge the gap between technology and people.
+            </p>
+        </div>
+
+        <button class="btn" onclick="showPage('brand-page')" style="width: 100%; opacity: 0.6; border: none;">← Back to Agency</button>
+
+        <div class="download-box">
+            <span class="stars">★★★★★</span>
+            <span class="rating-text">Top Rated Portfolio</span>
+            <button class="btn btn-primary" onclick="installAppPrompt()" style="width: 100%; margin-top: 10px;">Download Portfolio App</button>
         </div>
     </div>
 
-    <footer>&copy; 2026 BLESSED STUDIOS | LIBERIA</footer>
+    <footer>&copy; 2026 BLESSED STUDIOS | MONROVIA</footer>
 
     <script>
-        // Smooth Page Switcher
         function showPage(id) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            const target = document.getElementById(id);
-            target.classList.add('active');
+            document.getElementById(id).classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // App Installation Logic
         let deferredPrompt;
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            // Show banner after a 3 second delay
-            setTimeout(() => {
-                document.getElementById('install-banner').style.display = 'flex';
-            }, 3000);
         });
 
-        function installApp() {
+        function installAppPrompt() {
             if (deferredPrompt) {
                 deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((choice) => {
-                    document.getElementById('install-banner').style.display = 'none';
-                    deferredPrompt = null;
-                });
+            } else {
+                alert("To Install: Tap your browser menu (⋮) and select 'Add to Home Screen' or 'Install App'.");
             }
         }
     </script>
