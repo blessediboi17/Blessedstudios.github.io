@@ -3,119 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="google-site-verification" content="google3e79578c45ccecb5" />
-    <title>Blessed Studios | Inspiring content</title>
+    <title>Blessed Studios | Official Home</title>
     <link rel="icon" href="https://i.ibb.co/XfHqN4m/Blessed-Studios-Card.jpg">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#02040a">
+
     <style>
-        :root { --bg: #030712; --text: #ffffff; --primary: #00d2ff; --border: rgba(255,255,255,0.1); --card: #0a1120; }
-        body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; }
-        nav { position: fixed; top: 0; width: 100%; padding: 15px; display: flex; justify-content: space-between; background: rgba(3,7,18,0.9); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid var(--border); box-sizing: border-box; }
-        header { padding: 100px 20px 30px; text-align: center; }
-        .container { width: 92%; margin: 0 auto; }
-        .glass-card { background: var(--card); border: 1px solid var(--border); padding: 20px; border-radius: 20px; margin-bottom: 25px; }
-        
-        /* E-STORE STYLING */
-        .store-header { color: var(--primary); font-size: 12px; letter-spacing: 3px; text-transform: uppercase; font-weight: 800; margin-bottom: 10px; display: block; }
-        .price-tag { font-size: 24px; font-weight: 900; margin: 10px 0; color: #4ade80; }
-        .om-box { background: rgba(255, 131, 0, 0.1); border: 1px solid #ff8300; padding: 15px; border-radius: 12px; margin: 15px 0; font-size: 14px; }
-        
-        .admin-input { width: 100%; background: rgba(0,0,0,0.4); border: 1px solid var(--border); color: white; border-radius: 10px; padding: 12px; margin-bottom: 10px; box-sizing: border-box; }
-        .action-btn { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; font-weight: 800; width: 100%; cursor: pointer; }
-        
-        #ai-button { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), #bc13fe); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 9999; }
-        #admin-window { position: fixed; bottom: 90px; left: 5%; width: 90%; display: none; z-index: 9999; }
+        :root {
+            --bg: #02040a;
+            --glass: rgba(13, 22, 45, 0.75);
+            --accent: #00d2ff;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            margin: 0; background-color: var(--bg);
+            background-image: radial-gradient(circle at 80% 15%, #003366 0%, transparent 45%),
+                              radial-gradient(circle at 15% 85%, #001a33 0%, transparent 45%);
+            background-attachment: fixed;
+            color: white; font-family: 'Inter', -apple-system, sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Page Transitions */
+        .page { display: none; width: 92%; max-width: 450px; margin: 40px auto; animation: slideUp 0.4s ease-out; }
+        .active { display: block; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Install App Banner */
+        #install-banner {
+            display: none; position: fixed; bottom: 20px; left: 5%; width: 90%;
+            background: linear-gradient(135deg, #00d2ff, #0055ff);
+            color: white; padding: 16px; border-radius: 24px;
+            z-index: 9999; box-shadow: 0 15px 40px rgba(0, 210, 255, 0.4);
+            justify-content: space-between; align-items: center;
+        }
+
+        /* Visual Components */
+        .glass-card {
+            background: var(--glass); backdrop-filter: blur(30px) saturate(180%);
+            -webkit-backdrop-filter: blur(30px) saturate(180%);
+            border: 1px solid var(--border); border-radius: 30px; padding: 25px; margin-bottom: 20px;
+        }
+
+        .btn {
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border);
+            padding: 18px; border-radius: 22px; color: white; text-decoration: none;
+            font-weight: 700; margin-top: 12px; cursor: pointer; border: none; font-size: 15px;
+        }
+
+        .btn-primary { background: var(--accent); color: #000; }
+        .btn-yt { background: #ff0000; color: #fff; }
+
+        .video-wrapper { 
+            position: relative; padding-bottom: 56.25%; height: 0; 
+            border-radius: 20px; overflow: hidden; margin: 20px 0; background: #000;
+        }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+        .profile-img { 
+            width: 90px; height: 90px; margin: 0 auto 15px; border: 1px solid var(--accent);
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.2); 
+        }
+
+        footer { text-align: center; opacity: 0.3; font-size: 10px; padding: 40px; letter-spacing: 2px; }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div style="font-weight:900; color:var(--primary);">BLESSED STUDIOS</div>
-        <div style="font-size:10px; opacity:0.7;">LIBERIA RATE: <span id="rate-display">185</span></div>
-    </nav>
+    <div id="install-banner">
+        <span style="font-weight: 800;">Get the Blessed App?</span>
+        <button onclick="installApp()" style="background: white; color: black; border: none; padding: 10px 20px; border-radius: 14px; font-weight: 800; cursor: pointer;">INSTALL</button>
+    </div>
 
-    <header>
-        <h1>E-STORE</h1>
-    </header>
-
-    <div class="container">
-        <div class="glass-card">
-            <span class="store-header">Official eBook Launch</span>
-            <h2 style="margin:5px 0;">Smartphone No-Code Web Development</h2>
-            <div class="price-tag" id="main-price">Loading Price...</div>
-            <p style="font-size:14px; opacity:0.8;">Learn to build professional websites like this one using ONLY your phone. High-value CEO guide.</p>
-            
-            <div class="om-box">
-                <strong>PAY VIA ORANGE MONEY:</strong><br>
-                Number: <span style="color:#ff8300;">+231-771-798-046</span> (Blessed F. Iboi)<br>
-                <em>Pay the LRD amount shown above.</em>
-            </div>
-
-            <input type="email" id="order-email" class="admin-input" placeholder="Your Email Address">
-            <input type="text" id="order-txid" class="admin-input" placeholder="Orange Money Transaction ID">
-            <button class="action-btn" onclick="submitOrder()" id="buy-btn">Submit Payment Proof</button>
-        </div>
-
-        <hr style="border:0; border-top:1px solid var(--border); margin:40px 0;">
+    <div id="brand-page" class="page active">
+        <div class="profile-img" style="border-radius: 22px; background: url('https://i.ibb.co/XfHqN4m/Blessed-Studios-Card.jpg') center/cover;"></div>
+        <h1 style="text-align: center; margin: 0; letter-spacing: 1px;">BLESSED STUDIOS</h1>
+        <p style="text-align: center; opacity: 0.5; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 30px;">Digital Media Production</p>
         
-        <span class="store-header">Impact Feed</span>
-        <div id="live-feed"></div>
-    </div>
+        <div class="glass-card">
+            <span style="color: var(--accent); font-size: 10px; font-weight: 800; letter-spacing: 2px;">LATEST RELEASE</span>
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/HChoRh-z-xM" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <h3 style="margin-top: 0;">Internet APN 2026 Trick</h3>
+            <p style="font-size: 13px; opacity: 0.7;">Learn how to optimize your network settings for maximum speed.</p>
+            <a href="https://youtube.com/@howto9448-c4n" class="btn btn-yt" target="_blank">Subscribe on YouTube</a>
+        </div>
 
-    <div id="ai-button" onclick="document.getElementById('admin-window').style.display='block'">✨</div>
+        <button class="btn btn-primary" onclick="showPage('ceo-page')" style="width: 100%;">Learn More About CEO</button>
 
-    <div id="admin-window" class="glass-card">
-        <input type="password" id="admin-pass" class="admin-input" placeholder="CEO Key">
-        <button class="action-btn" onclick="unlockAdmin()">Access Admin</button>
-        <div id="post-area" style="display:none; margin-top:20px;">
-            <input type="text" id="p-title" class="admin-input" placeholder="Post Title">
-            <textarea id="p-content" class="admin-input" placeholder="Content"></textarea>
-            <button class="action-btn" onclick="publishPost()">Post to Feed</button>
+        <div class="glass-card" style="margin-top: 20px;">
+            <a href="https://www.facebook.com/Blessedstudios1" class="btn" target="_blank">Facebook Business</a>
+            <a href="https://www.instagram.com/studiosblessed" class="btn" target="_blank">Instagram Feed</a>
         </div>
     </div>
+
+    <div id="ceo-page" class="page">
+        <div class="profile-img" style="border-radius: 50%; background: url('https://i.ibb.co/XfHqN4m/Blessed-Studios-Card.jpg') center/cover;"></div>
+        <h1 style="text-align: center; margin: 0;">Blessed Fredrick Iboi</h1>
+        <p style="text-align: center; opacity: 0.5; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 30px;">Founder & Tech Visionary</p>
+
+        <div class="glass-card">
+            <h3 style="color: var(--accent); margin-top: 0;">The Vision</h3>
+            <p style="font-size: 14px; opacity: 0.8;">My goal is to bridge the gap between technology and accessibility. Through Blessed Studios, I create solutions that empower users to master their digital tools.</p>
+        </div>
+
+        <div class="glass-card">
+            <h3 style="color: var(--accent); margin-top: 0;">Contact</h3>
+            <p style="font-size: 13px; opacity: 0.6;">For business inquiries and tech consultations.</p>
+            <a href="mailto:contact@blessedstudios.com" class="btn">Send an Email</a>
+            <button class="btn" onclick="showPage('brand-page')" style="width: 100%; margin-top: 20px; opacity: 0.7;">← Back to Studio</button>
+        </div>
+    </div>
+
+    <footer>&copy; 2026 BLESSED STUDIOS | LIBERIA</footer>
 
     <script>
-        const SB_URL = "https://ulctlyvistlcjapqbzmp.supabase.co";
-        const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVsY3RseXZpc3Rs_YOUR_KEY";
-        const _supabase = supabase.createClient(SB_URL, SB_KEY);
-
-        // DYNAMIC PRICING SYSTEM
-        const usdPrice = 10;
-        const lrdRate = 185; // Change this to update the whole site
-        const totalLRD = usdPrice * lrdRate;
-
-        document.getElementById('rate-display').innerText = lrdRate;
-        document.getElementById('main-price').innerText = `$${usdPrice} USD / L$${totalLRD.toLocaleString()}`;
-
-        async function submitOrder() {
-            const email = document.getElementById('order-email').value;
-            const txid = document.getElementById('order-txid').value;
-            const btn = document.getElementById('buy-btn');
-
-            if(!email || !txid) return alert("Please fill all fields");
-            
-            btn.innerText = "Processing...";
-            const { error } = await _supabase.from('orders').insert([{ email, transaction_id: txid, amount_lrd: totalLRD.toString() }]);
-            
-            if(!error) {
-                alert("Success! Once your payment is verified, the eBook will be sent to your email.");
-                btn.innerText = "Submitted ✅";
-            }
+        // Smooth Page Switcher
+        function showPage(id) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const target = document.getElementById(id);
+            target.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // FEED LOADING LOGIC (Same as before)
-        async function loadFeed() {
-            const { data } = await _supabase.from('posts').select('*').order('created_at', { ascending: false });
-            if(data) {
-                document.getElementById('live-feed').innerHTML = data.map(p => `
-                    <div class="glass-card">
-                        <h3>${p.title}</h3>
-                        <p>${p.content}</p>
-                    </div>
-                `).join('');
+        // App Installation Logic
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            // Show banner after a 3 second delay
+            setTimeout(() => {
+                document.getElementById('install-banner').style.display = 'flex';
+            }, 3000);
+        });
+
+        function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choice) => {
+                    document.getElementById('install-banner').style.display = 'none';
+                    deferredPrompt = null;
+                });
             }
         }
-        loadFeed();
     </script>
 </body>
-            </html>
+</html>
