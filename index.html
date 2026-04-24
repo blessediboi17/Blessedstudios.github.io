@@ -2,207 +2,188 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Blessed Studios | Official</title>
-    
-    <meta name="title" content="Blessed Studios | Official Portfolio of Blessed Fredrick Iboi">
-<meta name="description" content="Official home of Blessed Studios. Digital Media Production, Voiceovers, and AI Web Development by Blessed Fredrick Iboi. Empowering visions through technology.">
-<meta name="keywords" content="Blessed Studios, Blessed Fredrick Iboi, Video Editing Liberia, Voiceover Actor, AI Web Developer, Graphic Designer, Motion Graphics, Monrovia Tech">
-<meta name="author" content="Blessed Fredrick Iboi">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blessed Studios | CEO Blessed Fredrick Iboi</title>
 
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://blessediboi17.github.io/Blessed_studios.github.io/">
-<meta property="og:title" content="Blessed Studios | Production & Tech Innovation">
-<meta property="og:description" content="Discover the work of Blessed Fredrick Iboi. Leading media production and digital architecture in Liberia.">
-<meta property="og:image" content="https://i.ibb.co/XfHqN4m/Blessed-Studios-Card.jpg">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Blessed Fredrick Iboi",
+      "jobTitle": "CEO & Founder",
+      "affiliation": {
+        "@type": "Organization",
+        "name": "Blessed Studios",
+        "logo": "https://blessediboi17.github.io/Blessedstudios.github.io/logo.jpg"
+      },
+      "image": "https://blessediboi17.github.io/Blessedstudios.github.io/ceo.jpg",
+      "url": "https://blessediboi17.github.io/Blessedstudios.github.io/"
+    }
+    </script>
 
- <meta name="google-site-verification" content="rqcKXpeuBPZWYr8MFtPsM4VivoAZiJyeDFfZz--o7Ec">
-    <link rel="icon" href="https://i.ibb.co/XfHqN4m/Blessed-Studios-Card.jpg">
-    
     <style>
         :root {
-            --bg: #02040a;
-            --glass: rgba(13, 22, 45, 0.75);
-            --accent: #00d2ff;
+            --bg: #050a14;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --accent: #0070f3;
             --border: rgba(255, 255, 255, 0.1);
-            --gold: #ffcc00;
+            --text: #ffffff;
+            --gold: #ffd700;
         }
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
         body {
-            margin: 0; background-color: var(--bg);
-            background-image: radial-gradient(circle at 80% 15%, #003366 0%, transparent 45%),
-                              radial-gradient(circle at 15% 85%, #001a33 0%, transparent 45%);
-            background-attachment: fixed;
-            color: white; font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* PAGE SYSTEM */
-        .page { display: none; width: 92%; max-width: 450px; margin: 40px auto; animation: slideUp 0.4s ease-out; }
-        .active { display: block; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* UI COMPONENTS */
         .glass-card {
-            background: var(--glass); backdrop-filter: blur(30px) saturate(180%);
-            -webkit-backdrop-filter: blur(30px) saturate(180%);
-            border: 1px solid var(--border); border-radius: 30px; padding: 25px; margin-bottom: 20px;
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .logo-container img {
+            width: 180px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(0, 112, 243, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 3px solid var(--accent);
+            object-fit: cover;
+            box-shadow: 0 0 15px var(--accent);
         }
 
         .btn {
-            display: flex; align-items: center; justify-content: center;
-            background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border);
-            padding: 18px; border-radius: 22px; color: white; text-decoration: none;
-            font-weight: 700; margin-top: 12px; cursor: pointer; font-size: 15px; transition: 0.3s;
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.3s;
         }
 
-        .btn-primary { background: var(--accent); color: #000; border: none; }
-        .btn-yt { background: #ff0000; color: #fff; border: none; }
-
-        /* LOGO STYLES */
-        .brand-img {
-            width: 140px; height: 140px; margin: 0 auto 15px;
-            border-radius: 24px; border: 1px solid var(--border);
-            background: url('https://i.ibb.co/XfHqN4m/Blessed-Studios-Card.jpg') center/cover;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        /* Floating Bar */
+        .floating-bar {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 400px;
+            background: rgba(10, 25, 47, 0.85);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .ceo-img {
-            width: 110px; height: 110px; margin: 0 auto 15px;
-            border-radius: 50%; border: 2px solid var(--accent);
-            background: url('https://i.ibb.co/3s6ZfXv/output.jpg') center/cover;
-            box-shadow: 0 0 25px rgba(0, 210, 255, 0.2);
+        .floating-bar a {
+            text-decoration: none;
+            color: white;
+            text-align: center;
+            font-size: 10px;
         }
 
-        /* TAGS */
-        .service-tag {
-            display: inline-block; background: rgba(0, 210, 255, 0.1);
-            color: var(--accent); font-size: 10px; padding: 5px 12px;
-            border-radius: 10px; margin: 4px; font-weight: 700; text-transform: uppercase;
+        .review-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            padding-bottom: 10px;
+            scrollbar-width: none;
         }
 
-        /* DOWNLOAD SECTION */
-        .download-box {
-            background: linear-gradient(135deg, rgba(0, 210, 255, 0.2), rgba(0, 85, 255, 0.2));
-            border: 1px solid var(--accent); border-radius: 25px; padding: 20px;
-            text-align: center; margin-top: 30px;
+        input[type="email"] {
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.05);
+            color: white;
+            outline: none;
         }
-        .stars { color: var(--gold); font-size: 18px; margin-bottom: 5px; display: block; }
-        .rating-text { font-size: 11px; opacity: 0.6; text-transform: uppercase; letter-spacing: 1px; }
 
-        footer { text-align: center; opacity: 0.3; font-size: 10px; padding: 40px; }
+        footer {
+            text-align: center;
+            padding: 100px 20px 120px 20px;
+            opacity: 0.5;
+            font-size: 12px;
+        }
     </style>
 </head>
 <body>
 
-    <div id="brand-page" class="page active">
-        <div class="brand-img"></div>
-        <h1 style="text-align: center; margin: 0;">BLESSED STUDIOS</h1>
-        <p style="text-align: center; opacity: 0.6; font-size: 11px; letter-spacing: 2px; margin-bottom: 30px;">INSPIRING CONTENT & PRODUCTION</p>
-        
-        <div class="glass-card">
-            <h3 style="color: var(--accent); margin-top: 0; font-size: 16px;">Agency Services</h3>
-            <div style="text-align: center;">
-                <span class="service-tag">Voiceover Acting</span>
-                <span class="service-tag">Video Editing</span>
-                <span class="service-tag">Videography</span>
-                <span class="service-tag">Uplifting Media</span>
-                <span class="service-tag">Motion Graphics</span>
+    <section id="brand-page" style="text-align: center; padding: 40px 0;">
+        <div class="logo-container">
+            <img src="logo.jpg" alt="Blessed Studios Logo">
+            <h1 style="letter-spacing: 3px; font-size: 28px; margin-top: 20px;">BLESSED STUDIOS</h1>
+            <p style="opacity: 0.7;">Creative Tech & Media Excellence</p>
+        </div>
+    </section>
+
+    <section id="ceo-page">
+        <div class="glass-card" style="text-align: center;">
+            <img src="ceo.jpg" alt="Blessed Fredrick Iboi" class="profile-img">
+            <h2 style="margin-bottom: 5px;">Blessed Fredrick Iboi</h2>
+            <p style="color: var(--accent); margin-top: 0; font-weight: bold;">Founder & CEO</p>
+            <p style="font-size: 14px; opacity: 0.8;">Expert Developer & Curriculum Specialist at Royal Academy School System.</p>
+        </div>
+    </section>
+
+    <div class="glass-card">
+        <h3 style="color: var(--accent); margin-top: 0;">What Clients Say</h3>
+        <div class="review-container">
+            <div style="min-width: 250px; background: rgba(255,255,255,0.02); padding: 15px; border-radius: 15px;">
+                <span style="color: var(--gold);">★★★★★</span>
+                <p style="font-style: italic; font-size: 13px;">"Blessed Studios delivered high-end designs that boosted our engagement immediately."</p>
+            </div>
+            <div style="min-width: 250px; background: rgba(255,255,255,0.02); padding: 15px; border-radius: 15px;">
+                <span style="color: var(--gold);">★★★★★</span>
+                <p style="font-style: italic; font-size: 13px;">"Professional editing and top-tier AI solutions. The best in the business."</p>
             </div>
         </div>
-
-        <div class="glass-card" style="text-align: center; padding: 30px;">
-            <p style="font-size: 14px; opacity: 0.8; margin-bottom: 20px;">"Capturing visions that inspire the world."</p>
-            <button class="btn btn-primary" onclick="showPage('ceo-page')" style="width: 100%;">Connect with the CEO</button>
-        </div>
-
-        <div class="download-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">4.5 Star Production App</span>
-            <button class="btn btn-primary" onclick="installAppPrompt()" style="width: 100%; margin-top: 10px;">Download Blessed App</button>
-        </div>
     </div>
 
-    <div id="ceo-page" class="page">
-        <div class="ceo-img"></div>
-        <h1 style="text-align: center; margin: 0;">Blessed Fredrick Iboi</h1>
-        <p style="text-align: center; color: var(--accent); font-size: 10px; font-weight: 800; letter-spacing: 1px; margin-bottom: 25px;">AI DEVELOPER | GRAPHIC DESIGNER | ACTOR</p>
-
-        <div class="glass-card">
-            <h3 style="margin-top: 0; font-size: 16px; color: var(--accent);">Professional Reach</h3>
-            <a href="https://youtube.com/@howto9448-c4n" class="btn btn-yt" target="_blank">YouTube: How To Do</a>
-            <a href="https://www.facebook.com/Blessedstudios1" class="btn" target="_blank">Official Facebook</a>
-            <a href="https://www.instagram.com/studiosblessed" class="btn" target="_blank">Official Instagram</a>
-        </div>
-
-        <div class="glass-card">
-            <h3 style="margin-top: 0; font-size: 14px;">About Me</h3>
-            <p style="font-size: 13px; opacity: 0.8; line-height: 1.6; margin: 0;">
-                Visionary <b>Motion Graphics Editor</b> & <b>Digital Architect</b>. I specialize in building high-end AI web solutions and cinematic productions that bridge the gap between technology and people.
-            </p>
-        </div>
-
-        <button class="btn" onclick="showPage('brand-page')" style="width: 100%; opacity: 0.6; border: none;">← Back to Agency</button>
-
-        <div class="download-box">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">Top Rated Portfolio</span>
-            <button class="btn btn-primary" onclick="installAppPrompt()" style="width: 100%; margin-top: 10px;">Download Portfolio App</button>
-        </div>
+    <div class="glass-card" style="text-align: center;">
+        <h3 style="color: var(--accent);">Subscribe</h3>
+        <p style="font-size: 13px; opacity: 0.8;">Stay updated with Blessed Studios projects.</p>
+        <form style="display: flex; flex-direction: column; gap: 10px;">
+            <input type="email" placeholder="Your Email Address" required>
+            <button type="submit" class="btn">Join Now</button>
+        </form>
     </div>
+
+    <nav class="floating-bar">
+        <a href="tel:+231XXXXXXXXXX">📞<br>Call</a>
+        <a href="https://wa.me/231XXXXXXXXXX">💬<br>WhatsApp</a>
+        <a href="#brand-page">📁<br>Home</a>
+    </nav>
 
     <footer>
-        <div class="glass-card" style="margin-top: 40px; text-align: center;">
-    <h3 style="color: var(--accent); margin-bottom: 10px;">Join the Blessed Universe</h3>
-    <p style="font-size: 13px; opacity: 0.8; margin-bottom: 20px;">Get exclusive production tips and tech updates directly in your inbox.</p>
-    
-    <form action="https://formspree.io/f/YOUR_ID" method="POST" style="display: flex; flex-direction: column; gap: 10px;">
-        <input type="email" name="email" placeholder="Enter your email" required 
-            style="padding: 12px; border-radius: 10px; border: 1px solid var(--border); background: rgba(255,255,255,0.05); color: white; outline: none;">
-        <button type="submit" class="btn btn-primary" style="width: 100%;">Subscribe Now</button>
-    </form>
-        </div>
-        &copy; 2026 BLESSED STUDIOS | MONROVIA</footer>
+        <p>© 2026 Blessed Studios. All Rights Reserved.</p>
+        <a href="#" style="color: white; text-decoration: none; opacity: 0.6;">Privacy Policy</a>
+    </footer>
 
-    <script>
-        function showPage(id) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-        });
-
-        function installAppPrompt() {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-            } else {
-                alert("To Install: Tap your browser menu (⋮) and select 'Add to Home Screen' or 'Install App'.");
-            }
-        }
-    </script>
-    <div style="text-align: center; margin-top: 20px;">
-    <a href="javascript:void(0)" onclick="showPage('privacy-page')" style="color: var(--accent); font-size: 10px; text-decoration: none; opacity: 0.5;">Privacy Policy</a>
-</div>
-
-<div id="privacy-page" class="page">
-    <div class="glass-card">
-        <h2 style="color: var(--accent); margin-top: 0;">Privacy Policy</h2>
-        <p style="font-size: 12px; opacity: 0.8; line-height: 1.6;">
-            At <b>Blessed Studios</b>, One of our main priorities is the privacy of our visitors. <br><br>
-            <b>Information We Collect:</b> We do not collect personal data unless voluntarily provided via contact forms. Standard web logs are used for traffic analysis via Google Search Console.<br><br>
-            <b>Cookies and Web Beacons:</b> Like any other website, Blessed Studios may use 'cookies' to store information including visitors' preferences and the pages on the website that the visitor accessed or visited.<br><br>
-            <b>Google DoubleClick DART Cookie:</b> Google is one of our third-party vendors. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to our site and other sites on the internet.<br><br>
-            <b>Contact:</b> If you have questions, contact us via the official channels on the CEO page.
-        </p>
-        <button class="btn" onclick="showPage('brand-page')" style="width: 100%;">Return Home</button>
-    </div>
-</div>
 </body>
 </html>
