@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book & Contact | Blessed Studios</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">BLESSED STUDIOS</a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="contact.html" class="active">Contact</a>
+        </div>
+    </nav>
+
+    <section class="container page-spacing">
+        <h1 class="page-title">Work With Me</h1>
+        <div class="contact-grid">
+            
+            <!-- BOOKING FORM -->
+            <div class="glass-card">
+                <h2>Book an Appointment</h2>
+                <form action="https://formsubmit.co/your-email@email.com" method="POST">
+                    <input type="text" name="name" placeholder="Full Name" required>
+                    <input type="email" name="email" placeholder="Email Address" required>
+                    <input type="text" name="phone" placeholder="WhatsApp / Phone Number">
+                    
+                    <select name="service" id="service-select">
+                        <option value="General">Select Service</option>
+                        <option value="WebDev">🌐 Website Development</option>
+                        <option value="GraphicDesign">🎨 Graphic Design</option>
+                        <option value="Acting">🎬 Acting / Voiceover</option>
+                        <option value="AISolutions">🤖 AI Digital Solutions</option>
+                    </select>
+
+                    <textarea name="description" placeholder="Describe your project" rows="4" required></textarea>
+                    <button type="submit" class="btn btn-gold" style="width:100%; border:none;">Submit Project Request</button>
+                </form>
+            </div>
+
+            <!-- CHANNELS & SOCIALS -->
+            <div class="glass-card flex-center">
+                <h2>Direct Channels</h2>
+                <a href="https://youtube.com/@howto9448-c4n" class="btn btn-social yt" target="_blank">YouTube Channel</a>
+                <a href="https://www.facebook.com/Blessedstudios1" class="btn btn-social fb" target="_blank">Facebook Page</a>
+                <a href="https://www.instagram.com/studiosblessed" class="btn btn-social ig" target="_blank">Instagram Profile</a>
+                <a href="https://github.com/blessediboi17" class="btn btn-social gh" target="_blank">GitHub Profile</a>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 BLESSED STUDIOS | MONROVIA. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Auto-select option from query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedService = urlParams.get('service');
+        if (selectedService) {
+            document.getElementById('service-select').value = selectedService;
+        }
+    </script>
+</body>
+  </html>
