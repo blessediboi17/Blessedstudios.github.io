@@ -3,175 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Blessed Studios | Official</title>
-    <meta name="description" content="Official home of Blessed Studios. Led by Blessed Fredrick Iboi, we produce motivational short films and comedy skits to help people navigate life's challenges.">
-    <meta name="keywords" content="Blessed Studios, Blessed Fredrick Iboi, Motivational Skits, Short Films Liberia, Content Creation, Cinematic Motivation">
-    <meta name="author" content="Blessed Fredrick Iboi">
-
-    <meta property="og:title" content="Blessed Studios | Cinematic Stories">
-    <meta property="og:description" content="Healing hearts through cinematic stories and motivational films.">
-    <meta property="og:image" content="https://blessediboi17.github.io/Blessedstudios.github.io/logo.jpg">
-    <meta property="og:url" content="https://blessediboi17.github.io/Blessedstudios.github.io/">
-    <meta property="og:type" content="website">
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "ProductionCompany",
-          "@id": "https://blessediboi17.github.io/Blessedstudios.github.io/#organization",
-          "name": "Blessed Studios",
-          "url": "https://blessediboi17.github.io/Blessedstudios.github.io/",
-          "logo": "https://blessediboi17.github.io/Blessedstudios.github.io/logo.jpg",
-          "foundingDate": "2025",
-          "description": "A production house specializing in motivational films and short skits.",
-          "sameAs": [
-            "https://www.facebook.com/profile.php?id=61562757004259",
-            "https://www.tiktok.com/@blessedstudiosofficial"
-          ]
-        },
-        {
-          "@type": "Person",
-          "@id": "https://blessediboi17.github.io/Blessedstudios.github.io/#ceo",
-          "name": "Blessed Fredrick Iboi",
-          "jobTitle": "Executive Producer & CEO",
-          "affiliation": {"@id": "https://blessediboi17.github.io/Blessedstudios.github.io/#organization"},
-          "image": "https://blessediboi17.github.io/Blessedstudios.github.io/ceo.jpg"
-        }
-      ]
-    }
-    </script>
-
-    <style>
-        :root {
-            --bg: #020617;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --accent: #0070f3;
-            --text: #f8fafc;
-            --gold: #fbbf24;
-        }
-
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
-
-        .glass-container {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 24px;
-            padding: 30px;
-            margin: 20px;
-        }
-
-        .hero { text-align: center; padding: 60px 20px; }
-        .hero img { width: 160px; border-radius: 20px; box-shadow: 0 0 40px rgba(0, 112, 243, 0.3); border: 1px solid rgba(255,255,255,0.1); }
-
-        .mission-text {
-            font-style: italic;
-            font-size: 18px;
-            color: var(--gold);
-            margin: 15px 0;
-        }
-
-        /* Casting Form */
-        .form-group { margin-bottom: 15px; text-align: left; }
-        label { display: block; font-size: 13px; margin-bottom: 5px; opacity: 0.8; }
-        input, select, textarea {
-            width: 100%; padding: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1);
-            background: rgba(15, 23, 42, 0.6); color: white; box-sizing: border-box; outline: none;
-        }
-
-        .btn-submit {
-            background: var(--accent); color: white; width: 100%; padding: 16px;
-            border: none; border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 16px;
-        }
-
-        .ceo-badge {
-            display: flex; align-items: center; gap: 12px; margin-top: 30px; justify-content: center;
-            background: rgba(255,255,255,0.02); padding: 10px; border-radius: 50px; width: fit-content; margin-inline: auto;
-        }
-        .ceo-badge img { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--accent); object-fit: cover; }
-
-        .action-bar {
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 450px; background: rgba(10, 25, 47, 0.95);
-            backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 40px; display: flex; justify-content: space-around; padding: 12px 0; z-index: 1000;
-        }
-        .action-bar a { color: white; text-decoration: none; font-size: 9px; text-align: center; font-weight: bold; text-transform: uppercase; }
-    </style>
+    <title>Blessed Studios | Personal Brand of Fredrick Iboi</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <section class="hero">
-        <img src="logo.jpg" alt="Blessed Studios Official Logo">
-        <h1 style="letter-spacing: 4px; margin-top: 20px; font-size: 32px;">BLESSED STUDIOS</h1>
-        <p class="mission-text">"Healing Hearts Through Stories"</p>
-        
-        <div class="ceo-badge">
-            <img src="ceo.jpg" alt="CEO Blessed Fredrick Iboi">
-            <div style="text-align: left;">
-                <div style="font-size: 14px; font-weight: bold;">Blessed Fredrick Iboi</div>
-                <div style="font-size: 11px; opacity: 0.6;">Executive Producer</div>
-            </div>
+    <!-- NAV BAR -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">BLESSED STUDIOS</a>
+        <div class="nav-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="contact.html">Contact</a>
         </div>
-    </section>
-
-    <div class="glass-container">
-        <h2 style="color: var(--accent); font-size: 15px; text-transform: uppercase; margin-top: 0;">Our Production Focus</h2>
-        <p style="font-size: 14px; opacity: 0.8;">
-            Blessed Studios is a specialized production house focused on <strong>motivational skits</strong> and <strong>cinematic short films</strong>. We create content that addresses mental health, personal struggles, and life lessons.
-        </p>
-    </div>
-
-    <div class="glass-container" id="join">
-        <h2 style="color: var(--gold); text-align: center; margin-top: 0; font-size: 20px;">Casting Call</h2>
-        <p style="text-align: center; font-size: 12px; opacity: 0.7; margin-bottom: 25px;">Join the Blessed Studios crew as an Actor, Actress, or Editor.</p>
-        
-        <form action="https://formspree.io/f/mqakpzoz" method="POST">
-            <div class="form-group">
-                <label>Full Name</label>
-                <input type="text" name="name" required>
-            </div>
-            <div class="form-group">
-                <label>Your Age</label>
-                <input type="number" name="age" required>
-            </div>
-            <div class="form-group">
-                <label>Role</label>
-                <select name="role">
-                    <option value="actor">Actor</option>
-                    <option value="actress">Actress</option>
-                    <option value="crew">Production Crew</option>
-                    <option value="editor">Video Editor</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Why do you want to join Blessed Studios?</label>
-                <textarea name="reason" rows="3" required placeholder="Your motivation..."></textarea>
-            </div>
-            <button type="submit" class="btn-submit">Submit Application</button>
-        </form>
-    </div>
-
-    <nav class="action-bar">
-        <a href="https://wa.me/231777002416">💬<br>WhatsApp</a>
-        <a href="https://www.facebook.com/profile.php?id=61562757004259">📘<br>Facebook</a>
-        <a href="https://www.tiktok.com/@blessedstudiosofficial">🎵<br>TikTok</a>
-        <a href="#join">🎭<br>Join Us</a>
     </nav>
 
-    <footer style="text-align: center; padding: 100px 20px 140px; opacity: 0.3; font-size: 11px;">
-        © 2026 Blessed Studios. All Rights Reserved. <br>
-        <a href="#" style="color:white; text-decoration: none;">Privacy Policy</a>
+    <!-- HERO SECTION -->
+    <header class="hero">
+        <div class="hero-content">
+            <div class="ceo-avatar"></div>
+            <h1>Blessed Fredrick Iboi</h1>
+            <p class="subtitle">AI Developer • Graphic Designer • Actor • Editor</p>
+            <p class="tagline">Welcome to Blessed Studios. I craft modern digital products, design stunning visual branding, and produce cinematic content.</p>
+            <div class="cta-buttons">
+                <a href="contact.html" class="btn btn-gold">Hire Me</a>
+                <a href="portfolio.html" class="btn btn-outline">View Portfolio</a>
+            </div>
+        </div>
+    </header>
+
+    <footer>
+        <p>&copy; 2026 BLESSED STUDIOS | MONROVIA. All Rights Reserved.</p>
     </footer>
 
 </body>
